@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>How War Shapes Migration | Luca Iacomino</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:wght@300;400;500&family=Instrument+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#1c1c1c;--paper:#ffffff;--paper-warm:#f5f3ef;--serif:'Syne',sans-serif;--mono:'DM Mono',monospace;--sans:'Instrument Sans',sans-serif;}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{background:var(--paper);color:var(--ink);font-family:var(--sans);font-weight:300;overflow-x:hidden;}
+nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;justify-content:center;align-items:center;gap:3rem;padding:1.4rem 4rem;background:rgba(255,255,255,0.96);border-bottom:1px solid #e0e0e0;}
+.nav-logo{font-family:var(--serif);font-size:1rem;font-weight:700;color:var(--ink);text-decoration:none;}
+.nav-links{display:flex;gap:3rem;list-style:none;}
+.nav-links a{font-family:var(--serif);font-size:0.95rem;font-weight:600;color:#555;text-decoration:none;transition:color 0.2s;padding-bottom:2px;border-bottom:1px solid transparent;}
+.nav-links a:hover,.nav-links a.active{color:var(--ink);border-bottom-color:var(--ink);}
+.proj-hero{padding:9rem 0 0;}
+.hero-inner{max-width:1080px;margin:0 auto;padding:4rem 4rem 0;}
+.back-link{font-family:var(--mono);font-size:0.62rem;letter-spacing:0.12em;text-transform:uppercase;color:#aaa;text-decoration:none;display:inline-flex;align-items:center;gap:0.5rem;margin-bottom:2rem;transition:color 0.2s;}
+.back-link::before{content:'←';}
+.back-link:hover{color:var(--ink);}
+.hero-eyebrow{font-family:var(--mono);font-size:0.62rem;letter-spacing:0.22em;text-transform:uppercase;color:#777;margin-bottom:1.5rem;}
+.hero-title{font-family:var(--serif);font-size:clamp(2.8rem,7vw,6rem);font-weight:800;line-height:0.88;letter-spacing:-0.04em;color:var(--ink);margin-bottom:2.5rem;max-width:800px;}
+.hero-title em{font-style:normal;-webkit-text-stroke:2px var(--ink);color:transparent;}
+.hero-meta-row{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid #e0e0e0;border-bottom:1px solid #e0e0e0;}
+.meta-cell{padding:1.2rem 0;}
+.meta-cell+.meta-cell{padding-left:2rem;border-left:1px solid #e0e0e0;}
+.meta-label{font-family:var(--mono);font-size:0.55rem;letter-spacing:0.18em;text-transform:uppercase;color:#aaa;margin-bottom:0.35rem;}
+.meta-value{font-family:var(--serif);font-size:0.95rem;font-weight:600;color:var(--ink);}
+.proj-tags{display:flex;flex-wrap:wrap;gap:0.4rem;padding:1.2rem 0;border-bottom:1px solid #e0e0e0;}
+.proj-tag{font-family:var(--mono);font-size:0.58rem;letter-spacing:0.06em;border:1px solid #ddd;color:#555;padding:0.18rem 0.65rem;}
+.metrics-strip{background:var(--ink);padding:3rem 4rem;}
+.metrics-inner{max-width:1080px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);}
+.band-metric{padding:0 2.5rem;border-right:1px solid rgba(255,255,255,0.12);}
+.band-metric:first-child{padding-left:0;}
+.band-metric:last-child{border-right:none;}
+.band-val{font-family:var(--serif);font-size:clamp(2rem,4vw,3.2rem);font-weight:800;color:#fff;line-height:1;margin-bottom:0.4rem;letter-spacing:-0.03em;}
+.band-val span{color:rgba(255,255,255,0.45);}
+.band-label{font-family:var(--mono);font-size:0.55rem;letter-spacing:0.14em;text-transform:uppercase;color:rgba(255,255,255,0.5);}
+.intro-section{max-width:1080px;margin:0 auto;padding:4rem 4rem 0;}
+.section-label{font-family:var(--mono);font-size:0.58rem;letter-spacing:0.22em;text-transform:uppercase;color:#aaa;margin-bottom:0.75rem;}
+.prose{font-size:0.95rem;color:#333;line-height:1.9;}
+.charts-section{max-width:1200px;margin:0 auto;padding:4rem 4rem 6rem;}
+.chart-entry{padding:5rem 0;border-top:1px solid #e0e0e0;}
+.chart-entry:last-child{border-bottom:1px solid #e0e0e0;}
+.chart-meta{display:flex;align-items:baseline;gap:2rem;margin-bottom:2rem;}
+.chart-num{font-family:var(--mono);font-size:0.55rem;letter-spacing:0.18em;text-transform:uppercase;color:#ccc;}
+.chart-category{font-family:var(--mono);font-size:0.55rem;letter-spacing:0.14em;text-transform:uppercase;color:#aaa;}
+.chart-type-badge{font-family:var(--mono);font-size:0.52rem;letter-spacing:0.1em;text-transform:uppercase;border:1px solid #e0e0e0;color:#777;padding:0.15rem 0.6rem;margin-left:auto;}
+.chart-header{display:grid;grid-template-columns:1fr 2fr;gap:4rem;margin-bottom:2rem;align-items:start;}
+.chart-title{font-family:var(--serif);font-size:clamp(1.6rem,3vw,2.4rem);font-weight:700;color:var(--ink);letter-spacing:-0.03em;line-height:1.05;}
+.chart-desc{font-size:0.92rem;color:#333;line-height:1.85;padding-top:0.3rem;}
+.chart-frame-wrap{width:100%;border:1px solid #e0e0e0;background:var(--paper-warm);overflow:hidden;}
+.chart-frame-wrap iframe{width:100%;height:600px;border:none;display:block;}
+.chart-insights{display:flex;border-top:1px solid #e0e0e0;}
+.insight{flex:1;padding:1.2rem 1.5rem;border-right:1px solid #e0e0e0;}
+.insight:last-child{border-right:none;}
+.insight-label{font-family:var(--mono);font-size:0.52rem;letter-spacing:0.14em;text-transform:uppercase;color:#aaa;margin-bottom:0.4rem;}
+.insight-val{font-family:var(--serif);font-size:1.05rem;font-weight:700;color:var(--ink);}
+.next-band{background:var(--paper-warm);padding:4rem;}
+.next-inner{max-width:1080px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;}
+.next-label{font-family:var(--mono);font-size:0.6rem;letter-spacing:0.18em;text-transform:uppercase;color:#aaa;margin-bottom:0.5rem;}
+.next-title{font-family:var(--serif);font-size:clamp(1.4rem,3vw,2.2rem);font-weight:700;letter-spacing:-0.02em;color:var(--ink);}
+.next-arrow{font-family:var(--serif);font-size:3rem;font-weight:300;color:#bbb;text-decoration:none;transition:transform 0.2s,color 0.2s;}
+.next-arrow:hover{transform:translateX(8px);color:var(--ink);}
+.next-band a{text-decoration:none;}
+footer{border-top:1px solid #e0e0e0;padding:2rem 4rem;display:flex;justify-content:space-between;align-items:center;max-width:1080px;margin:0 auto;}
+.footer-name{font-family:var(--serif);font-size:0.95rem;font-weight:600;color:#555;}
+.footer-mono{font-family:var(--mono);font-size:0.58rem;letter-spacing:0.1em;text-transform:uppercase;color:#bbb;}
+.reveal{opacity:0;transform:translateY(18px);transition:opacity 0.6s ease,transform 0.6s ease;}
+.reveal.visible{opacity:1;transform:translateY(0);}
+.rd1{transition-delay:0.08s}.rd2{transition-delay:0.16s}.rd3{transition-delay:0.24s}
+@media(max-width:860px){
+  nav{gap:1.5rem;padding:1.2rem 2rem;}.nav-links{gap:1.5rem;}
+  .hero-inner{padding:3rem 2rem 0;}
+  .hero-meta-row{grid-template-columns:repeat(2,1fr);}
+  .metrics-strip{padding:2rem;}.metrics-inner{grid-template-columns:repeat(2,1fr);gap:2rem;}
+  .band-metric{padding:0;border-right:none;}
+  .intro-section,.charts-section{padding-left:2rem;padding-right:2rem;}
+  .chart-header{grid-template-columns:1fr;}
+  .chart-frame-wrap iframe{height:420px;}
+  .chart-insights{flex-wrap:wrap;}.insight{min-width:50%;}
+  .next-band{padding:2.5rem 2rem;}.next-inner{flex-direction:column;align-items:flex-start;gap:1rem;}
+  footer{flex-direction:column;gap:0.5rem;padding:1.5rem 2rem;text-align:center;}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">Luca Iacomino</a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="projects.html" class="active">Projects</a></li>
+    <li><a href="cv.html">CV</a></li>
+  </ul>
+</nav>
+
+<div class="proj-hero">
+  <div class="hero-inner">
+    <a href="projects.html" class="back-link reveal">All Projects</a>
+    <div class="hero-eyebrow reveal">Data Visualization · Personal Project · 2024</div>
+    <h1 class="hero-title reveal rd1">How War<br>Shapes <em>Migration.</em></h1>
+    <div class="hero-meta-row reveal rd2">
+      <div class="meta-cell"><div class="meta-label">Type</div><div class="meta-value">Data Visualization</div></div>
+      <div class="meta-cell"><div class="meta-label">Year</div><div class="meta-value">2025</div></div>
+      <div class="meta-cell"><div class="meta-label">Tools</div><div class="meta-value">Python · Plotly </div></div>
+      <div class="meta-cell"><div class="meta-label">Period</div><div class="meta-value">2000–2024</div></div>
+    </div>
+    <div class="proj-tags reveal rd3">
+      <span class="proj-tag">Python</span>
+      <span class="proj-tag">Plotly</span>
+      <span class="proj-tag">Pandas</span>
+      <span class="proj-tag">Geospatial</span>
+      <span class="proj-tag">UNHCR Data</span>
+      <span class="proj-tag">ACLED Data</span>
+      <span class="proj-tag">World Bank GDP</span>
+    </div>
+  </div>
+</div>
+
+<div class="metrics-strip">
+  <div class="metrics-inner">
+    <div class="band-metric reveal"><div class="band-val">20<span>yrs</span></div><div class="band-label">Data Coverage</div></div>
+    <div class="band-metric reveal rd3"><div class="band-val">60<span>%</span></div><div class="band-label">Refugees from 6 Countries</div></div>
+  </div>
+</div>
+
+<div class="intro-section">
+  <div class="section-label reveal">Overview</div>
+  <div class="prose reveal rd1" style="max-width:680px;">
+    <p>This project explores 20 years of global refugee data — combining UNHCR displacement records, ACLED conflict events, and World Bank GDP figures to understand what drives forced migration and where people actually go when they go away from their country. </p>
+  </div>
+</div>
+
+<div class="charts-section">
+
+  <!-- 001 BUBBLE -->
+  <div class="chart-entry reveal">
+    <div class="chart-meta">
+      <span class="chart-num">001</span>
+      <span class="chart-category">GDP & Displacement</span>
+      <span class="chart-type-badge">Animated Bubble Chart</span>
+    </div>
+    <div class="chart-header">
+      <div class="chart-title">GDP vs Refugees Over Time</div>
+      <p class="chart-desc">Each bubble is a country — size reflects refugee numbers, vertical position shows GDP. Press play to watch 20 years of displacement unfold. The pattern is clear: economic collapse and conflict go hand in hand with forced migration. Low GDP countries dominate the top of the refugee rankings, consistently, year after year giving the insights that is not only war but also poverty to push people to migrate.</p>
+    </div>
+    <div class="chart-frame-wrap">
+      <iframe src="bubble.html" scrolling="no" title="GDP vs Refugees Bubble Chart"></iframe>
+    </div>
+    <div class="chart-insights">
+      <div class="insight"><div class="insight-label">Key finding</div><div class="insight-val">Low GDP = High displacement</div></div>
+      <div class="insight"><div class="insight-label">Data sources</div><div class="insight-val">UNHCR + World Bank</div></div>
+      <div class="insight"><div class="insight-label">Period</div><div class="insight-val">2000 – 2024</div></div>
+      <div class="insight"><div class="insight-label">Countries tracked</div><div class="insight-val">100+</div></div>
+    </div>
+  </div>
+
+  <!-- 002 MAP -->
+  <div class="chart-entry reveal">
+    <div class="chart-meta">
+      <span class="chart-num">002</span>
+      <span class="chart-category">Geographic Distribution</span>
+      <span class="chart-type-badge">Animated Choropleth Map</span>
+    </div>
+    <div class="chart-header">
+      <div class="chart-title">Refugees by Country Over Time</div>
+      <p class="chart-desc">A world map of refugee origins, animated year by year. The geographic concentration of displacement becomes immediately visible — a handful of countries account for the vast majority of the world's refugees. Use the slider to explore specific years or press play and watch two decades of crisis unfold across the globe.</p>
+    </div>
+    <div class="chart-frame-wrap">
+      <iframe src="map.html" scrolling="no" title="World Map of Refugees"></iframe>
+    </div>
+    <div class="chart-insights">
+      <div class="insight"><div class="insight-label">Key finding</div><div class="insight-val">6 countries = 60% of refugees</div></div>
+      <div class="insight"><div class="insight-label">Data source</div><div class="insight-val">UNHCR</div></div>
+      <div class="insight"><div class="insight-label">Coverage</div><div class="insight-val">Global</div></div>
+      <div class="insight"><div class="insight-label">Biggest spike</div><div class="insight-val">Ukraine 2022</div></div>
+    </div>
+  </div>
+
+  <!-- 003 TREEMAP -->
+  <div class="chart-entry reveal">
+    <div class="chart-meta">
+      <span class="chart-num">003</span>
+      <span class="chart-category">Origin → Destination</span>
+      <span class="chart-type-badge">Interactive Treemap</span>
+    </div>
+    <div class="chart-header">
+      <div class="chart-title">Where Refugees Actually Go</div>
+      <p class="chart-desc">Each rectangle is a country pair — origin and asylum. Size shows refugee volume. Click any country to drill down and see exactly which nations absorb its refugees. The finding is counterintuitive: refugees don't go to wealthy nations — they go to nearby ones. Pakistan, Iran, Uganda and Bangladesh absorb more than Germany or the US combined but at the same time are the richest country to complain more about immigration. Funny isn't it?</p>
+    </div>
+    <div class="chart-frame-wrap">
+      <iframe src="treemap.html" scrolling="no" title="Refugee Flow Treemap"></iframe>
+    </div>
+    <div class="chart-insights">
+      <div class="insight"><div class="insight-label">Key finding</div><div class="insight-val">Proximity &gt; Prosperity</div></div>
+      <div class="insight"><div class="insight-label">Data source</div><div class="insight-val">UNHCR</div></div>
+      <div class="insight"><div class="insight-label">Top host country</div><div class="insight-val">Pakistan</div></div>
+      <div class="insight"><div class="insight-label">Interaction</div><div class="insight-val">Click to drill down</div></div>
+    </div>
+  </div>
+
+</div>
+
+<div class="next-band">
+  <div class="next-inner">
+    <a href="project-etf.html" style="text-decoration:none;">
+      <div class="next-label">Next Project</div>
+      <div class="next-title">ETF Price Forecasting with LSTM</div>
+    </a>
+    <a href="project-etf.html" class="next-arrow">→</a>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-name">Luca Iacomino</div>
+  <div class="footer-mono">luca.iacomino20@gmail.com · Madrid, ES · © 2026</div>
+</footer>
+
+<script>
+const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target);}});},{threshold:0.1});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+</script>
+</body>
+</html>
