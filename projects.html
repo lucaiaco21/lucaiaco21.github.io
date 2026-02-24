@@ -86,6 +86,19 @@ h1 em{font-style:normal;-webkit-text-stroke:2px var(--ink);color:transparent;}
 .pc.dark .pc-link,.pc.slate .pc-link{color:rgba(255,255,255,0.4);}
 .pc.dark:hover .pc-link,.pc.slate:hover .pc-link{color:#fff;}
 
+.pc.light .pc-tag { color: #888; }
+.pc.light .pc-title { color: #1c1c1c; }
+.pc.light .pc-desc { color: #555; }
+.pc.light .pc-link { color: #888; }
+.pc.light:hover .pc-link { color: #1c1c1c; }
+.pc.mid .pc-tag { color: #888; }
+.pc.mid .pc-title { color: #1c1c1c; }
+.pc.mid .pc-desc { color: #555; }
+.pc.mid .pc-link { color: #888; }
+.pc.mid:hover .pc-link { color: #1c1c1c; }
+.pc-img { width:100%; aspect-ratio:16/9; object-fit:cover; display:block; max-height:220px; }
+.pc.hero .pc-img { width:100%; height:100%; aspect-ratio:unset; max-height:unset; object-fit:cover; }
+
 /* Vis layers inside hero */
 .vis-layers{display:flex;flex-direction:column;gap:0.65rem;width:100%;}
 .vis-layer{display:flex;align-items:center;gap:0.85rem;}
@@ -147,10 +160,12 @@ footer{border-top:1px solid var(--ink-faint);padding:2rem 4rem;max-width:1200px;
 
     <!-- HERO CARD — Work Order Classifier, full width, horizontal -->
     <a href="project-classifier.html" class="pc dark hero reveal">
-    <img src="photo_cardCL.jpg" class="pc-img" alt="Work Order Classifier">
-      <div class="pc-body">
-        <div>
-          <div class="pc-badge new">Latest Project</div>
+  <div class="pc-visual" style="background:#111;overflow:hidden;">
+    <img src="photo_cardCL.jpg" style="width:100%;height:100%;object-fit:cover;display:block;">
+  </div>
+  <div class="pc-body">
+    <div>
+      <div class="pc-badge new">Latest Project</div>
           <div class="pc-tag">NLP · BERT · scikit-learn · Python</div>
           <div class="pc-title">AI Work Order Classifier — TCR Group</div>
           <p class="pc-desc">Two-layer NLP classifier automatically categorizing technician work orders to identify chargeable activities and prevent revenue leakage. Layer 1 uses logistic regression; Layer 2 uses fine-tuned BERT for 23 categories. Orders below 80% confidence are flagged for human review, with monthly retraining.</p>
