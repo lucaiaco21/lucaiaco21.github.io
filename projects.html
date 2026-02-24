@@ -6,87 +6,112 @@
 <title>Projects | Luca Iacomino</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Mono:wght@300;400;500&family=Instrument+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:wght@300;400;500&family=Instrument+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
-:root{--ink:#2c2416;--ink-soft:#7a6e5e;--ink-faint:#c8bfad;--paper:#fdf8f0;--paper-warm:#f5edd8;--accent:#8b4513;--accent2:#4a7c59;--serif:'Cormorant Garamond',serif;--mono:'DM Mono',monospace;--sans:'Instrument Sans',sans-serif;}
+:root{--ink:#1c1c1c;--ink-soft:#666;--ink-faint:#ddd;--paper:#ffffff;--paper-warm:#f5f3ef;--serif:'Syne',sans-serif;--mono:'DM Mono',monospace;--sans:'Instrument Sans',sans-serif;}
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
 html{scroll-behavior:smooth;}
 body{background:var(--paper);color:var(--ink);font-family:var(--sans);font-weight:300;overflow-x:hidden;cursor:none;}
-#cursor{width:8px;height:8px;background:var(--accent);border-radius:50%;position:fixed;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);}
-#cursor-ring{width:32px;height:32px;border:1.5px solid var(--accent);border-radius:50%;position:fixed;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:all 0.16s ease;opacity:0.5;}
-nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;justify-content:center;align-items:center;gap:3rem;padding:1.6rem 4rem;background:rgba(253,248,240,0.95);backdrop-filter:blur(16px);border-bottom:1px solid var(--ink-faint);}
-.nav-logo{font-family:var(--serif);font-size:1.2rem;color:var(--ink);text-decoration:none;letter-spacing:0.02em;}
-.nav-logo em{font-style:italic;color:var(--accent);}
+#cursor{width:8px;height:8px;background:var(--ink);border-radius:50%;position:fixed;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);}
+#cursor-ring{width:28px;height:28px;border:1px solid var(--ink);border-radius:50%;position:fixed;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:all 0.16s ease;opacity:0.4;}
+
+nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;justify-content:center;align-items:center;gap:3rem;padding:1.4rem 4rem;background:rgba(255,255,255,0.96);backdrop-filter:blur(16px);border-bottom:1px solid var(--ink-faint);}
+.nav-logo{font-family:var(--serif);font-size:1rem;font-weight:700;color:var(--ink);text-decoration:none;letter-spacing:-0.02em;}
 .nav-links{display:flex;gap:3rem;list-style:none;}
-.nav-links a{font-family:var(--serif);font-size:1.1rem;font-weight:400;letter-spacing:0.08em;color:var(--ink-soft);text-decoration:none;transition:color 0.2s;padding-bottom:3px;border-bottom:1px solid transparent;}
-.nav-links a:hover,.nav-links a.active{color:var(--accent);border-bottom-color:var(--accent);font-style:italic;}
-.page-hero{padding:10rem 4rem 4rem;max-width:1080px;margin:0 auto;}
-.page-eyebrow{font-family:var(--mono);font-size:0.68rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--accent);margin-bottom:1rem;display:flex;align-items:center;gap:0.75rem;}
-.page-eyebrow::before{content:'';display:block;width:28px;height:1px;background:var(--accent);}
-h1{font-family:var(--serif);font-size:clamp(3rem,6vw,5rem);font-weight:300;line-height:0.95;letter-spacing:-0.02em;color:var(--ink);}
-h1 em{font-style:italic;color:var(--accent);}
-.page-desc{font-size:1rem;color:var(--ink-soft);line-height:1.8;max-width:520px;margin-top:1.5rem;}
-.divider{border:none;border-top:1px solid var(--ink-faint);max-width:1080px;margin:0 auto;}
-.projects-section{padding:5rem 4rem;max-width:1080px;margin:0 auto;}
-.filter-row{display:flex;gap:0.75rem;margin-bottom:3.5rem;flex-wrap:wrap;}
-.filter-btn{font-family:var(--mono);font-size:0.65rem;letter-spacing:0.1em;text-transform:uppercase;background:transparent;border:1px solid var(--ink-faint);color:var(--ink-soft);padding:0.4rem 1rem;cursor:none;transition:all 0.2s;}
-.filter-btn:hover,.filter-btn.active{background:var(--accent);border-color:var(--accent);color:white;}
+.nav-links a{font-family:var(--serif);font-size:0.95rem;font-weight:600;letter-spacing:0.05em;color:var(--ink-soft);text-decoration:none;transition:color 0.2s;padding-bottom:2px;border-bottom:1px solid transparent;}
+.nav-links a:hover,.nav-links a.active{color:var(--ink);border-bottom-color:var(--ink);}
 
-/* ── Featured card ── */
-.project-featured{display:grid;grid-template-columns:1fr 1fr;gap:0;background:var(--ink-faint);margin-bottom:1px;text-decoration:none;color:inherit;position:relative;cursor:none;}
-.project-featured::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;width:0;background:var(--accent);transition:width 0.4s ease;}
-.project-featured:hover::after{width:100%;}
-.project-featured-text{background:var(--paper);padding:3rem;transition:background 0.3s;}
-.project-featured:hover .project-featured-text{background:var(--paper-warm);}
-.project-featured-visual{background:var(--paper-warm);border-left:1px solid var(--ink-faint);padding:2.5rem;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:1.5rem;min-height:320px;transition:background 0.3s;}
-.project-featured:hover .project-featured-visual{background:#ecdfc8;}
-.project-featured-visual.left{border-left:none;border-right:1px solid var(--ink-faint);}
+.page-hero{padding:9rem 4rem 3rem;max-width:1200px;margin:0 auto;}
+.page-eyebrow{font-family:var(--mono);font-size:0.62rem;letter-spacing:0.22em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:1rem;}
+h1{font-family:var(--serif);font-size:clamp(2.8rem,6vw,5rem);font-weight:800;line-height:0.9;letter-spacing:-0.04em;color:var(--ink);}
+h1 em{font-style:normal;-webkit-text-stroke:2px var(--ink);color:transparent;}
+.page-desc{font-size:0.95rem;color:var(--ink-soft);line-height:1.8;max-width:520px;margin-top:1.2rem;}
+.divider{border:none;border-top:1px solid var(--ink-faint);max-width:1200px;margin:0 auto;}
 
-/* ── Regular grid ── */
-.projects-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--ink-faint);}
-/* Each card is a full <a> tag */
-.project-card{background:var(--paper);padding:2.5rem;transition:background 0.3s;position:relative;overflow:hidden;text-decoration:none;color:inherit;display:block;cursor:none;}
-.project-card:hover{background:var(--paper-warm);}
-.project-card::after{content:'';position:absolute;bottom:0;left:0;height:2px;width:0;background:var(--accent);transition:width 0.4s ease;}
-.project-card:hover::after{width:100%;}
+.filter-row{display:flex;gap:0.5rem;margin-bottom:2.5rem;flex-wrap:wrap;padding:2.5rem 4rem 0;max-width:1200px;margin-left:auto;margin-right:auto;}
+.filter-btn{font-family:var(--mono);font-size:0.62rem;letter-spacing:0.1em;text-transform:uppercase;background:transparent;border:1px solid var(--ink-faint);color:var(--ink-soft);padding:0.35rem 1rem;cursor:none;transition:all 0.2s;border-radius:2px;}
+.filter-btn:hover,.filter-btn.active{background:var(--ink);border-color:var(--ink);color:#fff;}
 
-/* Shared */
-.proj-num{font-family:var(--mono);font-size:0.6rem;letter-spacing:0.15em;color:var(--ink-faint);margin-bottom:1rem;}
-.proj-tags{display:flex;flex-wrap:wrap;gap:0.4rem;margin-bottom:1rem;}
-.proj-tag{font-family:var(--mono);font-size:0.6rem;letter-spacing:0.07em;border:1px solid var(--ink-faint);color:var(--ink-soft);padding:0.18rem 0.55rem;background:var(--paper-warm);}
-.proj-title{font-family:var(--serif);font-size:1.55rem;font-weight:400;line-height:1.2;color:var(--ink);margin-bottom:0.75rem;}
-.proj-desc{font-size:0.88rem;color:var(--ink-soft);line-height:1.75;margin-bottom:1.5rem;}
-.proj-metrics{display:flex;gap:1.5rem;margin-bottom:1.5rem;flex-wrap:wrap;}
-.metric{display:flex;flex-direction:column;}
-.metric-val{font-family:var(--serif);font-size:1.6rem;font-weight:300;color:var(--ink);line-height:1;}
-.metric-val span{color:var(--accent);}
-.metric-label{font-family:var(--mono);font-size:0.6rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-faint);}
-.proj-link{font-family:var(--mono);font-size:0.68rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--accent);display:inline-flex;align-items:center;gap:0.4rem;transition:gap 0.2s;}
-.project-featured:hover .proj-link,.project-card:hover .proj-link{gap:0.8rem;}
-.proj-link::after{content:'→';}
+/* ── CARD GRID ── */
+.cards-wrap{padding:0 4rem 5rem;max-width:1200px;margin:0 auto;}
+.cards-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;}
 
-/* Visuals */
-.vis-layers{display:flex;flex-direction:column;gap:0.75rem;width:100%;}
-.vis-layer{display:flex;align-items:center;gap:1rem;}
-.vis-layer-bar{height:8px;border-radius:4px;background:var(--accent);opacity:0.5;transition:opacity 0.3s;}
-.project-featured:hover .vis-layer-bar{opacity:0.85;}
-.vis-layer-label{font-family:var(--mono);font-size:0.6rem;letter-spacing:0.06em;color:var(--ink-soft);white-space:nowrap;}
-.vis-caption{font-family:var(--mono);font-size:0.6rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-faint);text-align:center;}
+/* Base card */
+.pc{border-radius:16px;overflow:hidden;text-decoration:none;color:inherit;display:flex;flex-direction:column;cursor:none;transition:transform 0.3s ease,box-shadow 0.3s ease;position:relative;}
+.pc:hover{transform:translateY(-5px);box-shadow:0 16px 48px rgba(0,0,0,0.12);}
 
-/* Sentiment bars */
-.sent-row{display:flex;align-items:center;gap:0.75rem;width:100%;}
-.sent-label{font-family:var(--mono);font-size:0.6rem;color:var(--ink-soft);width:65px;text-align:right;flex-shrink:0;}
-.sent-track{flex:1;height:9px;border-radius:3px;background:var(--ink-faint);overflow:hidden;}
-.sent-fill{height:100%;border-radius:3px;transition:width 0.5s ease;}
-.sent-val{font-family:var(--mono);font-size:0.6rem;width:28px;flex-shrink:0;}
+/* Card variants */
+.pc.light{background:var(--paper-warm);}
+.pc.dark{background:#141414;color:#fff;}
+.pc.mid{background:#e8e4dc;}
+.pc.slate{background:#1e2028;color:#fff;}
 
-footer{border-top:1px solid var(--ink-faint);padding:2rem 4rem;max-width:1080px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;}
-.footer-name{font-family:var(--serif);font-size:1rem;font-style:italic;color:var(--ink-soft);}
-.footer-mono{font-family:var(--mono);font-size:0.6rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-faint);}
-.reveal{opacity:0;transform:translateY(22px);transition:opacity 0.65s ease,transform 0.65s ease;}
+/* HERO card — full width horizontal */
+.pc.hero{grid-column:span 2;flex-direction:row;min-height:280px;}
+.pc.hero .pc-visual{width:45%;flex-shrink:0;display:flex;align-items:center;justify-content:center;padding:3rem;background:rgba(0,0,0,0.15);position:relative;overflow:hidden;}
+.pc.hero .pc-body{flex:1;padding:3rem;display:flex;flex-direction:column;justify-content:space-between;}
+
+/* Regular card visual */
+.pc-visual{width:100%;aspect-ratio:16/9;display:flex;align-items:center;justify-content:center;font-size:4rem;position:relative;overflow:hidden;}
+.pc-visual-icon{font-size:4rem;position:relative;z-index:1;}
+.pc-visual-icon.big{font-size:3rem;}
+
+/* Body */
+.pc-body{padding:1.6rem;display:flex;flex-direction:column;gap:0.35rem;}
+
+/* Badge */
+.pc-badge{display:inline-flex;align-items:center;gap:0.4rem;font-family:var(--mono);font-size:0.58rem;letter-spacing:0.12em;text-transform:uppercase;padding:0.25rem 0.7rem;border-radius:20px;width:fit-content;margin-bottom:0.5rem;}
+.pc-badge.new{background:#1c1c1c;color:#fff;}
+.pc.dark .pc-badge.new{background:rgba(255,255,255,0.15);color:rgba(255,255,255,0.9);}
+.pc.slate .pc-badge.new{background:rgba(255,255,255,0.15);color:rgba(255,255,255,0.9);}
+.pc-badge::before{content:'';width:6px;height:6px;border-radius:50%;background:currentColor;opacity:0.7;}
+
+.pc-tag{font-family:var(--mono);font-size:0.58rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-faint);margin-bottom:0.2rem;}
+.pc.dark .pc-tag,.pc.slate .pc-tag{color:rgba(255,255,255,0.35);}
+.pc-title{font-family:var(--serif);font-size:1.15rem;font-weight:700;letter-spacing:-0.02em;line-height:1.2;margin-bottom:0.3rem;}
+.pc.hero .pc-title{font-size:1.8rem;margin-bottom:0.5rem;}
+.pc.dark .pc-title,.pc.slate .pc-title{color:#fff;}
+.pc-desc{font-size:0.8rem;color:var(--ink-soft);line-height:1.65;}
+.pc.dark .pc-desc,.pc.slate .pc-desc{color:rgba(255,255,255,0.5);}
+.pc.hero .pc-desc{font-size:0.88rem;max-width:480px;}
+
+.pc-metrics{display:flex;gap:2rem;margin:1rem 0;}
+.metric-val{font-family:var(--serif);font-size:1.6rem;font-weight:700;line-height:1;}
+.metric-label{font-family:var(--mono);font-size:0.55rem;letter-spacing:0.1em;text-transform:uppercase;opacity:0.4;margin-top:0.2rem;}
+.pc.dark .metric-val,.pc.slate .metric-val{color:#fff;}
+
+.pc-link{font-family:var(--mono);font-size:0.62rem;letter-spacing:0.08em;text-transform:uppercase;color:var(--ink-soft);display:inline-flex;align-items:center;gap:0.35rem;transition:gap 0.2s,color 0.2s;margin-top:auto;padding-top:0.75rem;}
+.pc-link::after{content:'→';}
+.pc:hover .pc-link{gap:0.65rem;color:var(--ink);}
+.pc.dark .pc-link,.pc.slate .pc-link{color:rgba(255,255,255,0.4);}
+.pc.dark:hover .pc-link,.pc.slate:hover .pc-link{color:#fff;}
+
+/* Vis layers inside hero */
+.vis-layers{display:flex;flex-direction:column;gap:0.65rem;width:100%;}
+.vis-layer{display:flex;align-items:center;gap:0.85rem;}
+.vis-bar{height:6px;border-radius:3px;background:rgba(255,255,255,0.25);transition:background 0.3s;}
+.pc:hover .vis-bar{background:rgba(255,255,255,0.5);}
+.vis-bar.highlight{background:rgba(255,255,255,0.55);}
+.pc:hover .vis-bar.highlight{background:rgba(255,255,255,0.85);}
+.vis-lbl{font-family:var(--mono);font-size:0.56rem;letter-spacing:0.06em;color:rgba(255,255,255,0.5);white-space:nowrap;}
+.vis-cap{font-family:var(--mono);font-size:0.56rem;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.25);text-align:center;margin-top:0.5rem;}
+
+footer{border-top:1px solid var(--ink-faint);padding:2rem 4rem;max-width:1200px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;}
+.footer-name{font-family:var(--serif);font-size:0.95rem;font-weight:600;color:var(--ink-soft);}
+.footer-mono{font-family:var(--mono);font-size:0.58rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-faint);}
+
+.reveal{opacity:0;transform:translateY(18px);transition:opacity 0.6s ease,transform 0.6s ease;}
 .reveal.visible{opacity:1;transform:translateY(0);}
-.rd1{transition-delay:0.1s}.rd2{transition-delay:0.2s}.rd3{transition-delay:0.3s}
-@media(max-width:860px){nav{gap:1.5rem;padding:1.2rem 2rem;flex-wrap:wrap;}.nav-links{gap:1.5rem;}.page-hero{padding:8rem 2rem 3rem;}.projects-section{padding:3rem 2rem;}.project-featured{grid-template-columns:1fr;}.project-featured-visual,.project-featured-visual.left{border:none;border-top:1px solid var(--ink-faint);}.projects-grid{grid-template-columns:1fr;}footer{flex-direction:column;gap:0.5rem;padding:1.5rem 2rem;text-align:center;}}
+.rd1{transition-delay:0.08s}.rd2{transition-delay:0.16s}.rd3{transition-delay:0.24s}.rd4{transition-delay:0.32s}
+
+@media(max-width:860px){
+  nav{gap:1.5rem;padding:1.2rem 2rem;}.nav-links{gap:1.5rem;}
+  .page-hero,.filter-row,.cards-wrap{padding-left:1.5rem;padding-right:1.5rem;}
+  .cards-grid{grid-template-columns:1fr;}
+  .pc.hero{grid-column:span 1;flex-direction:column;}
+  .pc.hero .pc-visual{width:100%;}
+  footer{flex-direction:column;gap:0.5rem;padding:1.5rem 2rem;text-align:center;}
+}
 </style>
 </head>
 <body>
@@ -94,7 +119,7 @@ footer{border-top:1px solid var(--ink-faint);padding:2rem 4rem;max-width:1080px;
 <div id="cursor-ring"></div>
 
 <nav>
-  <a href="index.html" class="nav-logo">Luca <em>Iacomino</em></a>
+  <a href="index.html" class="nav-logo">Luca Iacomino</a>
   <ul class="nav-links">
     <li><a href="index.html">Home</a></li>
     <li><a href="projects.html" class="active">Projects</a></li>
@@ -104,121 +129,95 @@ footer{border-top:1px solid var(--ink-faint);padding:2rem 4rem;max-width:1080px;
 
 <div class="page-hero">
   <div class="page-eyebrow reveal">Selected Work</div>
-  <h1 class="reveal rd1">Projects &amp;<br><em>case studies.</em></h1>
-  <p class="page-desc reveal rd2">From ML forecasting models to NLP pipelines and data visualizations — projects where data meets real business impact.</p>
+  <h1 class="reveal rd1">Projects &amp;<br><em>Case Studies.</em></h1>
+  <p class="page-desc reveal rd2">From ML models to NLP pipelines and data visualizations — projects where data meets real business impact.</p>
 </div>
 <hr class="divider">
 
-<div class="projects-section">
-  <div class="filter-row reveal">
-    <button class="filter-btn active">All</button>
-    <button class="filter-btn">Machine Learning</button>
-    <button class="filter-btn">NLP</button>
-    <button class="filter-btn">Visualization</button>
-    <button class="filter-btn">GenAI</button>
+<div class="filter-row reveal">
+  <button class="filter-btn active">All</button>
+  <button class="filter-btn">Machine Learning</button>
+  <button class="filter-btn">NLP</button>
+  <button class="filter-btn">Visualization</button>
+  <button class="filter-btn">GenAI</button>
+</div>
+
+<div class="cards-wrap">
+  <div class="cards-grid">
+
+    <!-- HERO CARD — Work Order Classifier, full width, horizontal -->
+    <a href="project-classifier.html" class="pc dark hero reveal">
+    <img src="photo_cardCL.jpg" class="pc-img" alt="Work Order Classifier">
+      <div class="pc-body">
+        <div>
+          <div class="pc-badge new">Latest Project</div>
+          <div class="pc-tag">NLP · BERT · scikit-learn · Python</div>
+          <div class="pc-title">AI Work Order Classifier — TCR Group</div>
+          <p class="pc-desc">Two-layer NLP classifier automatically categorizing technician work orders to identify chargeable activities and prevent revenue leakage. Layer 1 uses logistic regression; Layer 2 uses fine-tuned BERT for 23 categories. Orders below 80% confidence are flagged for human review, with monthly retraining.</p>
+          <div class="pc-metrics">
+            <div><div class="metric-val">91%</div><div class="metric-label">Accuracy</div></div>
+            <div><div class="metric-val">23</div><div class="metric-label">Categories</div></div>
+            <div><div class="metric-val">3K</div><div class="metric-label">Monthly Texts</div></div>
+          </div>
+        </div>
+        <div class="pc-link">Read Case Study</div>
+      </div>
+    </a>
+
+    <!-- Card 2: Cafe Thesis — light -->
+    <!-- Card 2: Cafe Thesis — light -->
+  <a href="project-thesis.html" class="pc light reveal rd1">
+  <img src="photo_cardThesis.jpg" class="pc-img" alt="Café Demand Forecasting & Sentiment Analysis">
+  <div class="pc-body">
+    <div class="pc-tag">NLP · Forecasting · Streamlit</div>
+    <div class="pc-title">Café Demand Forecasting &amp; Sentiment Analysis</div>
+    <p class="pc-desc">MSc thesis. End-to-end system combining historical sales, NLP sentiment analysis of reviews, and competitor benchmarking via web scraping. Deployed as a Streamlit app.</p>
+    <div class="pc-link">Case Study</div>
   </div>
-
-  <!-- FEATURED 1: Work Order Classifier — text left, architecture visual right -->
-  <a href="project-classifier.html" class="project-featured reveal">
-    <div class="project-featured-text">
-      <div class="proj-num">000 — Featured</div>
-      <div class="proj-tags">
-        <span class="proj-tag">NLP</span><span class="proj-tag">BERT</span>
-        <span class="proj-tag">scikit-learn</span><span class="proj-tag">Python</span>
-      </div>
-      <div class="proj-title">AI Work Order Classifier — TCR Group</div>
-      <p class="proj-desc">Two-layer NLP classifier automatically categorizing technician work orders to identify chargeable activities and prevent revenue leakage. Layer 1 uses logistic regression; Layer 2 uses fine-tuned BERT for 23 categories. Orders below 80% confidence are flagged for human review, with monthly retraining.</p>
-      <div class="proj-metrics">
-        <div class="metric"><div class="metric-val">91<span>%</span></div><div class="metric-label">Accuracy</div></div>
-        <div class="metric"><div class="metric-val">23</div><div class="metric-label">Categories</div></div>
-        <div class="metric"><div class="metric-val">80<span>%</span></div><div class="metric-label">Confidence Threshold</div></div>
-      </div>
-      <div class="proj-link">Read Case Study</div>
-    </div>
-    <div class="project-featured-visual">
-      <div class="vis-layers">
-        <div class="vis-layer"><div class="vis-layer-bar" style="width:100%"></div><div class="vis-layer-label">Raw Work Order Text</div></div>
-        <div class="vis-layer"><div class="vis-layer-bar" style="width:88%"></div><div class="vis-layer-label">Cleaning + Embedding</div></div>
-        <div class="vis-layer"><div class="vis-layer-bar" style="width:72%"></div><div class="vis-layer-label">Layer 1 — Logistic Regression</div></div>
-        <div class="vis-layer"><div class="vis-layer-bar" style="width:58%"></div><div class="vis-layer-label">Layer 2 — BERT Fine-tuned</div></div>
-        <div class="vis-layer"><div class="vis-layer-bar" style="width:42%"></div><div class="vis-layer-label">Keyword Boost</div></div>
-        <div class="vis-layer"><div class="vis-layer-bar" style="width:92%;background:var(--accent2)"></div><div class="vis-layer-label">Category + Confidence Score</div></div>
-      </div>
-      <div class="vis-caption">Model Architecture</div>
-    </div>
   </a>
 
-  <!-- FEATURED 2: Cafe Demand Forecasting — sentiment visual left, text right -->
-  <a href="project-thesis.html" class="project-featured reveal">
-    <div class="project-featured-visual left">
-      <div style="width:100%;display:flex;flex-direction:column;gap:1rem;">
-        <div style="font-family:var(--mono);font-size:0.58rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-faint);margin-bottom:0.25rem;">Sentiment Score by Category</div>
-        <div class="sent-row"><span class="sent-label">Service</span><div class="sent-track"><div class="sent-fill" style="width:82%;background:var(--accent2);opacity:0.8;"></div></div><span class="sent-val" style="color:var(--accent2);">0.82</span></div>
-        <div class="sent-row"><span class="sent-label">Food</span><div class="sent-track"><div class="sent-fill" style="width:74%;background:var(--accent2);opacity:0.7;"></div></div><span class="sent-val" style="color:var(--accent2);">0.74</span></div>
-        <div class="sent-row"><span class="sent-label">Ambience</span><div class="sent-track"><div class="sent-fill" style="width:68%;background:var(--accent2);opacity:0.65;"></div></div><span class="sent-val" style="color:var(--accent2);">0.68</span></div>
-        <div class="sent-row"><span class="sent-label">Price</span><div class="sent-track"><div class="sent-fill" style="width:45%;background:var(--accent);opacity:0.7;"></div></div><span class="sent-val" style="color:var(--accent);">0.45</span></div>
-        <div class="sent-row"><span class="sent-label">Wait Time</span><div class="sent-track"><div class="sent-fill" style="width:31%;background:var(--accent);opacity:0.8;"></div></div><span class="sent-val" style="color:var(--accent);">0.31</span></div>
-        <div class="vis-caption" style="margin-top:0.5rem;">NLP Sentiment · Customer Reviews</div>
+    <!-- Card 3: Revenue Forecasting — dark -->
+    <a href="project-forecasting.html" class="pc dark reveal rd2">
+    <img src="photo_revenueforecast.jpg" class="pc-img" alt="Revenue Forecasting Model">
+      <div class="pc-body">
+        <div class="pc-tag">Machine Learning · XGBoost · Forecasting</div>
+        <div class="pc-title">ML Revenue Forecasting Model</div>
+        <p class="pc-desc">First ML forecasting model at TCR Group, replacing Excel. €12K RMSE, 40% monthly time saved.</p>
+        <div class="pc-link">Case Study</div>
       </div>
-    </div>
-    <div class="project-featured-text">
-      <div class="proj-num">001 — Featured · MSc Thesis</div>
-      <div class="proj-tags">
-        <span class="proj-tag">NLP</span><span class="proj-tag">Forecasting</span>
-        <span class="proj-tag">Web Scraping</span><span class="proj-tag">Streamlit</span>
-      </div>
-      <div class="proj-title">Café Demand Forecasting &amp; Sentiment Analysis</div>
-      <p class="proj-desc">End-to-end demand forecasting system for a café chain combining historical sales data, NLP-based sentiment analysis of customer reviews, and competitor benchmarking via web scraping. Deployed as an interactive Streamlit app allowing managers to explore forecasts and insights in real time.</p>
-      <div class="proj-link">Read Case Study</div>
-    </div>
-  </a>
-
-  <!-- REGULAR GRID -->
-  <div class="projects-grid">
-
-    <a href="project-forecasting.html" class="project-card reveal">
-      <div class="proj-num">002</div>
-      <div class="proj-tags"><span class="proj-tag">Machine Learning</span><span class="proj-tag">XGBoost</span><span class="proj-tag">Forecasting</span></div>
-      <div class="proj-title">ML Revenue Forecasting Model</div>
-      <p class="proj-desc">First-ever ML forecasting model at TCR Group, replacing manual Excel estimations. Uses historical sales and seasonality features across multiple entities. Saved 40% monthly reporting time.</p>
-      <div class="proj-metrics">
-        <div class="metric"><div class="metric-val">€12<span>K</span></div><div class="metric-label">RMSE</div></div>
-        <div class="metric"><div class="metric-val">40<span>%</span></div><div class="metric-label">Time Saved</div></div>
-      </div>
-      <div class="proj-link">Read Case Study</div>
     </a>
 
-    <a href="project-athena.html" class="project-card reveal rd1">
-      <div class="proj-num">003</div>
-      <div class="proj-tags">
-        <span class="proj-tag">GenAI</span><span class="proj-tag">SQL</span>
-        <span class="proj-tag">Requirements Engineering</span>
+    <!-- Card 4: Athena — light -->
+    <a href="project-athena.html" class="pc mid reveal rd1">
+    <img src="photo_athena.jpg" class="pc-img" alt="From Text to SQL Queries">
+      <div class="pc-body">
+        <div class="pc-tag">GenAI · SQL · Requirements Engineering</div>
+        <div class="pc-title">Athena — GenAI Conversational Reporting</div>
+        <p class="pc-desc">Co-designed at Accenture for a major FMCG. GenAI tool querying 16M+ records in natural language — 95%+ accuracy, 20K hours saved yearly.</p>
+        <div class="pc-link">Case Study</div>
       </div>
-      <div class="proj-title">Athena — GenAI Conversational Reporting</div>
-      <p class="proj-desc">Co-designed at Accenture for a major FMCG client. GenAI tool letting business users query a 16M+ record database in natural language — 95%+ accuracy, 20,000 hours saved yearly.</p>
-      <div class="proj-link">Read Case Study</div>
     </a>
 
-    <a href="project-migration.html" class="project-card reveal">
-      <div class="proj-num">004 — Data Visualization</div>
-      <div class="proj-tags">
-        <span class="proj-tag">Data Visualization</span><span class="proj-tag">Python</span>
-        <span class="proj-tag">Plotly</span><span class="proj-tag">Geospatial</span>
+    <!-- Card 5: War & Migration — dark slate -->
+    <a href="project-migration.html" class="pc slate reveal rd2">
+    <img src="photo_world.jpg" class="pc-img" alt="War migration">
+      <div class="pc-body">
+        <div class="pc-tag">Data Visualization · Plotly · Geospatial</div>
+        <div class="pc-title">How War Shapes Migration — 20 Years of Data</div>
+        <p class="pc-desc">Interactive visualization mapping the relationship between armed conflicts and forced migration flows worldwide over the last 20 years.</p>
+        <div class="pc-link">Explore</div>
       </div>
-      <div class="proj-title">How War Shapes Migration — 20 Years of Data</div>
-      <p class="proj-desc">Interactive data visualization exploring the relationship between armed conflicts and forced migration flows worldwide over the last 20 years. Combines UNHCR refugee data with conflict datasets to reveal patterns and tell stories through data.</p>
-      <div class="proj-link">Explore Project</div>
     </a>
 
-    <a href="project-etf.html" class="project-card reveal rd1">
-      <div class="proj-num">005 — Personal</div>
-      <div class="proj-tags">
-        <span class="proj-tag">LSTM</span><span class="proj-tag">Time Series</span>
-        <span class="proj-tag">TensorFlow</span><span class="proj-tag">Python</span>
+    <!-- Card 6: ETF LSTM — light -->
+    <a href="project-etf.html" class="pc light reveal rd3">
+    <img src="photo_LSTM.jpg" class="pc-img" alt="ETF Project">
+      <div class="pc-body">
+        <div class="pc-tag">LSTM · Time Series · TensorFlow</div>
+        <div class="pc-title">ETF Price Forecasting with LSTM</div>
+        <p class="pc-desc">Personal project predicting ETF prices using a Long Short-Term Memory neural network on real market data with multiple financial features and time lags.</p>
+        <div class="pc-link">GitHub</div>
       </div>
-      <div class="proj-title">ETF Price Forecasting with LSTM</div>
-      <p class="proj-desc">Personal project predicting ETF prices using a Long Short-Term Memory neural network on real market data. Incorporates multiple financial features and time lags to capture temporal dependencies.</p>
-      <div class="proj-link">View on GitHub</div>
     </a>
 
   </div>
@@ -227,8 +226,7 @@ footer{border-top:1px solid var(--ink-faint);padding:2rem 4rem;max-width:1080px;
 <hr class="divider">
 <footer>
   <div class="footer-name">Luca Iacomino</div>
-  <div class="footer-mono">luca.iacomino20@gmail.com · Madrid, ES</div>
-  <div class="footer-mono">© 2026</div>
+  <div class="footer-mono">luca.iacomino20@gmail.com · Madrid, ES · © 2026</div>
 </footer>
 
 <script>
@@ -237,8 +235,8 @@ let rx=0,ry=0,mx=0,my=0;
 document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cur.style.left=mx+'px';cur.style.top=my+'px';});
 (function anim(){rx+=(mx-rx)*0.13;ry+=(my-ry)*0.13;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(anim);})();
 document.querySelectorAll('a,button').forEach(el=>{
-  el.addEventListener('mouseenter',()=>{ring.style.transform='translate(-50%,-50%) scale(1.8)';ring.style.opacity='0.25';});
-  el.addEventListener('mouseleave',()=>{ring.style.transform='translate(-50%,-50%) scale(1)';ring.style.opacity='0.5';});
+  el.addEventListener('mouseenter',()=>{ring.style.transform='translate(-50%,-50%) scale(1.8)';ring.style.opacity='0.2';});
+  el.addEventListener('mouseleave',()=>{ring.style.transform='translate(-50%,-50%) scale(1)';ring.style.opacity='0.4';});
 });
 const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target);}});},{threshold:0.1});
 document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
