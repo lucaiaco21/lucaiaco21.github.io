@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Athena — Conversational Reporting | Luca Iacomino</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:wght@300;400;500&family=Instrument+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#1c1c1c;--paper:#ffffff;--paper-warm:#f5f3ef;--serif:'Syne',sans-serif;--mono:'DM Mono',monospace;--sans:'Instrument Sans',sans-serif;}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{background:var(--paper);color:var(--ink);font-family:var(--sans);font-weight:300;overflow-x:hidden;}
+
+nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;justify-content:center;align-items:center;gap:3rem;padding:1.4rem 4rem;background:rgba(255,255,255,0.96);border-bottom:1px solid #e0e0e0;}
+.nav-logo{font-family:var(--serif);font-size:1rem;font-weight:700;color:var(--ink);text-decoration:none;}
+.nav-links{display:flex;gap:3rem;list-style:none;}
+.nav-links a{font-family:var(--serif);font-size:0.95rem;font-weight:600;color:#555;text-decoration:none;transition:color 0.2s;padding-bottom:2px;border-bottom:1px solid transparent;}
+.nav-links a:hover,.nav-links a.active{color:var(--ink);border-bottom-color:var(--ink);}
+
+.proj-hero{padding:9rem 0 0;}
+.hero-inner{max-width:1080px;margin:0 auto;padding:4rem 4rem 0;}
+.back-link{font-family:var(--mono);font-size:0.62rem;letter-spacing:0.12em;text-transform:uppercase;color:#aaa;text-decoration:none;display:inline-flex;align-items:center;gap:0.5rem;margin-bottom:2rem;transition:color 0.2s;}
+.back-link::before{content:'←';}
+.back-link:hover{color:var(--ink);}
+.hero-eyebrow{font-family:var(--mono);font-size:0.62rem;letter-spacing:0.22em;text-transform:uppercase;color:#777;margin-bottom:1.5rem;}
+.hero-title{font-family:var(--serif);font-size:clamp(2.8rem,7vw,6rem);font-weight:800;line-height:0.88;letter-spacing:-0.04em;color:var(--ink);margin-bottom:2.5rem;max-width:800px;}
+.hero-title em{font-style:normal;-webkit-text-stroke:2px var(--ink);color:transparent;}
+
+.hero-meta-row{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid #e0e0e0;border-bottom:1px solid #e0e0e0;}
+.meta-cell{padding:1.2rem 0;}
+.meta-cell+.meta-cell{padding-left:2rem;border-left:1px solid #e0e0e0;}
+.meta-label{font-family:var(--mono);font-size:0.55rem;letter-spacing:0.18em;text-transform:uppercase;color:#aaa;margin-bottom:0.35rem;}
+.meta-value{font-family:var(--serif);font-size:0.95rem;font-weight:600;color:var(--ink);}
+.proj-tags{display:flex;flex-wrap:wrap;gap:0.4rem;padding:1.2rem 0;border-bottom:1px solid #e0e0e0;}
+.proj-tag{font-family:var(--mono);font-size:0.58rem;letter-spacing:0.06em;border:1px solid #ddd;color:#555;padding:0.18rem 0.65rem;}
+
+.metrics-strip{background:var(--ink);padding:4rem;}
+.metrics-inner{max-width:1080px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);}
+.band-metric{padding:0 3rem;border-right:1px solid rgba(255,255,255,0.12);}
+.band-metric:first-child{padding-left:0;}
+.band-metric:last-child{border-right:none;}
+.band-val{font-family:var(--serif);font-size:clamp(2.5rem,5vw,4rem);font-weight:800;color:#fff;line-height:1;margin-bottom:0.5rem;letter-spacing:-0.03em;}
+.band-val span{color:rgba(255,255,255,0.55);}
+.band-label{font-family:var(--mono);font-size:0.58rem;letter-spacing:0.14em;text-transform:uppercase;color:rgba(255,255,255,0.55);}
+
+.proj-body{max-width:1080px;margin:0 auto;padding:0 4rem;}
+.proj-content{padding:5rem 0;}
+
+.section-label{font-family:var(--mono);font-size:0.58rem;letter-spacing:0.22em;text-transform:uppercase;color:#aaa;margin-bottom:0.75rem;}
+h2{font-family:var(--serif);font-size:clamp(1.8rem,3vw,2.6rem);font-weight:700;line-height:1.05;color:var(--ink);letter-spacing:-0.03em;margin-bottom:1.5rem;}
+h2 em{font-style:normal;-webkit-text-stroke:1.5px var(--ink);color:transparent;}
+
+.prose{font-size:0.95rem;color:#333;line-height:1.9;margin-bottom:2.5rem;}
+.prose p{margin-bottom:1rem;}
+.content-hr{border:none;border-top:1px solid #e0e0e0;margin:3rem 0;}
+
+/* TWO SHOWCASE SECTIONS */
+.showcase{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:#e0e0e0;border:1px solid #e0e0e0;margin:2.5rem 0;}
+.showcase-item{background:var(--paper);padding:2rem;}
+.showcase-label{font-family:var(--mono);font-size:0.52rem;letter-spacing:0.18em;text-transform:uppercase;color:#aaa;margin-bottom:0.6rem;}
+.showcase-title{font-family:var(--serif);font-size:1.1rem;font-weight:700;color:var(--ink);margin-bottom:0.75rem;}
+.showcase-desc{font-size:0.85rem;color:#555;line-height:1.75;}
+
+/* ROLE BADGES */
+.role-tags{display:flex;flex-wrap:wrap;gap:0.4rem;margin:2rem 0;}
+.role-tag{font-family:var(--mono);font-size:0.58rem;letter-spacing:0.06em;padding:0.3rem 0.8rem;background:var(--ink);color:#fff;}
+.role-tag.outline{background:transparent;border:1px solid #ddd;color:#555;}
+
+/* STEPS */
+.steps{list-style:none;display:flex;flex-direction:column;margin-bottom:2.5rem;}
+.step{display:grid;grid-template-columns:3rem 1fr;padding:1.5rem 0;border-bottom:1px solid #e0e0e0;}
+.step:first-child{border-top:1px solid #e0e0e0;}
+.step-num{font-family:var(--mono);font-size:0.6rem;letter-spacing:0.1em;color:#ccc;padding-top:0.15rem;}
+.step-text{font-size:0.92rem;color:#333;line-height:1.75;}
+.step-text strong{display:block;font-family:var(--serif);font-size:1.05rem;font-weight:700;color:var(--ink);letter-spacing:-0.01em;margin-bottom:0.4rem;}
+
+/* SQL BLOCK */
+.sql-wrap{margin:2.5rem 0;background:#141414;border-radius:4px;overflow:hidden;}
+.sql-header{padding:0.75rem 1.2rem;border-bottom:1px solid rgba(255,255,255,0.08);display:flex;justify-content:space-between;align-items:center;}
+.sql-label{font-family:var(--mono);font-size:0.52rem;letter-spacing:0.14em;text-transform:uppercase;color:rgba(255,255,255,0.3);}
+.sql-tag{font-family:var(--mono);font-size:0.5rem;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.2);border:1px solid rgba(255,255,255,0.1);padding:0.1rem 0.5rem;}
+pre{padding:1.5rem 1.2rem;overflow-x:auto;margin:0;}
+code{font-family:var(--mono);font-size:0.78rem;line-height:1.8;color:#e0e0e0;}
+.kw{color:#7eb8f7;}
+.fn{color:#c9a8f5;}
+.cm{color:#555;font-style:italic;}
+.str{color:#98c379;}
+.num{color:#e5c07b;}
+
+/* IMG */
+.img-wrap{margin:2.5rem 0;}
+.img-wrap img{width:100%;display:block;border:1px solid #e0e0e0;}
+.img-caption{font-family:var(--mono);font-size:0.58rem;letter-spacing:0.1em;text-transform:uppercase;color:#aaa;margin-top:0.75rem;}
+
+/* SIDEBAR STAT */
+.sidebar-stat{display:flex;justify-content:space-between;align-items:baseline;padding:0.6rem 0;border-bottom:1px solid #f0ede8;}
+.sidebar-stat:last-child{border-bottom:none;}
+.stat-name{font-family:var(--mono);font-size:0.6rem;letter-spacing:0.06em;color:#555;text-transform:uppercase;}
+.stat-val{font-family:var(--serif);font-size:1.1rem;font-weight:700;color:var(--ink);}
+
+.next-band{background:var(--paper-warm);padding:4rem;}
+.next-inner{max-width:1080px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;}
+.next-label{font-family:var(--mono);font-size:0.6rem;letter-spacing:0.18em;text-transform:uppercase;color:#aaa;margin-bottom:0.5rem;}
+.next-title{font-family:var(--serif);font-size:clamp(1.4rem,3vw,2.2rem);font-weight:700;letter-spacing:-0.02em;color:var(--ink);}
+.next-arrow{font-family:var(--serif);font-size:3rem;font-weight:300;color:#bbb;text-decoration:none;transition:transform 0.2s,color 0.2s;}
+.next-arrow:hover{transform:translateX(8px);color:var(--ink);}
+.next-band a{text-decoration:none;}
+.next-band a:hover .next-title{text-decoration:underline;text-underline-offset:4px;}
+
+footer{border-top:1px solid #e0e0e0;padding:2rem 4rem;display:flex;justify-content:space-between;align-items:center;max-width:1080px;margin:0 auto;}
+.footer-name{font-family:var(--serif);font-size:0.95rem;font-weight:600;color:#555;}
+.footer-mono{font-family:var(--mono);font-size:0.58rem;letter-spacing:0.1em;text-transform:uppercase;color:#bbb;}
+
+.reveal{opacity:0;transform:translateY(18px);transition:opacity 0.6s ease,transform 0.6s ease;}
+.reveal.visible{opacity:1;transform:translateY(0);}
+.rd1{transition-delay:0.08s}.rd2{transition-delay:0.16s}.rd3{transition-delay:0.24s}
+
+@media(max-width:860px){
+  nav{gap:1.5rem;padding:1.2rem 2rem;}.nav-links{gap:1.5rem;}
+  .hero-inner{padding:3rem 2rem 0;}
+  .hero-meta-row{grid-template-columns:repeat(2,1fr);}
+  .metrics-strip{padding:2.5rem 2rem;}
+  .metrics-inner{grid-template-columns:repeat(2,1fr);gap:2rem;}
+  .band-metric{padding:0;border-right:none;}
+  .proj-body{padding:0 2rem;}
+  .showcase{grid-template-columns:1fr;}
+  .next-band{padding:2.5rem 2rem;}
+  .next-inner{flex-direction:column;align-items:flex-start;gap:1rem;}
+  footer{flex-direction:column;gap:0.5rem;padding:1.5rem 2rem;text-align:center;}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">Luca Iacomino</a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="projects.html" class="active">Projects</a></li>
+    <li><a href="cv.html">CV</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<div class="proj-hero">
+  <div class="hero-inner">
+    <a href="projects.html" class="back-link reveal">All Projects</a>
+    <div class="hero-eyebrow reveal">Case Study · Accenture · FMCG Big Player · 2024 </div>
+    <h1 class="hero-title reveal rd1">Ask the data.<br><em>Athena answers.</em></h1>
+    <div class="hero-meta-row reveal rd2">
+      <div class="meta-cell"><div class="meta-label">Company</div><div class="meta-value">Accenture</div></div>
+      <div class="meta-cell"><div class="meta-label">Client</div><div class="meta-value">FMCG Company</div></div>
+      <div class="meta-cell"><div class="meta-label">My Role</div><div class="meta-value">Functional · SQL</div></div>
+      <div class="meta-cell"><div class="meta-label">Type</div><div class="meta-value">GenAI · SQL · Project Management</div></div>
+    </div>
+    <div class="proj-tags reveal rd3">
+      <span class="proj-tag">GenAI</span>
+      <span class="proj-tag">GPT-4</span>
+      <span class="proj-tag">SQL</span>
+      <span class="proj-tag">Functional Requirements</span>
+      <span class="proj-tag">Stakeholder Management</span>
+    </div>
+  </div>
+</div>
+
+<!-- METRICS -->
+<div class="metrics-strip">
+  <div class="metrics-inner">
+    <div class="band-metric reveal">
+      <div class="band-val">95<span>%+</span></div>
+      <div class="band-label">Output Accuracy</div>
+    </div>
+    <div class="band-metric reveal rd1">
+      <div class="band-val">16<span>M</span></div>
+      <div class="band-label">Records in SQL DB</div>
+    </div>
+    <div class="band-metric reveal rd2">
+      <div class="band-val">20<span>K</span></div>
+      <div class="band-label">Hours Saved / Year</div>
+    </div>
+    <div class="band-metric reveal rd3">
+      <div class="band-val">2</div>
+      <div class="band-label">Showcases</div>
+    </div>
+  </div>
+</div>
+
+<!-- BODY -->
+<div class="proj-body">
+  <div class="proj-content">
+
+    <!-- WHAT WAS THE PROJECT -->
+    <div class="section-label reveal">The Project</div>
+    <h2 class="reveal rd1">What is <em>Athena.</em></h2>
+    <div class="prose reveal rd2">
+      <p>Athena is a GenAI-powered conversational reporting tool built at Accenture for one of the world's largest FMCG companies. It allows business users and executives to query 16M+ rows of Nielsen syndicated sales data using plain English, getting back tables and visualizations instantly WITH no SQL knowledge required.</p>
+    </div>
+
+    <!-- MY ROLE -->
+    <div class="section-label reveal">My Role</div>
+    <h2 class="reveal rd1">Where I <em>contributed.</em></h2>
+    <div class="prose reveal rd2">
+      <p>I was part of the functional team at the intersection of business and technology: understanding what the business actually needed, translating that into requirements the technical team could build, and making sure the solution made sense to the people who would use it.</p>
+    </div>
+
+    <!-- TWO SHOWCASES -->
+    <div class="showcase reveal">
+      <div class="showcase-item">
+        <div class="showcase-label">Showcase 01</div>
+        <div class="showcase-title">Project & Stakeholder Management</div>
+        <div class="showcase-desc">gathering requirements, managing deadlines, aligning the team, and presenting the solution to client executives and decision-makers.</div>
+      </div>
+      <div class="showcase-item" style="border-left:1px solid #e0e0e0;">
+        <div class="showcase-label">Showcase 02</div>
+        <div class="showcase-title">SQL Query Authoring</div>
+        <div class="showcase-desc">Writing the SQL queries used as training examples for the model — teaching Athena the logic, structure and business vocabulary it needed to generate accurate answers.</div>
+      </div>
+    </div>
+
+    <div class="content-hr"></div>
+
+    <!-- Example of SQL Queries Written -->
+    <div class="section-label reveal">Showcase 02</div>
+    <h2 class="reveal rd1">Writing SQL that teaches<br>a <em>model to think.</em></h2>
+    <div class="prose reveal rd2">
+      <p>For a GenAI tool to generate accurate SQL from plain English, it needed examples — high-quality query-answer pairs that demonstrate the business logic and naming conventions</p>
+      <p>The task required understanding both the  data model (how sell-out performance data is structured across SKUs, markets, and periods) and the business questions that the client users actually asked — then translating it in SQL langauge</p>
+    </div>
+
+    <!-- SQL EXAMPLE 1 -->
+    <div class="sql-wrap reveal">
+      <div class="sql-header">
+        <span class="sql-label">Example Query 01 — Market Share by Category</span>
+        <span class="sql-tag">Training Sample</span>
+      </div>
+      <pre><code><span class="cm">-- Business question: "What is MARS market share by category in the last period?"</span>
+
+<span class="kw">SELECT</span>
+    f.global_subcategory,
+    <span class="fn">SUM</span>(f.promo_value) <span class="kw">AS</span> client_value,
+    <span class="fn">SUM</span>(t.total_category_value) <span class="kw">AS</span> total_value,
+    <span class="fn">ROUND</span>(
+        <span class="fn">SUM</span>(f.promo_value) * <span class="num">100.0</span> / <span class="fn">SUM</span>(t.total_category_value), <span class="num">2</span>
+    ) <span class="kw">AS</span> market_share_pct
+<span class="kw">FROM</span> fact_flat_table_local_dashboard f
+<span class="kw">JOIN</span> total_category_summary t
+    <span class="kw">ON</span> f.global_subcategory = t.global_subcategory
+    <span class="kw">AND</span> f.mars_period = t.mars_period
+<span class="kw">WHERE</span> f.mars_period = (<span class="kw">SELECT</span> <span class="fn">MAX</span>(mars_period) <span class="kw">FROM</span> fact_flat_table_local_dashboard)
+<span class="kw">GROUP BY</span> f.global_subcategory
+<span class="kw">ORDER BY</span> market_share_pct <span class="kw">DESC</span>;</code></pre>
+    </div>
+
+
+    <!-- SQL EXAMPLE 3 -->
+    <div class="sql-wrap reveal rd2">
+      <div class="sql-header">
+        <span class="sql-label">Example Query 02 — Promo vs Non-Promo Distribution</span>
+        <span class="sql-tag">Training Sample</span>
+      </div>
+      <pre><code><span class="cm">-- Business question: "Compare promo and non-promo value for each subcategory"</span>
+
+<span class="kw">SELECT</span>
+    global_subcategory,
+    <span class="fn">SUM</span>(promo_value)     <span class="kw">AS</span> total_promo_value,
+    <span class="fn">SUM</span>(non_promo_value) <span class="kw">AS</span> total_non_promo_value,
+    <span class="fn">ROUND</span>(
+        <span class="fn">SUM</span>(promo_value) * <span class="num">100.0</span> /
+        <span class="fn">NULLIF</span>(<span class="fn">SUM</span>(promo_value) + <span class="fn">SUM</span>(non_promo_value), <span class="num">0</span>), <span class="num">1</span>
+    ) <span class="kw">AS</span> promo_mix_pct
+<span class="kw">FROM</span> fact_flat_table_local_dashboard
+<span class="kw">WHERE</span> mars_period = (<span class="kw">SELECT</span> <span class="fn">MAX</span>(mars_period) <span class="kw">FROM</span> fact_flat_table_local_dashboard)
+<span class="kw">GROUP BY</span> global_subcategory
+<span class="kw">ORDER BY</span> promo_mix_pct <span class="kw">DESC</span>;</code></pre>
+    </div>
+
+    <div class="content-hr"></div>
+
+    <!-- RESULTS -->
+    <div class="section-label reveal">Results</div>
+    <h2 class="reveal rd1">What it delivered.</h2>
+    <div class="prose reveal rd2">
+      <p>Athena reached 95%+ output accuracy in production — consistently generating correct SQL and readable outputs from  English questions. The managers at the client company could now get answers in seconds that previously took analysts hours to produce manually.</p>
+      <p>The estimated impact is 20,000 hours saved per year across the reporting function — freeing analysts from repetitive query work and letting them focus on interpretation and decision-making instead.</p>
+    </div>
+
+    <div style="border:1px solid #e0e0e0;padding:1.5rem;margin-bottom:2.5rem;" class="reveal">
+      <div class="sidebar-stat"><span class="stat-name">Output accuracy</span><span class="stat-val">95%+</span></div>
+      <div class="sidebar-stat"><span class="stat-name">Records in database</span><span class="stat-val">16M+</span></div>
+      <div class="sidebar-stat"><span class="stat-name">Hours saved / year</span><span class="stat-val">~20,000</span></div>
+    </div>
+
+  </div>
+</div>
+
+<!-- NEXT -->
+<div class="next-band">
+  <div class="next-inner">
+    <a href="project-migration.html" style="text-decoration:none;">
+      <div class="next-label">Next Project</div>
+      <div class="next-title">How War Shapes Migration</div>
+    </a>
+    <a href="project-migration.html" class="next-arrow">→</a>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-name">Luca Iacomino</div>
+  <div class="footer-mono">luca.iacomino20@gmail.com · Madrid, ES · © 2026</div>
+</footer>
+
+<script>
+const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target);}});},{threshold:0.1});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+</script>
+</body>
+</html>
