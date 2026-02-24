@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>CV | Luca Iacomino</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Mono:wght@300;400;500&family=Instrument+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink: #2c2416;
+  --ink-soft: #7a6e5e;
+  --ink-faint: #c8bfad;
+  --paper: #fdf8f0;
+  --paper-warm: #f5edd8;
+  --accent: #8b4513;
+  --accent2: #4a7c59;
+  --serif: 'Cormorant Garamond', serif;
+  --mono: 'DM Mono', monospace;
+  --sans: 'Instrument Sans', sans-serif;
+
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{background:var(--paper);color:var(--ink);font-family:var(--sans);font-weight:300;overflow-x:hidden;cursor:none;}
+#cursor{width:8px;height:8px;background:var(--accent);border-radius:50%;position:fixed;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);}
+#cursor-ring{width:32px;height:32px;border:1.5px solid var(--accent);border-radius:50%;position:fixed;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:all 0.16s ease;opacity:0.5;}
+nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;justify-content:space-between;align-items:center;padding:1.1rem 4rem;background:rgba(247,245,242,0.93);backdrop-filter:blur(16px);border-bottom:1px solid var(--ink-faint);}
+.nav-logo{font-family:var(--serif);font-size:1.1rem;color:var(--ink);text-decoration:none;letter-spacing:0.02em;}
+.nav-logo em{font-style:italic;color:var(--accent);}
+.nav-links{display:flex;gap:2rem;list-style:none;}
+.nav-links a{font-family:var(--mono);font-size:0.68rem;letter-spacing:0.13em;text-transform:uppercase;color:var(--ink-soft);text-decoration:none;transition:color 0.2s;padding-bottom:2px;border-bottom:1px solid transparent;}
+.nav-links a:hover,.nav-links a.active{color:var(--accent);border-bottom-color:var(--accent);}
+.page-hero{padding:10rem 4rem 4rem;max-width:1080px;margin:0 auto;display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:2rem;}
+.page-eyebrow{font-family:var(--mono);font-size:0.68rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--accent);margin-bottom:1rem;display:flex;align-items:center;gap:0.75rem;}
+.page-eyebrow::before{content:'';display:block;width:28px;height:1px;background:var(--accent);}
+h1{font-family:var(--serif);font-size:clamp(3rem,6vw,5rem);font-weight:300;line-height:0.95;letter-spacing:-0.02em;color:var(--ink);}
+h1 em{font-style:italic;color:var(--accent);}
+.btn-cv{display:inline-block;font-family:var(--mono);font-size:0.72rem;letter-spacing:0.12em;text-transform:uppercase;background:var(--ink);color:var(--paper);padding:0.85rem 2.5rem;text-decoration:none;position:relative;overflow:hidden;}
+.btn-cv::after{content:'';position:absolute;inset:0;background:var(--accent);transform:translateX(-101%);transition:transform 0.3s ease;}
+.btn-cv:hover::after{transform:translateX(0);}
+.btn-cv span{position:relative;z-index:1;}
+.divider{border:none;border-top:1px solid var(--ink-faint);max-width:1080px;margin:0 auto;}
+.cv-body{max-width:1080px;margin:0 auto;padding:5rem 4rem;display:grid;grid-template-columns:280px 1fr;gap:5rem;align-items:start;}
+/* Left sidebar */
+.cv-sidebar{}
+.sidebar-block{margin-bottom:3rem;}
+.sidebar-title{font-family:var(--mono);font-size:0.65rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--accent);margin-bottom:1rem;display:flex;align-items:center;gap:0.5rem;}
+.sidebar-title::after{content:'';flex:1;height:1px;background:var(--ink-faint);}
+.contact-list{list-style:none;display:flex;flex-direction:column;gap:0.6rem;}
+.contact-list li{font-family:var(--mono);font-size:0.72rem;letter-spacing:0.04em;color:var(--ink-soft);}
+.contact-list a{color:var(--ink-soft);text-decoration:none;transition:color 0.2s;}
+.contact-list a:hover{color:var(--accent);}
+.skill-group{margin-bottom:1.5rem;}
+.skill-group-name{font-size:0.8rem;color:var(--ink);margin-bottom:0.5rem;font-weight:500;}
+.skill-pills{display:flex;flex-wrap:wrap;gap:0.35rem;}
+.pill{font-family:var(--mono);font-size:0.6rem;letter-spacing:0.05em;border:1px solid var(--ink-faint);color:var(--ink-soft);padding:0.2rem 0.55rem;background:var(--paper-warm);transition:all 0.2s;}
+.pill:hover{border-color:var(--accent);color:var(--accent);}
+.lang-item{display:flex;justify-content:space-between;align-items:center;padding:0.4rem 0;border-bottom:1px solid var(--paper-warm);}
+.lang-name{font-size:0.9rem;color:var(--ink);}
+.lang-level{font-family:var(--mono);font-size:0.6rem;letter-spacing:0.08em;text-transform:uppercase;color:var(--ink-faint);}
+/* Main CV */
+.cv-main{}
+.cv-section{margin-bottom:4rem;}
+.cv-section-title{font-family:var(--mono);font-size:0.65rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--accent);margin-bottom:1.5rem;display:flex;align-items:center;gap:0.75rem;}
+.cv-section-title::after{content:'';flex:1;height:1px;background:var(--ink-faint);}
+.cv-item{padding-bottom:2rem;margin-bottom:2rem;border-bottom:1px solid var(--paper-warm);}
+.cv-item:last-child{border-bottom:none;margin-bottom:0;}
+.cv-item-header{display:flex;justify-content:space-between;align-items:flex-start;gap:1rem;margin-bottom:0.3rem;flex-wrap:wrap;}
+.cv-role{font-family:var(--serif);font-size:1.2rem;font-weight:400;color:var(--ink);}
+.cv-period{font-family:var(--mono);font-size:0.62rem;letter-spacing:0.08em;color:var(--ink-faint);white-space:nowrap;}
+.cv-org{font-size:0.88rem;color:var(--accent);margin-bottom:0.1rem;font-weight:500;}
+.cv-loc{font-family:var(--mono);font-size:0.6rem;letter-spacing:0.06em;color:var(--ink-faint);margin-bottom:0.75rem;}
+.cv-points{list-style:none;display:flex;flex-direction:column;gap:0.5rem;}
+.cv-points li{font-size:0.88rem;color:var(--ink-soft);line-height:1.65;padding-left:1.1rem;position:relative;}
+.cv-points li::before{content:'—';position:absolute;left:0;color:var(--accent);font-size:0.8rem;top:0.1rem;}
+.cv-gpa{display:inline-block;background:rgba(232,160,32,0.12);border:1px solid rgba(232,160,32,0.3);color:var(--accent2);font-family:var(--mono);font-size:0.6rem;letter-spacing:0.08em;padding:0.18rem 0.55rem;margin-top:0.5rem;}
+footer{border-top:1px solid var(--ink-faint);padding:2rem 4rem;max-width:1080px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;}
+.footer-name{font-family:var(--serif);font-size:1rem;font-style:italic;color:var(--ink-soft);}
+.footer-mono{font-family:var(--mono);font-size:0.6rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-faint);}
+.reveal{opacity:0;transform:translateY(22px);transition:opacity 0.65s ease,transform 0.65s ease;}
+.reveal.visible{opacity:1;transform:translateY(0);}
+.rd1{transition-delay:0.1s}.rd2{transition-delay:0.2s}.rd3{transition-delay:0.28s}
+@media(max-width:860px){nav{padding:1rem 1.5rem;}.nav-links{gap:1rem;}.page-hero{padding:8rem 2rem 3rem;}.cv-body{grid-template-columns:1fr;gap:2.5rem;padding:3rem 2rem;}.cv-sidebar{order:2;}footer{flex-direction:column;gap:0.5rem;padding:1.5rem 2rem;text-align:center;}}
+</style>
+</head>
+<body>
+<div id="cursor"></div>
+<div id="cursor-ring"></div>
+<nav>
+  <a href="index.html" class="nav-logo">Luca <em>Iacomino</em></a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="projects.html">Projects</a></li>
+    <li><a href="cv.html" class="active">CV</a></li>
+  </ul>
+</nav>
+
+<div class="page-hero">
+  <div>
+    <div class="page-eyebrow reveal">Curriculum Vitae</div>
+    <h1 class="reveal rd1">My <em>résumé.</em></h1>
+  </div>
+  <a href="Luca_Iacomino_CV.pdf" download class="btn-cv reveal rd2"><span>⬇ Download PDF</span></a>
+</div>
+<hr class="divider">
+
+<div class="cv-body">
+
+  <!-- SIDEBAR -->
+  <div class="cv-sidebar">
+    <div class="sidebar-block reveal">
+      <div class="sidebar-title">Contact</div>
+      <ul class="contact-list">
+        <li><a href="mailto:luca.iacomino20@gmail.com">luca.iacomino20@gmail.com</a></li>
+        <li>(+34) 602 097 905</li>
+        <li>Madrid, Spain</li>
+        <li><a href="https://linkedin.com" target="_blank">LinkedIn</a></li>
+        <li><a href="https://github.com" target="_blank">GitHub</a></li>
+      </ul>
+    </div>
+    <div class="sidebar-block reveal rd1">
+      <div class="sidebar-title">Skills</div>
+      <div class="skill-group">
+        <div class="skill-group-name">Programming</div>
+        <div class="skill-pills"><span class="pill">Python</span><span class="pill">SQL</span><span class="pill">DAX</span><span class="pill">VBA</span></div>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-name">Machine Learning</div>
+        <div class="skill-pills"><span class="pill">scikit-learn</span><span class="pill">XGBoost</span><span class="pill">TensorFlow</span></div>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-name">NLP & Scraping</div>
+        <div class="skill-pills"><span class="pill">spaCy</span><span class="pill">NLTK</span><span class="pill">Scrapy</span></div>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-name">Visualization</div>
+        <div class="skill-pills"><span class="pill">Power BI</span><span class="pill">Tableau</span><span class="pill">Plotly</span><span class="pill">Seaborn</span></div>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-name">Other</div>
+        <div class="skill-pills"><span class="pill">DevOps</span><span class="pill">HubSpot</span><span class="pill">Git</span><span class="pill">MS Office</span></div>
+      </div>
+    </div>
+    <div class="sidebar-block reveal rd2">
+      <div class="sidebar-title">Languages</div>
+      <div class="lang-item"><span class="lang-name">Italian</span><span class="lang-level">Native</span></div>
+      <div class="lang-item"><span class="lang-name">English</span><span class="lang-level">Fluent</span></div>
+      <div class="lang-item"><span class="lang-name">Spanish</span><span class="lang-level">Fluent</span></div>
+    </div>
+  </div>
+
+  <!-- MAIN -->
+  <div class="cv-main">
+    <div class="cv-section reveal">
+      <div class="cv-section-title">Experience</div>
+
+      <div class="cv-item">
+        <div class="cv-item-header">
+          <div class="cv-role">Business Analyst — Performance Analytics</div>
+          <div class="cv-period">Sep 2024 – Present</div>
+        </div>
+        <div class="cv-org">TCR Group</div>
+        <div class="cv-loc">Madrid, Spain</div>
+        <ul class="cv-points">
+          <li>Led end-to-end development of the company's first-ever ML Revenue Forecasting Model (RMSE €12K), replacing manual Excel estimations</li>
+          <li>Created dynamic PowerBI dashboard monitoring KPIs across multiple entities and reporting layers</li>
+          <li>Automated monthly performance reporting, reducing reporting time by 40%</li>
+        </ul>
+      </div>
+
+      <div class="cv-item">
+        <div class="cv-item-header">
+          <div class="cv-role">Data & AI Value Strategy — Analyst</div>
+          <div class="cv-period">Feb 2023 – Sep 2024</div>
+        </div>
+        <div class="cv-org">Accenture</div>
+        <div class="cv-loc">Rome, Italy</div>
+        <ul class="cv-points">
+          <li>Co-designed an AI-powered chatbot for a public sector client, improving response time by 30%</li>
+          <li>Translated business requirements into data-driven use cases and defined KPIs</li>
+          <li>Facilitated stakeholder workshops identifying automation opportunities, achieving 20–25% process time reduction</li>
+        </ul>
+      </div>
+
+      <div class="cv-item">
+        <div class="cv-item-header">
+          <div class="cv-role">Market Analyst & Team Lead — Italian Market</div>
+          <div class="cv-period">Jan 2022 – Jan 2023</div>
+        </div>
+        <div class="cv-org">BusinessCoot</div>
+        <div class="cv-loc">Paris, France · Rio de Janeiro, Brazil</div>
+        <ul class="cv-points">
+          <li>Grew Italian market sales by 60% over 2 years</li>
+          <li>Managed teams of 4 analysts, increasing output by 40%</li>
+          <li>6-month assignment in Rio de Janeiro office</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="cv-section reveal">
+      <div class="cv-section-title">Education</div>
+
+      <div class="cv-item">
+        <div class="cv-item-header">
+          <div class="cv-role">MSc in Data Science</div>
+          <div class="cv-period">Feb 2025</div>
+        </div>
+        <div class="cv-org">Universidad Complutense</div>
+        <div class="cv-loc">Madrid, Spain</div>
+        <div class="cv-gpa">GPA 8/10</div>
+        <ul class="cv-points" style="margin-top:0.75rem">
+          <li>Thesis: Demand Forecasting System for Restaurants using Historical Sales, Web Trends & Geospatial Analysis</li>
+          <li>Courses: Machine Learning, Deep Learning, Statistics, Model Deployment</li>
+        </ul>
+      </div>
+
+      <div class="cv-item">
+        <div class="cv-item-header">
+          <div class="cv-role">MSc in Management</div>
+          <div class="cv-period">Sep 2021 – Jan 2023</div>
+        </div>
+        <div class="cv-org">Nova School of Business and Economics</div>
+        <div class="cv-loc">Lisbon, Portugal</div>
+        <div class="cv-gpa">Top 5% · 18/20</div>
+        <ul class="cv-points" style="margin-top:0.75rem">
+          <li>Thesis: Impact of Venture Capital on economic growth in emerging markets — 400+ startups, 10 countries</li>
+        </ul>
+      </div>
+
+      <div class="cv-item">
+        <div class="cv-item-header">
+          <div class="cv-role">Grande École Program</div>
+          <div class="cv-period">Jan – Jul 2022</div>
+        </div>
+        <div class="cv-org">ESSEC Business School</div>
+        <div class="cv-loc">Paris, France</div>
+        <div class="cv-gpa">19/20</div>
+      </div>
+
+      <div class="cv-item">
+        <div class="cv-item-header">
+          <div class="cv-role">BSc in Economics & Management</div>
+          <div class="cv-period">Sep 2018 – Jul 2021</div>
+        </div>
+        <div class="cv-org">LUISS Guido Carli University</div>
+        <div class="cv-loc">Rome, Italy</div>
+        <div class="cv-gpa">28/30</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<hr class="divider">
+<footer>
+  <div class="footer-name">Luca Iacomino</div>
+  <div class="footer-mono">luca.iacomino20@gmail.com · Madrid, ES</div>
+  <div class="footer-mono">© 2026</div>
+</footer>
+
+<script>
+const cur=document.getElementById('cursor'),ring=document.getElementById('cursor-ring');
+let rx=0,ry=0,mx=0,my=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cur.style.left=mx+'px';cur.style.top=my+'px';});
+(function anim(){rx+=(mx-rx)*0.13;ry+=(my-ry)*0.13;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(anim);})();
+document.querySelectorAll('a,button').forEach(el=>{
+  el.addEventListener('mouseenter',()=>{ring.style.transform='translate(-50%,-50%) scale(1.8)';ring.style.opacity='0.25';});
+  el.addEventListener('mouseleave',()=>{ring.style.transform='translate(-50%,-50%) scale(1)';ring.style.opacity='0.5';});
+});
+const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target);}});},{threshold:0.1});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+</script>
+</body>
+</html>
