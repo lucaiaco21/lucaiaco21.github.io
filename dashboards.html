@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Power BI Dashboards | Luca Iacomino</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:wght@300;400;500&family=Instrument+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#1c1c1c;
+  --paper:#ffffff;
+  --paper-warm:#f5f3ef;
+  --serif:'Syne',sans-serif;
+  --mono:'DM Mono',monospace;
+  --sans:'Instrument Sans',sans-serif;
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{background:var(--paper);color:var(--ink);font-family:var(--sans);font-weight:300;overflow-x:hidden;cursor:none;}
+
+#cursor{width:8px;height:8px;background:var(--ink);border-radius:50%;position:fixed;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);}
+#cursor-ring{width:28px;height:28px;border:1px solid var(--ink);border-radius:50%;position:fixed;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:all 0.16s ease;opacity:0.4;}
+
+nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;justify-content:center;align-items:center;gap:3rem;padding:1.4rem 4rem;background:rgba(255,255,255,0.96);backdrop-filter:blur(16px);border-bottom:1px solid #e0e0e0;}
+.nav-logo{font-family:var(--serif);font-size:1rem;font-weight:700;color:var(--ink);text-decoration:none;}
+.nav-links{display:flex;gap:3rem;list-style:none;}
+.nav-links a{font-family:var(--serif);font-size:0.95rem;font-weight:600;color:#555;text-decoration:none;transition:color 0.2s;padding-bottom:2px;border-bottom:1px solid transparent;}
+.nav-links a:hover,.nav-links a.active{color:var(--ink);border-bottom-color:var(--ink);}
+
+/* HERO */
+.proj-hero{padding:9rem 0 0;overflow:hidden;}
+.hero-inner{max-width:1080px;margin:0 auto;padding:4rem 4rem 0;}
+.back-link{font-family:var(--mono);font-size:0.62rem;letter-spacing:0.12em;text-transform:uppercase;color:#aaa;text-decoration:none;display:inline-flex;align-items:center;gap:0.5rem;margin-bottom:2rem;transition:color 0.2s;}
+.back-link::before{content:'←';}
+.back-link:hover{color:var(--ink);}
+.hero-eyebrow{font-family:var(--mono);font-size:0.62rem;letter-spacing:0.22em;text-transform:uppercase;color:#777;margin-bottom:1.5rem;}
+.hero-title{font-family:var(--serif);font-size:clamp(2.8rem,7vw,6rem);font-weight:800;line-height:0.88;letter-spacing:-0.04em;color:var(--ink);margin-bottom:2.5rem;max-width:800px;}
+.hero-title em{font-style:normal;-webkit-text-stroke:2px var(--ink);color:transparent;}
+
+.hero-meta-row{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid #e0e0e0;border-bottom:1px solid #e0e0e0;}
+.meta-cell{padding:1.2rem 0;}
+.meta-cell+.meta-cell{padding-left:2rem;border-left:1px solid #e0e0e0;}
+.meta-label{font-family:var(--mono);font-size:0.55rem;letter-spacing:0.18em;text-transform:uppercase;color:#aaa;margin-bottom:0.35rem;}
+.meta-value{font-family:var(--serif);font-size:0.95rem;font-weight:600;color:var(--ink);}
+.proj-tags{display:flex;flex-wrap:wrap;gap:0.4rem;padding:1.2rem 0;border-bottom:1px solid #e0e0e0;}
+.proj-tag{font-family:var(--mono);font-size:0.58rem;letter-spacing:0.06em;border:1px solid #ddd;color:#555;padding:0.18rem 0.65rem;transition:all 0.2s;}
+.proj-tag:hover{border-color:var(--ink);color:var(--ink);}
+
+/* INTRO PROSE */
+.intro-section{max-width:1080px;margin:0 auto;padding:4rem 4rem 0;}
+.section-label{font-family:var(--mono);font-size:0.58rem;letter-spacing:0.22em;text-transform:uppercase;color:#aaa;margin-bottom:0.75rem;}
+.prose{font-size:0.95rem;color:#333;line-height:1.9;}
+.prose p{margin-bottom:1rem;}
+
+/* DASHBOARDS LIST */
+.dashboards-section{max-width:1080px;margin:0 auto;padding:4rem 4rem 6rem;}
+
+.dash-entry{display:grid;grid-template-columns:1fr 1fr;gap:4rem;padding:4rem 0;border-top:1px solid #e0e0e0;align-items:start;}
+.dash-entry:last-child{border-bottom:1px solid #e0e0e0;}
+
+/* alternate layout every other entry */
+.dash-entry:nth-child(even) .dash-img-col{order:2;}
+.dash-entry:nth-child(even) .dash-text-col{order:1;}
+
+.dash-img-col{}
+.dash-img-wrap{position:relative;}
+.dash-img-wrap img{width:100%;display:block;border:1px solid #e0e0e0;}
+
+/* placeholder for missing screenshots */
+.dash-img-placeholder{width:100%;aspect-ratio:16/9;background:var(--paper-warm);border:1px solid #e0e0e0;display:flex;align-items:center;justify-content:center;position:relative;}
+.dash-img-placeholder::before,.dash-img-placeholder::after{content:'';position:absolute;width:16px;height:16px;border-color:#d5d2cd;border-style:solid;}
+.dash-img-placeholder::before{top:10px;left:10px;border-width:1px 0 0 1px;}
+.dash-img-placeholder::after{bottom:10px;right:10px;border-width:0 1px 1px 0;}
+.placeholder-label{font-family:var(--mono);font-size:0.55rem;letter-spacing:0.14em;text-transform:uppercase;color:#ccc;}
+
+.dash-img-caption{font-family:var(--mono);font-size:0.55rem;letter-spacing:0.1em;text-transform:uppercase;color:#aaa;margin-top:0.75rem;}
+
+.dash-text-col{}
+.dash-num{font-family:var(--mono);font-size:0.55rem;letter-spacing:0.18em;text-transform:uppercase;color:#ccc;margin-bottom:0.5rem;}
+.dash-category{font-family:var(--mono);font-size:0.55rem;letter-spacing:0.14em;text-transform:uppercase;color:#aaa;margin-bottom:0.75rem;}
+.dash-title{font-family:var(--serif);font-size:clamp(1.5rem,2.5vw,2rem);font-weight:700;color:var(--ink);letter-spacing:-0.02em;line-height:1.1;margin-bottom:1.25rem;}
+.dash-desc{font-size:0.92rem;color:#333;line-height:1.85;margin-bottom:1.5rem;}
+.dash-tags{display:flex;flex-wrap:wrap;gap:0.35rem;margin-bottom:1.5rem;}
+.dash-tag{font-family:var(--mono);font-size:0.52rem;letter-spacing:0.06em;border:1px solid #e0e0e0;color:#777;padding:0.15rem 0.55rem;}
+.dash-highlights{list-style:none;border-top:1px solid #f0ede8;}
+.dash-highlight{display:flex;justify-content:space-between;align-items:baseline;padding:0.55rem 0;border-bottom:1px solid #f0ede8;}
+.highlight-name{font-family:var(--mono);font-size:0.58rem;letter-spacing:0.06em;color:#888;text-transform:uppercase;}
+.highlight-val{font-family:var(--serif);font-size:1rem;font-weight:700;color:var(--ink);}
+
+/* NEXT */
+.next-band{background:var(--paper-warm);padding:4rem;}
+.next-inner{max-width:1080px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;}
+.next-label{font-family:var(--mono);font-size:0.6rem;letter-spacing:0.18em;text-transform:uppercase;color:#aaa;margin-bottom:0.5rem;}
+.next-title{font-family:var(--serif);font-size:clamp(1.4rem,3vw,2.2rem);font-weight:700;letter-spacing:-0.02em;color:var(--ink);}
+.next-arrow{font-family:var(--serif);font-size:3rem;font-weight:300;color:#bbb;text-decoration:none;transition:transform 0.2s,color 0.2s;}
+.next-arrow:hover{transform:translateX(8px);color:var(--ink);}
+.next-band a{text-decoration:none;}
+.next-band a:hover .next-title{text-decoration:underline;text-underline-offset:4px;}
+
+footer{border-top:1px solid #e0e0e0;padding:2rem 4rem;display:flex;justify-content:space-between;align-items:center;max-width:1080px;margin:0 auto;}
+.footer-name{font-family:var(--serif);font-size:0.95rem;font-weight:600;color:#555;}
+.footer-mono{font-family:var(--mono);font-size:0.58rem;letter-spacing:0.1em;text-transform:uppercase;color:#bbb;}
+
+.reveal{opacity:0;transform:translateY(18px);transition:opacity 0.6s ease,transform 0.6s ease;}
+.reveal.visible{opacity:1;transform:translateY(0);}
+.rd1{transition-delay:0.08s}.rd2{transition-delay:0.16s}.rd3{transition-delay:0.24s}
+
+@media(max-width:860px){
+  nav{gap:1.5rem;padding:1.2rem 2rem;flex-wrap:wrap;}.nav-links{gap:1.5rem;}
+  .hero-inner{padding:3rem 2rem 0;}
+  .hero-meta-row{grid-template-columns:repeat(2,1fr);}
+  .intro-section{padding:3rem 2rem 0;}
+  .dashboards-section{padding:3rem 2rem 4rem;}
+  .dash-entry{grid-template-columns:1fr;gap:2rem;}
+  .dash-entry:nth-child(even) .dash-img-col{order:0;}
+  .dash-entry:nth-child(even) .dash-text-col{order:0;}
+  .next-band{padding:2.5rem 2rem;}
+  .next-inner{flex-direction:column;align-items:flex-start;gap:1rem;}
+  footer{flex-direction:column;gap:0.5rem;padding:1.5rem 2rem;text-align:center;}
+}
+</style>
+</head>
+<body>
+
+<div id="cursor"></div>
+<div id="cursor-ring"></div>
+
+<nav>
+  <a href="index.html" class="nav-logo">Luca Iacomino</a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="projects.html" class="active">Projects</a></li>
+    <li><a href="cv.html">CV</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<div class="proj-hero">
+  <div class="hero-inner">
+    <a href="projects.html" class="back-link reveal">All Projects</a>
+    <div class="hero-eyebrow reveal">Data Visualization · 2024–2026</div>
+    <h1 class="hero-title reveal rd1">Data that<br><em>Speaks.</em></h1>
+    <div class="hero-meta-row reveal rd2">
+      <div class="meta-cell">
+        <div class="meta-label">Tool</div>
+        <div class="meta-value">Power BI</div>
+      </div>
+      <div class="meta-cell">
+        <div class="meta-label">Period</div>
+        <div class="meta-value">2024–2026</div>
+      </div>
+      <div class="meta-cell">
+        <div class="meta-label">Domains</div>
+        <div class="meta-value">Finance · Ops · HR</div>
+      </div>
+      <div class="meta-cell">
+        <div class="meta-label">Dashboards</div>
+        <div class="meta-value">5 Projects</div>
+      </div>
+    </div>
+    <div class="proj-tags reveal rd3">
+      <span class="proj-tag">Power BI</span>
+      <span class="proj-tag">DAX</span>
+      <span class="proj-tag">SQL</span>
+      <span class="proj-tag">Data Modeling</span>
+      <span class="proj-tag">Python</span>
+    </div>
+  </div>
+</div>
+
+<!-- INTRO -->
+<div class="intro-section">
+  <div class="section-label reveal">Overview</div>
+  <div class="prose reveal rd1" style="max-width:640px;">
+    <p>A selection of Power BI dashboards built across different companies and business functions — each designed to turn raw operational data into a clear, decision-ready view for the people who need it.</p>
+  </div>
+</div>
+
+<!-- DASHBOARDS -->
+<div class="dashboards-section">
+
+  <!-- 01 -->
+  <div class="dash-entry reveal">
+    <div class="dash-img-col">
+      <div class="dash-img-wrap">
+        <!-- Replace with: <img src="dashboard-1.png" alt="P&L Performance Tracker"> -->
+        <div class="dash-img-placeholder">
+          <span class="placeholder-label">dashboard-1.png</span>
+        </div>
+        <div class="dash-img-caption">P&L overview — actuals vs. budget by region</div>
+      </div>
+    </div>
+    <div class="dash-text-col">
+      <div class="dash-num">001</div>
+      <div class="dash-category">Finance · TCR Group</div>
+      <div class="dash-title">P&L Performance Tracker</div>
+      <p class="dash-desc">End-to-end profitability monitoring across 14 countries. Revenue, EBITDA, and cost variance with drill-down by region, business unit, and month — built for the CFO's monthly review.</p>
+      <div class="dash-tags">
+        <span class="dash-tag">DAX</span>
+        <span class="dash-tag">SQL</span>
+        <span class="dash-tag">Finance</span>
+      </div>
+      <ul class="dash-highlights">
+        <li class="dash-highlight"><span class="highlight-name">Countries covered</span><span class="highlight-val">14</span></li>
+        <li class="dash-highlight"><span class="highlight-name">Data sources</span><span class="highlight-val">3</span></li>
+        <li class="dash-highlight"><span class="highlight-name">Refresh cadence</span><span class="highlight-val">Monthly</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- 02 -->
+  <div class="dash-entry reveal">
+    <div class="dash-img-col">
+      <div class="dash-img-wrap">
+        <!-- Replace with: <img src="dashboard-2.png" alt="GSE Maintenance KPIs"> -->
+        <div class="dash-img-placeholder">
+          <span class="placeholder-label">dashboard-2.png</span>
+        </div>
+        <div class="dash-img-caption">Maintenance KPIs — downtime & SLA by hub</div>
+      </div>
+    </div>
+    <div class="dash-text-col">
+      <div class="dash-num">002</div>
+      <div class="dash-category">Operations · TCR Group</div>
+      <div class="dash-title">GSE Maintenance KPI Monitor</div>
+      <p class="dash-desc">Real-time tracking of ground support equipment maintenance cycles, downtime rates, and SLA compliance across airport hubs in Europe and the Middle East.</p>
+      <div class="dash-tags">
+        <span class="dash-tag">DAX</span>
+        <span class="dash-tag">Operations</span>
+        <span class="dash-tag">KPIs</span>
+      </div>
+      <ul class="dash-highlights">
+        <li class="dash-highlight"><span class="highlight-name">Airport hubs</span><span class="highlight-val">20+</span></li>
+        <li class="dash-highlight"><span class="highlight-name">SLA tracked</span><span class="highlight-val">Yes</span></li>
+        <li class="dash-highlight"><span class="highlight-name">Refresh cadence</span><span class="highlight-val">Weekly</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- 03 -->
+  <div class="dash-entry reveal">
+    <div class="dash-img-col">
+      <div class="dash-img-wrap">
+        <!-- Replace with: <img src="dashboard-3.png" alt="Inventory & Demand Flow"> -->
+        <div class="dash-img-placeholder">
+          <span class="placeholder-label">dashboard-3.png</span>
+        </div>
+        <div class="dash-img-caption">Inventory coverage vs. demand forecast deviation</div>
+      </div>
+    </div>
+    <div class="dash-text-col">
+      <div class="dash-num">003</div>
+      <div class="dash-category">Supply Chain · CCafe</div>
+      <div class="dash-title">Inventory & Demand Flow</div>
+      <p class="dash-desc">Supplier lead times, stock coverage, and demand forecast deviation in one view — enabling proactive replenishment decisions for a high-SKU retail chain.</p>
+      <div class="dash-tags">
+        <span class="dash-tag">Python</span>
+        <span class="dash-tag">Forecasting</span>
+        <span class="dash-tag">Supply Chain</span>
+      </div>
+      <ul class="dash-highlights">
+        <li class="dash-highlight"><span class="highlight-name">SKUs tracked</span><span class="highlight-val">200+</span></li>
+        <li class="dash-highlight"><span class="highlight-name">Forecast horizon</span><span class="highlight-val">8 weeks</span></li>
+        <li class="dash-highlight"><span class="highlight-name">Refresh cadence</span><span class="highlight-val">Weekly</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- 04 -->
+  <div class="dash-entry reveal">
+    <div class="dash-img-col">
+      <div class="dash-img-wrap">
+        <!-- Replace with: <img src="dashboard-4.png" alt="Headcount & Turnover"> -->
+        <div class="dash-img-placeholder">
+          <span class="placeholder-label">dashboard-4.png</span>
+        </div>
+        <div class="dash-img-caption">Headcount distribution & attrition by department</div>
+      </div>
+    </div>
+    <div class="dash-text-col">
+      <div class="dash-num">004</div>
+      <div class="dash-category">HR · TCR Group</div>
+      <div class="dash-title">Headcount & Turnover Analytics</div>
+      <p class="dash-desc">Workforce distribution, attrition rates, and recruitment funnel metrics across departments — giving HR leadership a clear picture of talent flow and where retention risk is highest.</p>
+      <div class="dash-tags">
+        <span class="dash-tag">DAX</span>
+        <span class="dash-tag">HR Analytics</span>
+        <span class="dash-tag">People Data</span>
+      </div>
+      <ul class="dash-highlights">
+        <li class="dash-highlight"><span class="highlight-name">Departments</span><span class="highlight-val">12</span></li>
+        <li class="dash-highlight"><span class="highlight-name">Attrition tracked</span><span class="highlight-val">Yes</span></li>
+        <li class="dash-highlight"><span class="highlight-name">Refresh cadence</span><span class="highlight-val">Monthly</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- 05 -->
+  <div class="dash-entry reveal">
+    <div class="dash-img-col">
+      <div class="dash-img-wrap">
+        <!-- Replace with: <img src="dashboard-5.png" alt="Outlet Performance Scorecard"> -->
+        <div class="dash-img-placeholder">
+          <span class="placeholder-label">dashboard-5.png</span>
+        </div>
+        <div class="dash-img-caption">Store-level revenue, footfall & NPS by region</div>
+      </div>
+    </div>
+    <div class="dash-text-col">
+      <div class="dash-num">005</div>
+      <div class="dash-category">Retail · CCafe</div>
+      <div class="dash-title">Outlet Performance Scorecard</div>
+      <p class="dash-desc">Store-level revenue, footfall, ticket average, and customer satisfaction aggregated weekly — letting regional managers benchmark outlets and act fast on underperformers.</p>
+      <div class="dash-tags">
+        <span class="dash-tag">DAX</span>
+        <span class="dash-tag">Retail</span>
+        <span class="dash-tag">NPS</span>
+      </div>
+      <ul class="dash-highlights">
+        <li class="dash-highlight"><span class="highlight-name">Outlets tracked</span><span class="highlight-val">35</span></li>
+        <li class="dash-highlight"><span class="highlight-name">Metrics</span><span class="highlight-val">Revenue, NPS, AOV</span></li>
+        <li class="dash-highlight"><span class="highlight-name">Refresh cadence</span><span class="highlight-val">Weekly</span></li>
+      </ul>
+    </div>
+  </div>
+
+</div>
+
+<!-- NEXT -->
+<div class="next-band">
+  <div class="next-inner">
+    <a href="project-classifier.html" style="text-decoration:none;">
+      <div class="next-label">Next Project</div>
+      <div class="next-title">Work Order Classifier</div>
+    </a>
+    <a href="project-classifier.html" class="next-arrow">→</a>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-name">Luca Iacomino</div>
+  <div class="footer-mono">luca.iacomino20@gmail.com · Madrid, ES · © 2026</div>
+</footer>
+
+<script>
+const cur=document.getElementById('cursor'),ring=document.getElementById('cursor-ring');
+let rx=0,ry=0,mx=0,my=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cur.style.left=mx+'px';cur.style.top=my+'px';});
+(function anim(){rx+=(mx-rx)*0.13;ry+=(my-ry)*0.13;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(anim);})();
+document.querySelectorAll('a,button').forEach(el=>{
+  el.addEventListener('mouseenter',()=>{ring.style.transform='translate(-50%,-50%) scale(1.8)';ring.style.opacity='0.2';});
+  el.addEventListener('mouseleave',()=>{ring.style.transform='translate(-50%,-50%) scale(1)';ring.style.opacity='0.4';});
+});
+const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target);}});},{threshold:0.1});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+</script>
+</body>
+</html>
