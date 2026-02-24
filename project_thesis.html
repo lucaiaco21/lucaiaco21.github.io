@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Work Order Classifier | Luca Iacomino</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:wght@300;400;500&family=Instrument+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#1c1c1c;
+  --paper:#ffffff;
+  --paper-warm:#f5f3ef;
+  --serif:'Syne',sans-serif;
+  --mono:'DM Mono',monospace;
+  --sans:'Instrument Sans',sans-serif;
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{background:var(--paper);color:var(--ink);font-family:var(--sans);font-weight:300;overflow-x:hidden;cursor:none;}
+#cursor{width:8px;height:8px;background:var(--ink);border-radius:50%;position:fixed;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);}
+#cursor-ring{width:28px;height:28px;border:1px solid var(--ink);border-radius:50%;position:fixed;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:all 0.16s ease;opacity:0.4;}
+
+nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;justify-content:center;align-items:center;gap:3rem;padding:1.4rem 4rem;background:rgba(255,255,255,0.96);backdrop-filter:blur(16px);border-bottom:1px solid #e0e0e0;}
+.nav-logo{font-family:var(--serif);font-size:1rem;font-weight:700;color:var(--ink);text-decoration:none;}
+.nav-links{display:flex;gap:3rem;list-style:none;}
+.nav-links a{font-family:var(--serif);font-size:0.95rem;font-weight:600;color:#555;text-decoration:none;transition:color 0.2s;padding-bottom:2px;border-bottom:1px solid transparent;}
+.nav-links a:hover,.nav-links a.active{color:var(--ink);border-bottom-color:var(--ink);}
+
+/* HERO */
+.proj-hero{padding:9rem 0 0;overflow:hidden;}
+.hero-inner{max-width:1080px;margin:0 auto;padding:4rem 4rem 0;}
+.back-link{font-family:var(--mono);font-size:0.62rem;letter-spacing:0.12em;text-transform:uppercase;color:#aaa;text-decoration:none;display:inline-flex;align-items:center;gap:0.5rem;margin-bottom:2rem;transition:color 0.2s;}
+.back-link::before{content:'←';}
+.back-link:hover{color:var(--ink);}
+.hero-eyebrow{font-family:var(--mono);font-size:0.62rem;letter-spacing:0.22em;text-transform:uppercase;color:#777;margin-bottom:1.5rem;}
+.hero-title{font-family:var(--serif);font-size:clamp(2.8rem,7vw,6rem);font-weight:800;line-height:0.88;letter-spacing:-0.04em;color:var(--ink);margin-bottom:2.5rem;max-width:800px;}
+.hero-title em{font-style:normal;-webkit-text-stroke:2px var(--ink);color:transparent;}
+
+.hero-meta-row{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid #e0e0e0;border-bottom:1px solid #e0e0e0;}
+.meta-cell{padding:1.2rem 0;border-right:1px solid #e0e0e0;}
+.meta-cell:last-child{border-right:none;}
+.meta-label{font-family:var(--mono);font-size:0.55rem;letter-spacing:0.18em;text-transform:uppercase;color:#aaa;margin-bottom:0.35rem;}
+.meta-value{font-family:var(--serif);font-size:0.95rem;font-weight:600;color:var(--ink);}
+.proj-tags{display:flex;flex-wrap:wrap;gap:0.4rem;padding:1.2rem 0;border-bottom:1px solid #e0e0e0;}
+.proj-tag{font-family:var(--mono);font-size:0.58rem;letter-spacing:0.06em;border:1px solid #ddd;color:#555;padding:0.18rem 0.65rem;transition:all 0.2s;}
+.proj-tag:hover{border-color:var(--ink);color:var(--ink);}
+
+/* METRICS STRIP */
+.metrics-strip{background:var(--ink);padding:4rem;}
+.metrics-inner{max-width:1080px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);}
+.band-metric{padding:0 3rem;border-right:1px solid rgba(255,255,255,0.12);}
+.band-metric:first-child{padding-left:0;}
+.band-metric:last-child{border-right:none;}
+.band-val{font-family:var(--serif);font-size:clamp(2.5rem,5vw,4rem);font-weight:800;color:#fff;line-height:1;margin-bottom:0.5rem;letter-spacing:-0.03em;}
+.band-val span{color:rgba(255,255,255,0.55);}
+.band-label{font-family:var(--mono);font-size:0.58rem;letter-spacing:0.14em;text-transform:uppercase;color:rgba(255,255,255,0.55);}
+
+/* BODY — full width left + narrow sidebar right */
+.proj-body{display:grid;grid-template-columns:1fr;gap:0;max-width:1080px;margin:0 auto;padding:0 4rem;}
+.proj-content{padding:5rem 0;}
+.proj-sidebar{padding:5rem 0 5rem 2rem;}
+
+.section-label{font-family:var(--mono);font-size:0.58rem;letter-spacing:0.22em;text-transform:uppercase;color:#aaa;margin-bottom:0.75rem;}
+h2{font-family:var(--serif);font-size:clamp(1.8rem,3vw,2.6rem);font-weight:700;line-height:1.05;color:var(--ink);letter-spacing:-0.03em;margin-bottom:1.5rem;}
+h2 em{font-style:normal;-webkit-text-stroke:1.5px var(--ink);color:transparent;}
+
+/* Readable body text — #333 not #666 */
+.prose{font-size:0.95rem;color:#333;line-height:1.9;margin-bottom:2.5rem;}
+.prose p{margin-bottom:1rem;}
+.content-hr{border:none;border-top:1px solid #e0e0e0;margin:3rem 0;}
+
+/* Steps */
+.steps{list-style:none;display:flex;flex-direction:column;margin-bottom:2.5rem;}
+.step{display:grid;grid-template-columns:3rem 1fr;padding:1.5rem 0;border-bottom:1px solid #e0e0e0;}
+.step:first-child{border-top:1px solid #e0e0e0;}
+.step-num{font-family:var(--mono);font-size:0.6rem;letter-spacing:0.1em;color:#ccc;padding-top:0.15rem;}
+.step-text{font-size:0.92rem;color:#333;line-height:1.75;}
+.step-text strong{display:block;font-family:var(--serif);font-size:1.05rem;font-weight:700;color:var(--ink);letter-spacing:-0.01em;margin-bottom:0.4rem;}
+
+/* Single image */
+.img-wrap{margin:2.5rem 0;}
+.img-wrap img{width:100%;display:block;border:1px solid #e0e0e0;}
+.img-caption{font-family:var(--mono);font-size:0.58rem;letter-spacing:0.1em;text-transform:uppercase;color:#aaa;margin-top:0.75rem;}
+
+/* SIDEBAR */
+.sidebar-title{font-family:var(--mono);font-size:0.58rem;letter-spacing:0.2em;text-transform:uppercase;color:#aaa;margin-bottom:1.25rem;}
+.sidebar-stat{display:flex;justify-content:space-between;align-items:baseline;padding:0.6rem 0;border-bottom:1px solid #f0ede8;}
+.sidebar-stat:last-child{border-bottom:none;margin-bottom:2rem;}
+.stat-name{font-family:var(--mono);font-size:0.6rem;letter-spacing:0.06em;color:#555;text-transform:uppercase;}
+.stat-val{font-family:var(--serif);font-size:1.1rem;font-weight:700;color:var(--ink);}
+.sidebar-link{display:block;font-family:var(--mono);font-size:0.65rem;letter-spacing:0.1em;text-transform:uppercase;color:#fff;text-decoration:none;padding:0.85rem 1rem;background:var(--ink);text-align:center;transition:opacity 0.2s;margin-bottom:0.6rem;}
+.sidebar-link:hover{opacity:0.7;}
+.sidebar-link.outline{background:transparent;color:#555;border:1px solid #ddd;}
+.sidebar-link.outline:hover{border-color:var(--ink);color:var(--ink);opacity:1;}
+
+/* NEXT */
+.next-band{background:var(--paper-warm);padding:4rem;}
+.next-inner{max-width:1080px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;}
+.next-label{font-family:var(--mono);font-size:0.6rem;letter-spacing:0.18em;text-transform:uppercase;color:#aaa;margin-bottom:0.5rem;}
+.next-title{font-family:var(--serif);font-size:clamp(1.4rem,3vw,2.2rem);font-weight:700;letter-spacing:-0.02em;color:var(--ink);}
+.next-arrow{font-family:var(--serif);font-size:3rem;font-weight:300;color:#bbb;text-decoration:none;transition:transform 0.2s,color 0.2s;}
+.next-arrow:hover{transform:translateX(8px);color:var(--ink);}
+.next-band a{text-decoration:none;}
+.next-band a:hover .next-title{text-decoration:underline;text-underline-offset:4px;}
+
+footer{border-top:1px solid #e0e0e0;padding:2rem 4rem;display:flex;justify-content:space-between;align-items:center;max-width:1080px;margin:0 auto;}
+.footer-name{font-family:var(--serif);font-size:0.95rem;font-weight:600;color:#555;}
+.footer-mono{font-family:var(--mono);font-size:0.58rem;letter-spacing:0.1em;text-transform:uppercase;color:#bbb;}
+
+.reveal{opacity:0;transform:translateY(18px);transition:opacity 0.6s ease,transform 0.6s ease;}
+.reveal.visible{opacity:1;transform:translateY(0);}
+.rd1{transition-delay:0.08s}.rd2{transition-delay:0.16s}.rd3{transition-delay:0.24s}
+
+@media(max-width:860px){
+  nav{gap:1.5rem;padding:1.2rem 2rem;flex-wrap:wrap;}.nav-links{gap:1.5rem;}
+  .hero-inner{padding:3rem 2rem 0;}
+  .hero-meta-row{grid-template-columns:repeat(2,1fr);}
+  .metrics-strip{padding:2.5rem 2rem;}
+  .metrics-inner{grid-template-columns:repeat(2,1fr);gap:2rem;}
+  .band-metric{padding:0;border-right:none;}
+  .proj-body{grid-template-columns:1fr;padding:0 2rem;}
+  .proj-content{padding:3rem 0;border-right:none;border-bottom:1px solid #e0e0e0;}
+  .proj-sidebar{padding:3rem 0;}
+  .next-band{padding:2.5rem 2rem;}
+  .next-inner{flex-direction:column;align-items:flex-start;gap:1rem;}
+  footer{flex-direction:column;gap:0.5rem;padding:1.5rem 2rem;text-align:center;}
+}
+</style>
+</head>
+<body>
+<div id="cursor"></div>
+<div id="cursor-ring"></div>
+
+<nav>
+  <a href="index.html" class="nav-logo">Luca Iacomino</a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="projects.html" class="active">Projects</a></li>
+    <li><a href="cv.html">CV</a></li>
+  </ul>
+</nav>
+
+<div class="proj-hero">
+  <div class="hero-inner">
+    <a href="projects.html" class="back-link reveal">All Projects</a>
+    <div class="hero-eyebrow reveal">Case Study · 001 — MSc Thesis · 2025-2026</div>
+    <h1 class="hero-title reveal rd1">Data Science for <br>to <em>Coffee Shop</em></h1>
+    <div class="hero-meta-row reveal rd2">
+      <div class="meta-cell">
+        <div class="meta-label">University</div>
+        <div class="meta-value">UCM Complutense</div>
+      </div>
+      <div class="meta-cell" style="padding-left:2rem;">
+        <div class="meta-label">Year</div>
+        <div class="meta-value">2025–2026</div>
+      </div>
+      <div class="meta-cell" style="padding-left:2rem;">
+        <div class="meta-label">Data</div>
+        <div class="meta-value">Sales Data · Online Reviews</div>
+      </div>
+      <div class="meta-cell" style="padding-left:2rem;">
+        <div class="meta-label">Type</div>
+        <div class="meta-value">Time Series · Sentiment Analysis</div>
+      </div>
+    </div>
+    <div class="proj-tags reveal rd3">
+      <span class="proj-tag">Python</span>
+      <span class="proj-tag">scikit-learn</span>
+      <span class="proj-tag">Prophet</span>
+      <span class="proj-tag">YAKE</span>
+      <span class="proj-tag">Semantic Normalization</span>
+      <span class="proj-tag">Streamlit</span>
+    </div>
+  </div>
+</div>
+
+<div class="metrics-strip">
+  <div class="metrics-inner">
+    <div class="band-metric reveal">
+      <div class="band-val">189<span>%</span></div>
+      <div class="band-label">MAE Prophet - Total Sales</div>
+    </div>
+    <div class="band-metric reveal rd1">
+      <div class="band-val">18.6%</div>
+      <div class="band-label">MAPE Prophet - Units of Toast Sold</div>
+    </div>
+    <div class="band-metric reveal rd2">
+      <div class="band-val">13<span>%</span></div>
+      <div class="band-label">Competitors Analyzed</div>
+    </div>
+    <div class="band-metric reveal rd3">
+      <div class="band-val">40K</div>
+      <div class="band-label">Reviews Analyzed</div>
+    </div>
+  </div>
+</div>
+
+<div class="proj-body">
+  <div class="proj-content">
+
+    <div class="section-label reveal">The Challenge</div>
+    <h2 class="reveal rd1">Main Objective of the Project </em></h2>
+    <div class="prose reveal rd2">
+      <p>The main objective was to help a coffee shop in Madrid to predict the weekly sales in order to reduce food waste and optimize the buying process. To predict the sales serveral aspects were taking into consideration such as weather forecast, number of tourist expected in a close by museum and lag of last 14 days. The model output two forecast one for total sales and one for total units sold by product category. </p>
+      <p>In order to increase the sales and differenciate from competition, an analysis of online reviews of the coffee shop and nearby competitors was done in order to have an overview of what customer loved most about competitions and what are the strenghts and issues of the coffee shop analyzed</p>
+      <p>Through Streamlit an interface was developed so that owner of the coffee shop could easily access the analysis of reviews and do by himself the prediction only by uploading invoices of the last two weeks</p>
+    </div>
+
+
+    <hr class="content-hr">
+
+    <div class="section-label reveal">The Approach</div>
+    <h2 class="reveal rd1">Sales Forecasting Model</em></h2>
+    <ul class="steps reveal rd2">
+      <li class="step">
+        <span class="step-num">01</span>
+        <span class="step-text">
+          <strong>Data Preprocessing & Feature Engineering</strong>
+          A total of 900.000 invoices (L3 Years) were used to train the data. After the EDA and the grouping of the variables per product category, several varibales were added such as the temperature of that day, if it was raining and how much, the total number of visitors of the nearby museum and a 14 day variable lag
+        </span>
+      </li>
+      <li class="step">
+        <span class="step-num">02</span>
+        <span class="step-text">
+          <strong>Training and Model Choice - Why Prophet?</strong>
+          <p> To choose the best model, first were tried the mos common model used for Time Series analysis such as ARIMA/SARIMA that were dismissed for the difficulties to add exogenous variables while the ML classic model liek Linear Regression and XGBoost were used as baseline. Among all the others models tried, like Naive or LSTM, the one that best suited the problem was Prophet.<p>
+          <p> Prophet, a model developed by META, was choose for several caharcteristics such as the fact that is very good to detect weekly and annual seasonality and trends. There is also the possibility to add a list of days that have a bigger impact on the sales, perfect for our case where we could add several holidays that over the years had huge impact oon the sales. To the model can also be add easily  some exogenous variables that can have an additive or multuplicative effect.
+        </span>
+      </li>
+      <li class="step">
+        <span class="step-num">03</span>
+        <span class="step-text">
+          <strong>Web Scraping & Sentence Tokenizer</strong>
+          For the reviews analysis, first were scraped almost 30k of reviews from Google Maps and Trip Advisors of the main competitors. Then, after a cleaning, a sentence tokenizer was used in order to detect multiple sentiment inside the single reviews. So a review like “Matcha was very good and we loved the carrot cake but we waited too much time to be served” was splitted into two sentences with opposite sentiment.
+        </span>
+      </li>
+      <li class="step">
+        <span class="step-num">04</span>
+        <span class="step-text">
+          <strong>Keyword Extract & Semantic Normalization</strong>
+          <p>Then were extracted up to 10 keywords per review with YAKE (up to 3‑word n‑grams), using only statistical signals, which works well on noisy review text and with a all‑MiniLM‑L6‑v2 Sentence Transformers was computed cosine similarity between keywords to cluster semantically equivalent terms and assign a canonical label.<p>
+          <p> The final output here are insights, divided by category and sentiment, to help the owner take actions based on the products loved most about competitors menu, if there was any issue with its price, type of location and decoration preferred etc....
+        </span>
+      </li>
+      <li class="step">
+        <span class="step-num">05</span>
+        <span class="step-text">
+          <strong>Interface Creation w/ Streamlit</strong>
+          Both the prediction model and the review analysis are displayed in a Streamlit Interface. fully deployed with Python code, to help the owner easily access those information.
+        </span>
+      </li>
+    </ul>
+
+    <hr class="content-hr">
+
+    <div class="section-label reveal">Results</div>
+    <h2 class="reveal rd1">Demo & <em>Link.</em></h2>
+    <div class="prose reveal rd2">
+      <p>Here a quick demo of how the app works while at this link you can visit the webpage of the application.</p>
+      <p>To access the page "Reviews" the password to use is PATIO</p>
+    </div>
+  <div class="img-wrap reveal">
+  <video width="100%" autoplay muted loop playsinline>
+    <source src="video_class1.mp4" type="video/mp4">
+  </video>
+  <div class="img-caption">Work order flow — from technician input to billing category</div>
+</div>
+  </div>
+
+  <div class="proj-sidebar">
+    <a href="#" class="sidebar-link reveal">View on GitHub</a>
+    <a href="projects.html" class="sidebar-link outline reveal rd1">← All Projects</a>
+  </div>
+</div>
+
+<div class="next-band">
+  <div class="next-inner">
+    <a href="project-forecasting.html" style="text-decoration:none;">
+      <div class="next-label">Next Project</div>
+      <div class="next-title">ML Revenue Forecasting Model</div>
+    </a>
+    <a href="project-forecasting.html" class="next-arrow">→</a>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-name">Luca Iacomino</div>
+  <div class="footer-mono">luca.iacomino20@gmail.com · Madrid, ES · © 2026</div>
+</footer>
+
+<script>
+const cur=document.getElementById('cursor'),ring=document.getElementById('cursor-ring');
+let rx=0,ry=0,mx=0,my=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cur.style.left=mx+'px';cur.style.top=my+'px';});
+(function anim(){rx+=(mx-rx)*0.13;ry+=(my-ry)*0.13;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(anim);})();
+document.querySelectorAll('a,button').forEach(el=>{
+  el.addEventListener('mouseenter',()=>{ring.style.transform='translate(-50%,-50%) scale(1.8)';ring.style.opacity='0.2';});
+  el.addEventListener('mouseleave',()=>{ring.style.transform='translate(-50%,-50%) scale(1)';ring.style.opacity='0.4';});
+});
+const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target);}});},{threshold:0.1});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+</script>
+</body>
+</html>
