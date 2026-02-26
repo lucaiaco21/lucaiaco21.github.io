@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>w
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>Luca Iacomino | Data Science & Analytics</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -16,8 +16,8 @@
   --paper-warm:#f5f3ef;
   --accent:#1c1c1c;
   --accent2:#555;
-  --accent3:#C9A84C;   /* your new WORK color */
-  --accent4:#2D5016;   /* your new EDUCATION color */
+  --accent3:#C9A84C;
+  --accent4:#2D5016;
   --serif:'Syne',sans-serif;
   --mono:'DM Mono',monospace;
   --sans:'Instrument Sans',sans-serif;
@@ -26,37 +26,28 @@
 html { scroll-behavior: smooth; }
 body { background: var(--paper); color: var(--ink); font-family: var(--sans); font-weight:300; overflow-x:hidden; cursor:none; }
 
-#cursor { width:8px; height:8px; background:var(--accent); border-radius:50%; position:fixed; pointer-events:none; z-index:9999; transform:translate(-50%,-50%); }
+#cursor { width:8px; height:8px; background:var(--accent); border-radius:50%; position:fixed; pointer-events:none; z-index:9999; transform:translate(-50%,-50%); transition: opacity 0.2s; }
 #cursor-ring { width:32px; height:32px; border:1.5px solid var(--accent); border-radius:50%; position:fixed; pointer-events:none; z-index:9998; transform:translate(-50%,-50%); transition: all 0.16s ease; opacity:0.5; }
+#cursor.hidden, #cursor-ring.hidden { opacity:0; }
 
 /* ── NAV ── */
 nav {
   position: fixed; top:0; left:0; right:0; z-index:200;
   display: flex; justify-content: center; align-items: center;
-  gap: 3rem;
-  padding: 1.6rem 4rem;
-  background: rgba(255,255,255,0.96);;
+  gap: 3rem; padding: 1.6rem 4rem;
+  background: rgba(255,255,255,0.96);
   backdrop-filter: blur(16px);
   border-bottom: 1px solid var(--ink-faint);
 }
-.nav-logo {
-  font-family: var(--serif); font-size: 1.2rem; color: var(--ink);
-  text-decoration: none; letter-spacing: 0.02em;
-}
+.nav-logo { font-family: var(--serif); font-size: 1.2rem; color: var(--ink); text-decoration: none; letter-spacing: 0.02em; }
 .nav-logo em { font-style: italic; color: var(--accent); }
 .nav-links { display: flex; gap: 3rem; list-style: none; }
 .nav-links a {
-  font-family: var(--serif);
-  font-size: 1.1rem;
-  font-weight: 400;
-  letter-spacing: 0.08em;
+  font-family: var(--serif); font-size: 1.1rem; font-weight: 400; letter-spacing: 0.08em;
   color: var(--ink-soft); text-decoration: none; transition: color 0.2s;
   padding-bottom: 3px; border-bottom: 1px solid transparent;
 }
-.nav-links a:hover, .nav-links a.active {
-  color: var(--accent); border-bottom-color: var(--accent);
-  font-style: italic;
-}
+.nav-links a:hover, .nav-links a.active { color: var(--accent); border-bottom-color: var(--accent); font-style: italic; }
 
 /* ── HERO ── */
 #hero {
@@ -65,54 +56,28 @@ nav {
   align-items: center; justify-content: center;
   text-align: center; overflow: hidden;
 }
-#plexus {
-  position: absolute; inset: 0;
-  width:100%; height:100%;
-  z-index: -1; pointer-events: none;
-}
+#plexus { position: absolute; inset: 0; width:100%; height:100%; z-index: -1; pointer-events: none; }
 .hero-content { position: relative; z-index:1; display:flex; flex-direction:column; align-items:center; gap:1.5rem; padding: 8rem 2rem 4rem; }
 
 .hero-name {
-  font-family: var(--serif);
-  font-size: clamp(3.5rem, 8vw, 7rem);
-  font-weight: 300; line-height: 0.92;
-  letter-spacing: -0.02em; color: var(--ink);
+  font-family: var(--serif); font-size: clamp(3.5rem, 8vw, 7rem);
+  font-weight: 300; line-height: 0.92; letter-spacing: -0.02em; color: var(--ink);
   opacity: 0; transform: translateY(30px);
   animation: fadeUp 0.9s ease 0.2s forwards;
 }
 .hero-name em { font-style:italic; color:var(--accent); }
-
-.hero-sub {
-  font-family: var(--mono); font-size:0.75rem; letter-spacing:0.22em; text-transform:uppercase;
-  color: var(--ink-soft);
-  opacity: 0; animation: fadeUp 0.8s ease 0.55s forwards;
-}
+.hero-sub { font-family: var(--mono); font-size:0.75rem; letter-spacing:0.22em; text-transform:uppercase; color: var(--ink-soft); opacity: 0; animation: fadeUp 0.8s ease 0.55s forwards; }
 .hero-sub span { color: var(--accent); }
-
-.hero-socials {
-  display: flex; gap: 1rem; align-items: center;
-  opacity: 0; animation: fadeUp 0.8s ease 0.75s forwards;
-}
+.hero-socials { display: flex; gap: 1rem; align-items: center; opacity: 0; animation: fadeUp 0.8s ease 0.75s forwards; }
 .social-btn {
-  width:42px; height:42px; border-radius:50%;
-  background: var(--ink); color: var(--paper);
-  display:flex; align-items:center; justify-content:center;
-  text-decoration:none;
-  transition: all 0.25s ease;
-  border: 1.5px solid var(--ink);
+  width:42px; height:42px; border-radius:50%; background: var(--ink); color: var(--paper);
+  display:flex; align-items:center; justify-content:center; text-decoration:none;
+  transition: all 0.25s ease; border: 1.5px solid var(--ink);
 }
 .social-btn:hover { background: var(--accent); border-color: var(--accent); transform: translateY(-3px); }
 .social-btn svg { width:18px; height:18px; fill:currentColor; }
-
-.hero-intro {
-  max-width: 560px; font-size:1rem; color:var(--ink-soft); line-height:1.8;
-  opacity: 0; animation: fadeUp 0.8s ease 0.9s forwards;
-}
-
-.hero-buttons {
-  display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center;
-  opacity: 0; animation: fadeUp 0.8s ease 1.05s forwards;
-}
+.hero-intro { max-width: 560px; font-size:1rem; color:var(--ink-soft); line-height:1.8; opacity: 0; animation: fadeUp 0.8s ease 0.9s forwards; }
+.hero-buttons { display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; opacity: 0; animation: fadeUp 0.8s ease 1.05s forwards; }
 
 .btn-cv, .btn-projects {
   font-family: var(--mono); font-size:0.72rem; letter-spacing:0.12em; text-transform:uppercase;
@@ -123,11 +88,7 @@ nav {
 .btn-cv::after { content:''; position:absolute; inset:0; background:var(--accent); transform:translateX(-101%); transition:transform 0.3s ease; }
 .btn-cv:hover::after { transform:translateX(0); }
 .btn-cv span { position:relative; z-index:1; }
-
-.btn-projects {
-  background: transparent; color: var(--ink);
-  border: 1.5px solid var(--ink-faint);
-}
+.btn-projects { background: transparent; color: var(--ink); border: 1.5px solid var(--ink-faint); }
 .btn-projects::after { content:''; position:absolute; inset:0; background:var(--accent); transform:translateX(-101%); transition:transform 0.3s ease; }
 .btn-projects:hover { color: var(--paper); border-color: var(--accent); }
 .btn-projects:hover::after { transform:translateX(0); }
@@ -137,8 +98,7 @@ nav {
   position:absolute; bottom:2.5rem; left:50%; transform:translateX(-50%);
   display:flex; flex-direction:column; align-items:center; gap:0.5rem;
   font-family:var(--mono); font-size:0.6rem; letter-spacing:0.15em; text-transform:uppercase;
-  color:var(--ink-faint); z-index:1;
-  animation: bounce 2s ease infinite;
+  color:var(--ink-faint); z-index:1; animation: bounce 2s ease infinite;
 }
 .scroll-hint svg { width:20px; height:20px; fill:none; stroke:var(--ink-faint); stroke-width:1.5; }
 
@@ -147,6 +107,7 @@ nav {
 
 .divider { border:none; border-top:1px solid var(--ink-faint); max-width:1080px; margin:0 auto; }
 
+/* ── ABOUT ── */
 #about { max-width:1080px; margin:0 auto; padding:6rem 4rem; display:grid; grid-template-columns:1fr 1.2fr; gap:5rem; align-items:start; }
 .about-photo { width:100%; aspect-ratio:4/5; object-fit:cover; filter: grayscale(15%); border: 1px solid var(--ink-faint); }
 .about-label { font-family:var(--mono); font-size:0.65rem; letter-spacing:0.18em; text-transform:uppercase; color:var(--ink-faint); margin-bottom:0.5rem; display:flex; align-items:center; gap:0.75rem; }
@@ -158,44 +119,62 @@ h2 em { font-style:italic; color:var(--accent); }
 .tag { font-family:var(--mono); font-size:0.62rem; letter-spacing:0.07em; border:1px solid var(--ink-faint); color:var(--ink-soft); padding:0.22rem 0.65rem; background:var(--paper-warm); transition:all 0.2s; }
 .tag:hover { border-color:var(--accent); color:var(--accent); }
 
-#timeline { max-width:1080px; margin:0 auto; padding:5rem 4rem; }
-.tl-header { margin-bottom:3.5rem; }
-.tl-wrap { position:relative; }
-.tl-axis { position:absolute; left:50%; top:0; bottom:0; width:1px; background:var(--ink-faint); transform:translateX(-50%); }
-.tl-item { display:grid; grid-template-columns:1fr 60px 1fr; align-items:stretch; position:relative; }
-.tl-item.left .tl-content { grid-column:1; text-align:right; padding: 0 2.5rem 3rem 0; }
-.tl-item.left .tl-dot-col { grid-column:2; }
-.tl-item.left .tl-empty { grid-column:3; }
-.tl-item.right .tl-empty { grid-column:1; }
-.tl-item.right .tl-dot-col { grid-column:2; }
-.tl-item.right .tl-content { grid-column:3; text-align:left; padding: 0 0 3rem 2.5rem; }
-.tl-item.both .tl-left-content { grid-column:1; text-align:right; padding: 0 2.5rem 3rem 0; }
-.tl-item.both .tl-dot-col { grid-column:2; }
-.tl-item.both .tl-right-content { grid-column:3; text-align:left; padding: 0 0 3rem 2.5rem; }
-.tl-dot-col { display:flex; flex-direction:column; align-items:center; padding-top:0.35rem; }
-.tl-dot { width:14px; height:14px; border-radius:50%; background:var(--paper); border:2px solid var(--ink-faint); flex-shrink:0; z-index:1; position:relative; }
-.tl-dot.work         { border-color:var(--accent3); background:var(--accent3); }
-.tl-dot.edu          { border-color:var(--accent4); background:var(--accent4); }
-.tl-dot.both-dot     { background: linear-gradient(135deg, var(--accent3) 50%, var(--accent4) 50%); }
-.tl-card.work-card   { border-left:3px solid var(--accent3); }
-.tl-card.edu-card    { border-left:3px solid var(--accent4); }
-.tl-type.w           { color:var(--accent3); }
-.tl-type.e           { color:var(--accent4); }
-.legend-dot.w        { background:var(--accent3); }
-.legend-dot.e        { background:var(--accent4); }
-.tl-year { font-family:var(--mono); font-size:0.6rem; letter-spacing:0.1em; color:var(--ink-faint); margin-top:0.4rem; white-space:nowrap; text-align:center; }
-.tl-card { display:inline-block; background:var(--paper-warm); border:1px solid var(--ink-faint); padding:1.1rem 1.3rem; text-align:left; transition: border-color 0.2s, box-shadow 0.2s; max-width:340px; }
-.tl-item.right .tl-content .tl-card, .tl-item.both .tl-right-content .tl-card { display:block; }
-.tl-item.left .tl-content .tl-card { margin-left:auto; }
-.tl-card:hover { border-color:var(--accent); box-shadow:0 4px 20px rgba(139,69,19,0.1); }
-.tl-type { font-family:var(--mono); font-size:0.58rem; letter-spacing:0.14em; text-transform:uppercase; color:#555; margin-bottom:0.35rem; font-weight:500; }
-.tl-title { font-family:var(--serif); font-size:1.1rem; font-weight:400; color:var(--ink); line-height:1.2; margin-bottom:0.2rem; }
-.tl-org { font-size:0.82rem; color:#333; margin-bottom:0.3rem; font-weight:400;}
-.tl-period { font-family:var(--mono); font-size:0.6rem; color:#555; letter-spacing:0.06em; font-weight:400; }
-.tl-legend { display:flex; gap:2rem; margin-bottom:2.5rem; }
-.legend-item { display:flex; align-items:center; gap:0.5rem; font-family:var(--mono); font-size:0.65rem; letter-spacing:0.1em; text-transform:uppercase; color:var(--ink-soft); }
-.legend-dot { width:10px; height:10px; border-radius:50%; }
+/* ── PROJECTS ── */
+#projects { max-width:1080px; margin:0 auto; padding:5rem 4rem; cursor:auto; }
 
+.filter-row { display:flex; gap:0.5rem; margin-bottom:2.5rem; flex-wrap:wrap; }
+.filter-btn { font-family:var(--mono); font-size:0.62rem; letter-spacing:0.1em; text-transform:uppercase; background:transparent; border:1px solid var(--ink-faint); color:var(--ink-soft); padding:0.35rem 1rem; cursor:pointer; transition:all 0.2s; border-radius:2px; }
+.filter-btn:hover, .filter-btn.active { background:var(--ink); border-color:var(--ink); color:#fff; }
+
+.cards-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:12px; }
+
+.pc { border-radius:16px; overflow:hidden; text-decoration:none; color:inherit; display:flex; flex-direction:column; transition:transform 0.25s ease,box-shadow 0.25s ease; will-change:transform; cursor:pointer; }
+.pc:hover { transform:translateY(-4px); box-shadow:0 12px 36px rgba(0,0,0,0.1); }
+.pc.light { background:var(--paper-warm); }
+.pc.dark { background:#141414; color:#fff; }
+.pc.mid { background:#e8e4dc; }
+.pc.slate { background:#1e2028; color:#fff; }
+
+.pc.hero-card { grid-column:span 2; flex-direction:row; min-height:300px; }
+.pc.hero-card .hero-img-col { width:45%; flex-shrink:0; overflow:hidden; }
+.pc.hero-card .hero-img-col img { width:100%; height:100%; object-fit:cover; display:block; }
+.pc.hero-card .pc-body { flex:1; padding:3rem; display:flex; flex-direction:column; justify-content:space-between; }
+
+.pc-img { width:100%; height:200px; object-fit:cover; display:block; flex-shrink:0; }
+.pc-body { padding:1.6rem; display:flex; flex-direction:column; gap:0.35rem; }
+
+.pc-badge { display:inline-flex; align-items:center; gap:0.4rem; font-family:var(--mono); font-size:0.58rem; letter-spacing:0.12em; text-transform:uppercase; padding:0.25rem 0.7rem; border-radius:20px; width:fit-content; margin-bottom:0.5rem; }
+.pc-badge.new { background:#fff; color:#1c1c1c; }
+.pc-badge::before { content:''; width:6px; height:6px; border-radius:50%; background:#1c1c1c; opacity:0.7; }
+
+.pc-tag { font-family:var(--mono); font-size:0.58rem; letter-spacing:0.1em; text-transform:uppercase; margin-bottom:0.2rem; }
+.pc.light .pc-tag, .pc.mid .pc-tag { color:#999; }
+.pc.dark .pc-tag, .pc.slate .pc-tag { color:rgba(255,255,255,0.35); }
+
+.pc-title { font-family:var(--serif); font-size:1.15rem; font-weight:700; letter-spacing:-0.02em; line-height:1.2; margin-bottom:0.3rem; }
+.pc.hero-card .pc-title { font-size:1.8rem; margin-bottom:0.5rem; color:#fff; }
+.pc.light .pc-title, .pc.mid .pc-title { color:#1c1c1c; }
+.pc.dark .pc-title, .pc.slate .pc-title { color:#fff; }
+
+.pc-desc { font-size:0.8rem; line-height:1.65; }
+.pc.hero-card .pc-desc { font-size:0.88rem; max-width:480px; color:rgba(255,255,255,0.6); }
+.pc.light .pc-desc, .pc.mid .pc-desc { color:#555; }
+.pc.dark .pc-desc, .pc.slate .pc-desc { color:rgba(255,255,255,0.5); }
+
+.pc-metrics { display:flex; gap:2rem; margin:1rem 0; }
+.metric-val { font-family:var(--serif); font-size:1.6rem; font-weight:700; line-height:1; color:#fff; }
+.metric-label { font-family:var(--mono); font-size:0.55rem; letter-spacing:0.1em; text-transform:uppercase; color:rgba(255,255,255,0.35); margin-top:0.2rem; }
+
+.pc-link { font-family:var(--mono); font-size:0.62rem; letter-spacing:0.08em; text-transform:uppercase; display:inline-flex; align-items:center; gap:0.35rem; transition:gap 0.2s,color 0.2s; margin-top:auto; padding-top:0.75rem; }
+.pc-link::after { content:'→'; }
+.pc.light .pc-link, .pc.mid .pc-link { color:#888; }
+.pc.light:hover .pc-link, .pc.mid:hover .pc-link { color:#1c1c1c; gap:0.65rem; }
+.pc.dark .pc-link, .pc.slate .pc-link { color:rgba(255,255,255,0.4); }
+.pc.dark:hover .pc-link, .pc.slate:hover .pc-link { color:#fff; gap:0.65rem; }
+.pc.hero-card .pc-link { color:rgba(255,255,255,0.5); }
+.pc.hero-card:hover .pc-link { color:#fff; gap:0.65rem; }
+
+/* ── FOOTER ── */
 footer { border-top:1px solid var(--ink-faint); padding:2rem 4rem; max-width:1080px; margin:0 auto; display:flex; justify-content:space-between; align-items:center; }
 .footer-name { font-family:var(--serif); font-size:1rem; font-style:italic; color:var(--ink-soft); }
 .footer-mono { font-family:var(--mono); font-size:0.6rem; letter-spacing:0.1em; text-transform:uppercase; color:var(--ink-faint); }
@@ -207,16 +186,12 @@ footer { border-top:1px solid var(--ink-faint); padding:2rem 4rem; max-width:108
 @media(max-width:860px){
   nav { gap:1.5rem; padding:1.2rem 2rem; flex-wrap:wrap; }
   .nav-links { gap:1.5rem; }
-  #about{grid-template-columns:1fr;gap:2.5rem;padding:4rem 2rem;}
-  #timeline{padding:4rem 2rem;}
-  .tl-axis{left:24px;}
-  .tl-item{grid-template-columns:40px 1fr!important;}
-  .tl-item.left .tl-content,.tl-item.right .tl-content,.tl-item.both .tl-left-content,.tl-item.both .tl-right-content{grid-column:2!important;text-align:left!important;padding:0 0 2rem 1.5rem!important;}
-  .tl-item.left .tl-empty,.tl-item.right .tl-empty{display:none;}
-  .tl-dot-col{grid-column:1!important;}
-  .tl-card{max-width:100%;}
-  .tl-item.left .tl-content .tl-card{margin-left:0;}
-  footer{flex-direction:column;gap:0.5rem;padding:1.5rem 2rem;text-align:center;}
+  #about { grid-template-columns:1fr; gap:2.5rem; padding:4rem 2rem; }
+  #projects { padding:4rem 2rem; }
+  .cards-grid { grid-template-columns:1fr; }
+  .pc.hero-card { grid-column:span 1; flex-direction:column; }
+  .pc.hero-card .hero-img-col { width:100%; height:220px; }
+  footer { flex-direction:column; gap:0.5rem; padding:1.5rem 2rem; text-align:center; }
 }
 </style>
 </head>
@@ -234,6 +209,7 @@ footer { border-top:1px solid var(--ink-faint); padding:2rem 4rem; max-width:108
   </ul>
 </nav>
 
+<!-- ── HERO ── -->
 <section id="hero">
   <canvas id="plexus"></canvas>
   <div class="hero-content">
@@ -251,11 +227,11 @@ footer { border-top:1px solid var(--ink-faint); padding:2rem 4rem; max-width:108
       </a>
     </div>
     <p class="hero-intro">
-      From economics and strategy consulting to hands-on data science project. Specialized in deploy ML solutions to automate processes and create dashboards that turn complex data into actionable insights. 
+      From economics and strategy consulting to hands-on data science. Specialized in deploying ML solutions to automate processes and creating dashboards that turn complex data into actionable insights.
     </p>
     <div class="hero-buttons">
       <a href="Luca_Iacomino_CV.pdf" download class="btn-cv"><span>⬇ Download CV</span></a>
-      <a href="projects.html" class="btn-projects"><span>→ My Projects</span></a>
+      <a href="#projects" class="btn-projects"><span>→ My Projects</span></a>
     </div>
   </div>
   <div class="scroll-hint">
@@ -266,6 +242,7 @@ footer { border-top:1px solid var(--ink-faint); padding:2rem 4rem; max-width:108
 
 <hr class="divider">
 
+<!-- ── ABOUT ── -->
 <section id="about">
   <div class="about-photo-wrap reveal">
     <img src="photo.jpg" alt="Luca Iacomino" class="about-photo">
@@ -273,9 +250,8 @@ footer { border-top:1px solid var(--ink-faint); padding:2rem 4rem; max-width:108
   <div class="about-text">
     <div class="about-label reveal">About me</div>
     <h2 class="reveal rd1">Building things<br>with <em>data.</em></h2>
-    <p class="reveal rd2"> With a strong technical background (MSc in Data Science) and real-world strategy consulting experience, I work at the intersection of machine learning, business strategy, and visual communication.</p>
-    <p class="reveal rd2">Currently at TCR Group in Madrid — an international airport solution company operating across 40 countries worldwide - where I drove the implementation of the company's first AI projects: a machine-learning revenue forecasting model (RMSE €12K) and a work-order text classifier (91% accuracy). I also build dashboards that turn complex operational data into actionable insights.
-</p>
+    <p class="reveal rd2">With a strong technical background (MSc in Data Science) and real-world strategy consulting experience, I work at the intersection of machine learning, business strategy, and visual communication.</p>
+    <p class="reveal rd2">Currently at TCR Group in Madrid — an international airport solution company operating across 40 countries worldwide — where I drove the implementation of the company's first AI projects: a machine-learning revenue forecasting model (RMSE €12K) and a work-order text classifier (91% accuracy). I also build dashboards that turn complex operational data into actionable insights.</p>
     <p class="reveal rd3">Before joining TCR Group, I spent 2 years at Accenture delivering Data & AI solutions, translating strategic objectives into scalable analytics use cases. Earlier, I drove the Italian market expansion for a Paris-based market-research start-up.</p>
     <div class="about-tags reveal rd3">
       <span class="tag">Python</span><span class="tag">SQL</span><span class="tag">Machine Learning</span>
@@ -287,91 +263,102 @@ footer { border-top:1px solid var(--ink-faint); padding:2rem 4rem; max-width:108
 
 <hr class="divider">
 
-<section id="timeline">
-  <div class="tl-header">
-    <div class="about-label reveal">My Journey</div>
-    <h2 class="reveal rd1">Education &amp; <em>experience.</em></h2>
-    <div class="tl-legend reveal rd2">
-      <div class="legend-item"><div class="legend-dot w"></div> Work</div>
-      <div class="legend-item"><div class="legend-dot e"></div> Education</div>
-    </div>
+<!-- ── PROJECTS ── -->
+<section id="projects">
+  <div class="about-label reveal">Selected Work</div>
+  <h2 class="reveal rd1">Work &amp; Personal <em>Projects.</em></h2>
+  <p style="font-size:0.95rem;color:var(--ink-soft);line-height:1.8;margin-bottom:2rem;" class="reveal rd2">From ML models to NLP pipelines and data visualizations — an overview of the most interesting projects I worked on in the last years.</p>
+
+  <div class="filter-row reveal rd2">
+    <button class="filter-btn active" data-filter="all">All</button>
+    <button class="filter-btn" data-filter="ml">Machine Learning</button>
+    <button class="filter-btn" data-filter="nlp">NLP</button>
+    <button class="filter-btn" data-filter="viz">Visualization</button>
+    <button class="filter-btn" data-filter="genai">GenAI</button>
   </div>
-  <div class="tl-wrap">
-    <div class="tl-axis"></div>
-    <div class="tl-item left reveal">
-      <div class="tl-content">
-        <div class="tl-card edu-card">
-          <div class="tl-type e">Education</div>
-          <div class="tl-title">BSc Economics &amp; Management</div>
-          <div class="tl-org">LUISS Guido Carli · Rome, Italy</div>
-          <div class="tl-period">Sep 2018 – Jul 2021 · GPA 28/30</div>
-        </div>
+
+  <div class="cards-grid">
+
+    <a href="project-classifier.html" class="pc dark hero-card reveal" data-tags="nlp">
+      <div class="hero-img-col">
+        <img src="photo_cardCL.jpg" alt="Work Order Classifier">
       </div>
-      <div class="tl-dot-col"><div class="tl-dot edu"></div><div class="tl-year">2018</div></div>
-      <div class="tl-empty"></div>
-    </div>
-    <div class="tl-item both reveal">
-      <div class="tl-left-content">
-        <div class="tl-card edu-card">
-          <div class="tl-type e">Education</div>
-          <div class="tl-title">MSc in Management</div>
-          <div class="tl-org">Nova SBE · Lisbon, Portugal</div>
-          <div class="tl-period">Sep 2021 – Jan 2023 · Top 5% · 18/20</div>
+      <div class="pc-body">
+        <div>
+          <div class="pc-badge new">Latest Project</div>
+          <div class="pc-tag">NLP · BERT · scikit-learn · Python</div>
+          <div class="pc-title">AI Work Order Classifier — TCR Group</div>
+          <p class="pc-desc">Two-layer NLP classifier automatically categorizing technician work orders to identify chargeable activities and prevent revenue leakage. Layer 1 uses logistic regression; Layer 2 uses fine-tuned BERT for 23 categories.</p>
+          <div class="pc-metrics">
+            <div><div class="metric-val">91%</div><div class="metric-label">Accuracy</div></div>
+            <div><div class="metric-val">23</div><div class="metric-label">Categories</div></div>
+            <div><div class="metric-val">3K</div><div class="metric-label">Monthly Texts</div></div>
+          </div>
         </div>
+        <div class="pc-link">Read Case Study</div>
       </div>
-      <div class="tl-dot-col"><div class="tl-dot both-dot"></div><div class="tl-year">2021–22</div></div>
-      <div class="tl-right-content">
-        <div class="tl-card work-card" style="height:100%;">
-          <div class="tl-type w">Work — during MSc</div>
-          <div class="tl-title">Market Analyst &amp; Team Lead</div>
-          <div class="tl-org">BusinessCoot · Paris &amp; Rio de Janeiro</div>
-          <div class="tl-period">Jan 2022 – Jan 2023 · +60% sales growth</div>
-        </div>
+    </a>
+
+    <a href="project-thesis.html" class="pc light reveal rd1" data-tags="nlp ml">
+      <img src="photo_cardThesis.jpg" class="pc-img" alt="Café Demand Forecasting">
+      <div class="pc-body">
+        <div class="pc-tag">NLP · Forecasting · Streamlit</div>
+        <div class="pc-title">Café Demand Forecasting &amp; Sentiment Analysis</div>
+        <p class="pc-desc">MSc thesis. End-to-end system combining historical sales, NLP sentiment analysis of reviews, and competitor benchmarking via web scraping. Deployed as a Streamlit app.</p>
+        <div class="pc-link">Case Study</div>
       </div>
-    </div>
-    <div class="tl-item right reveal">
-      <div class="tl-empty"></div>
-      <div class="tl-dot-col"><div class="tl-dot edu"></div><div class="tl-year">2022</div></div>
-      <div class="tl-content">
-        <div class="tl-card edu-card">
-          <div class="tl-type e">Exchange — during MSc</div>
-          <div class="tl-title">Grande École Program</div>
-          <div class="tl-org">ESSEC Business School · Paris, France</div>
-          <div class="tl-period">Jan 2022 – Jul 2022 · GPA 19/20</div>
-        </div>
+    </a>
+
+    <a href="project-forecasting.html" class="pc dark reveal rd2" data-tags="ml">
+      <img src="photo_revenueforecast.jpg" class="pc-img" alt="Revenue Forecasting Model">
+      <div class="pc-body">
+        <div class="pc-tag">Machine Learning · XGBoost · Forecasting</div>
+        <div class="pc-title">ML Revenue Forecasting Model</div>
+        <p class="pc-desc">First ML forecasting model at TCR Group, replacing Excel. €12K RMSE, 40% monthly time saved.</p>
+        <div class="pc-link">Case Study</div>
       </div>
-    </div>
-    <div class="tl-item left reveal">
-      <div class="tl-content">
-        <div class="tl-card work-card">
-          <div class="tl-type w">Work</div>
-          <div class="tl-title">Data &amp; AI Value Strategy Analyst</div>
-          <div class="tl-org">Accenture · Rome, Italy</div>
-          <div class="tl-period">Feb 2023 – Sep 2024 · GenAI Projects</div>
-        </div>
+    </a>
+
+    <a href="dashboards.html" class="pc mid reveal rd1" data-tags="viz">
+      <img src="photo_dashboard.jpg" class="pc-img" alt="Dashboards">
+      <div class="pc-body">
+        <div class="pc-tag">Power BI · DAX · Data Visualization</div>
+        <div class="pc-title">Power BI Dashboards</div>
+        <p class="pc-desc">A collection of dashboards built in Power BI — each with custom DAX measures and calculated columns, covering finance, operations, supply chain, and HR.</p>
+        <div class="pc-link">View Dashboards</div>
       </div>
-      <div class="tl-dot-col"><div class="tl-dot work"></div><div class="tl-year">2023</div></div>
-      <div class="tl-empty"></div>
-    </div>
-    <div class="tl-item both reveal">
-      <div class="tl-left-content">
-        <div class="tl-card work-card">
-          <div class="tl-type w">Work — current</div>
-          <div class="tl-title">Business Analyst</div>
-          <div class="tl-org">TCR Group · Madrid, Spain</div>
-          <div class="tl-period">Sep 2024 – Present</div>
-        </div>
+    </a>
+
+    <a href="athena.html" class="pc mid reveal rd1" data-tags="genai">
+      <img src="photo_athena.jpg" class="pc-img" alt="Athena GenAI">
+      <div class="pc-body">
+        <div class="pc-tag">GenAI · SQL · Requirements Engineering</div>
+        <div class="pc-title">Athena — GenAI Conversational Reporting</div>
+        <p class="pc-desc">Co-designed at Accenture for a major FMCG. GenAI tool querying 16M+ records in natural language — 95%+ accuracy, 20K hours saved yearly.</p>
+        <div class="pc-link">Case Study</div>
       </div>
-      <div class="tl-dot-col"><div class="tl-dot both-dot"></div><div class="tl-year">2024–25</div></div>
-      <div class="tl-right-content">
-        <div class="tl-card edu-card">
-          <div class="tl-type e">Education — alongside work</div>
-          <div class="tl-title">MSc in Data Science</div>
-          <div class="tl-org">Universidad Complutense · Madrid</div>
-          <div class="tl-period">Feb 2025 – Feb 2026</div>
-        </div>
+    </a>
+
+    <a href="migration.html" class="pc slate reveal rd2" data-tags="viz">
+      <img src="photo_world.jpg" class="pc-img" alt="War and Migration">
+      <div class="pc-body">
+        <div class="pc-tag">Data Visualization · Plotly · Geospatial</div>
+        <div class="pc-title">How War Shapes Migration — 20 Years of Data</div>
+        <p class="pc-desc">Interactive visualization mapping the relationship between armed conflicts and forced migration flows worldwide over the last 20 years.</p>
+        <div class="pc-link">Explore</div>
       </div>
-    </div>
+    </a>
+
+    <a href="project-etf.html" class="pc light reveal rd3" data-tags="ml">
+      <img src="photo_LSTM.jpg" class="pc-img" alt="ETF LSTM Forecasting">
+      <div class="pc-body">
+        <div class="pc-tag">LSTM · Time Series · TensorFlow</div>
+        <div class="pc-title">ETF Price Forecasting with LSTM</div>
+        <p class="pc-desc">Personal project predicting ETF prices using a Long Short-Term Memory neural network on real market data with multiple financial features and time lags.</p>
+        <div class="pc-link">GitHub</div>
+      </div>
+    </a>
+
   </div>
 </section>
 
@@ -383,21 +370,50 @@ footer { border-top:1px solid var(--ink-faint); padding:2rem 4rem; max-width:108
 </footer>
 
 <script>
-const cur=document.getElementById('cursor'),ring=document.getElementById('cursor-ring');
-let rx=0,ry=0,mx=0,my=0;
-document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cur.style.left=mx+'px';cur.style.top=my+'px';});
-(function anim(){rx+=(mx-rx)*0.13;ry+=(my-ry)*0.13;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(anim);})();
-document.querySelectorAll('a,button').forEach(el=>{
-  el.addEventListener('mouseenter',()=>{ring.style.transform='translate(-50%,-50%) scale(1.8)';ring.style.opacity='0.25';});
-  el.addEventListener('mouseleave',()=>{ring.style.transform='translate(-50%,-50%) scale(1)';ring.style.opacity='0.5';});
+/* ── CUSTOM CURSOR — hero only ── */
+const cur = document.getElementById('cursor');
+const ring = document.getElementById('cursor-ring');
+const heroSection = document.getElementById('hero');
+let rx=0, ry=0, mx=0, my=0;
+
+document.addEventListener('mousemove', e => {
+  mx = e.clientX; my = e.clientY;
+  cur.style.left = mx + 'px';
+  cur.style.top = my + 'px';
+
+  const heroRect = heroSection.getBoundingClientRect();
+  const inHero = my >= heroRect.top && my <= heroRect.bottom;
+
+  if (inHero) {
+    cur.classList.remove('hidden');
+    ring.classList.remove('hidden');
+    document.body.style.cursor = 'none';
+  } else {
+    cur.classList.add('hidden');
+    ring.classList.add('hidden');
+    document.body.style.cursor = 'auto';
+  }
 });
 
-/* Plexus — warm brown color to match theme */
-const canvas=document.getElementById('plexus'),ctx=canvas.getContext('2d');
-let W,H,dots=[],pmx=-999,pmy=-999;
-const N=70,DIST=140,COL='139,69,19';
-function resize(){W=canvas.width=window.innerWidth;H=canvas.height=window.innerHeight;}
-function init(){dots=[];for(let i=0;i<N;i++)dots.push({x:Math.random()*W,y:Math.random()*H,vx:(Math.random()-.5)*.5,vy:(Math.random()-.5)*.5,r:Math.random()*2+1.5});}
+(function anim() {
+  rx += (mx - rx) * 0.13;
+  ry += (my - ry) * 0.13;
+  ring.style.left = rx + 'px';
+  ring.style.top = ry + 'px';
+  requestAnimationFrame(anim);
+})();
+
+document.querySelectorAll('#hero a, #hero button').forEach(el => {
+  el.addEventListener('mouseenter', () => { ring.style.transform='translate(-50%,-50%) scale(1.8)'; ring.style.opacity='0.25'; });
+  el.addEventListener('mouseleave', () => { ring.style.transform='translate(-50%,-50%) scale(1)'; ring.style.opacity='0.5'; });
+});
+
+/* ── PLEXUS ── */
+const canvas = document.getElementById('plexus'), ctx = canvas.getContext('2d');
+let W, H, dots=[], pmx=-999, pmy=-999;
+const N=70, DIST=140, COL='139,69,19';
+function resize(){ W=canvas.width=window.innerWidth; H=canvas.height=window.innerHeight; }
+function init(){ dots=[]; for(let i=0;i<N;i++) dots.push({x:Math.random()*W,y:Math.random()*H,vx:(Math.random()-.5)*.5,vy:(Math.random()-.5)*.5,r:Math.random()*2+1.5}); }
 function draw(){
   ctx.clearRect(0,0,W,H);
   dots.forEach(d=>{d.x+=d.vx;d.y+=d.vy;if(d.x<0||d.x>W)d.vx*=-1;if(d.y<0||d.y>H)d.vy*=-1;});
@@ -416,12 +432,31 @@ function draw(){
   }
   requestAnimationFrame(draw);
 }
-document.addEventListener('mousemove',e=>{pmx=e.clientX;pmy=e.clientY;});
-window.addEventListener('resize',()=>{resize();init();});
-resize();init();draw();
+document.addEventListener('mousemove', e=>{ pmx=e.clientX; pmy=e.clientY; });
+window.addEventListener('resize', ()=>{ resize(); init(); });
+resize(); init(); draw();
 
-const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target);}});},{threshold:0.1});
+/* ── REVEAL ── */
+const obs = new IntersectionObserver(entries=>{
+  entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('visible'); obs.unobserve(e.target); } });
+},{threshold:0.1});
 document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+
+/* ── FILTER ── */
+document.querySelectorAll('.filter-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    const filter = btn.dataset.filter;
+    document.querySelectorAll('.pc').forEach(card => {
+      if (filter === 'all' || card.dataset.tags.includes(filter)) {
+        card.style.display = '';
+      } else {
+        card.style.display = 'none';
+      }
+    });
+  });
+});
 </script>
 </body>
 </html>
