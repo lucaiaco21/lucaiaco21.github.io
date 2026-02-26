@@ -2,14 +2,26 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>w
 <title>Luca Iacomino | Data Science & Analytics</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:wght@300;400;500&family=Instrument+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
-:root{--ink:#1c1c1c;--ink-soft:#666;--ink-faint:#ddd;--paper:#ffffff;--paper-warm:#f5f3ef;--accent:#1c1c1c;--accent2:#555;--serif:'Syne',sans-serif;--mono:'DM Mono',monospace;--sans:'Instrument Sans',sans-serif;}
-
+:root {
+  --ink:#1c1c1c;
+  --ink-soft:#666;
+  --ink-faint:#ddd;
+  --paper:#ffffff;
+  --paper-warm:#f5f3ef;
+  --accent:#1c1c1c;
+  --accent2:#555;
+  --accent3:#C9A84C;   /* your new WORK color */
+  --accent4:#2D5016;   /* your new EDUCATION color */
+  --serif:'Syne',sans-serif;
+  --mono:'DM Mono',monospace;
+  --sans:'Instrument Sans',sans-serif;
+}
 *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
 html { scroll-behavior: smooth; }
 body { background: var(--paper); color: var(--ink); font-family: var(--sans); font-weight:300; overflow-x:hidden; cursor:none; }
@@ -162,27 +174,27 @@ h2 em { font-style:italic; color:var(--accent); }
 .tl-item.both .tl-right-content { grid-column:3; text-align:left; padding: 0 0 3rem 2.5rem; }
 .tl-dot-col { display:flex; flex-direction:column; align-items:center; padding-top:0.35rem; }
 .tl-dot { width:14px; height:14px; border-radius:50%; background:var(--paper); border:2px solid var(--ink-faint); flex-shrink:0; z-index:1; position:relative; }
-.tl-dot.work { border-color:var(--accent); background:var(--accent); }
-.tl-dot.edu { border-color:var(--accent2); background:var(--accent2); }
-.tl-dot.both-dot { border-color:var(--accent); background: linear-gradient(135deg, var(--accent) 50%, var(--accent2) 50%); }
+.tl-dot.work         { border-color:var(--accent3); background:var(--accent3); }
+.tl-dot.edu          { border-color:var(--accent4); background:var(--accent4); }
+.tl-dot.both-dot     { background: linear-gradient(135deg, var(--accent3) 50%, var(--accent4) 50%); }
+.tl-card.work-card   { border-left:3px solid var(--accent3); }
+.tl-card.edu-card    { border-left:3px solid var(--accent4); }
+.tl-type.w           { color:var(--accent3); }
+.tl-type.e           { color:var(--accent4); }
+.legend-dot.w        { background:var(--accent3); }
+.legend-dot.e        { background:var(--accent4); }
 .tl-year { font-family:var(--mono); font-size:0.6rem; letter-spacing:0.1em; color:var(--ink-faint); margin-top:0.4rem; white-space:nowrap; text-align:center; }
 .tl-card { display:inline-block; background:var(--paper-warm); border:1px solid var(--ink-faint); padding:1.1rem 1.3rem; text-align:left; transition: border-color 0.2s, box-shadow 0.2s; max-width:340px; }
 .tl-item.right .tl-content .tl-card, .tl-item.both .tl-right-content .tl-card { display:block; }
 .tl-item.left .tl-content .tl-card { margin-left:auto; }
 .tl-card:hover { border-color:var(--accent); box-shadow:0 4px 20px rgba(139,69,19,0.1); }
-.tl-card.work-card { border-left:3px solid var(--accent); }
-.tl-card.edu-card { border-left:3px solid var(--accent2); }
 .tl-type { font-family:var(--mono); font-size:0.58rem; letter-spacing:0.14em; text-transform:uppercase; color:var(--ink-faint); margin-bottom:0.35rem; }
-.tl-type.w { color:var(--accent); }
-.tl-type.e { color:var(--accent2); }
 .tl-title { font-family:var(--serif); font-size:1.1rem; font-weight:400; color:var(--ink); line-height:1.2; margin-bottom:0.2rem; }
 .tl-org { font-size:0.82rem; color:var(--ink-soft); margin-bottom:0.3rem; }
 .tl-period { font-family:var(--mono); font-size:0.6rem; color:var(--ink-faint); letter-spacing:0.06em; }
 .tl-legend { display:flex; gap:2rem; margin-bottom:2.5rem; }
 .legend-item { display:flex; align-items:center; gap:0.5rem; font-family:var(--mono); font-size:0.65rem; letter-spacing:0.1em; text-transform:uppercase; color:var(--ink-soft); }
 .legend-dot { width:10px; height:10px; border-radius:50%; }
-.legend-dot.w { background:var(--accent); }
-.legend-dot.e { background:var(--accent2); }
 
 footer { border-top:1px solid var(--ink-faint); padding:2rem 4rem; max-width:1080px; margin:0 auto; display:flex; justify-content:space-between; align-items:center; }
 .footer-name { font-family:var(--serif); font-size:1rem; font-style:italic; color:var(--ink-soft); }
@@ -309,7 +321,7 @@ footer { border-top:1px solid var(--ink-faint); padding:2rem 4rem; max-width:108
       </div>
       <div class="tl-dot-col"><div class="tl-dot both-dot"></div><div class="tl-year">2021–22</div></div>
       <div class="tl-right-content">
-        <div class="tl-card work-card">
+        <div class="tl-card work-card" style="height:100%;">
           <div class="tl-type w">Work — during MSc</div>
           <div class="tl-title">Market Analyst &amp; Team Lead</div>
           <div class="tl-org">BusinessCoot · Paris &amp; Rio de Janeiro</div>
