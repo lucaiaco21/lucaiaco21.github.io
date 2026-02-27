@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Work Order Classifier | Luca Iacomino</title>
+<title>MSc Thesis | Luca Iacomino</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:wght@300;400;500&family=Instrument+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -146,7 +146,7 @@ footer{border-top:1px solid #e0e0e0;padding:2rem 4rem;display:flex;justify-conte
   <div class="hero-inner">
     <a href="projects.html" class="back-link reveal">All Projects</a>
     <div class="hero-eyebrow reveal">Case Study · 001 — MSc Thesis · 2025-2026</div>
-    <h1 class="hero-title reveal rd1">Data Science for <br>to <em>Coffee Shop</em></h1>
+    <h1 class="hero-title reveal rd1">MSc Thesis: Development of AI Models <br>for <em>Coffee Shop</em></h1>
     <div class="hero-meta-row reveal rd2">
       <div class="meta-cell">
         <div class="meta-label">University</div>
@@ -203,8 +203,8 @@ footer{border-top:1px solid #e0e0e0;padding:2rem 4rem;display:flex;justify-conte
     <div class="section-label reveal">The Challenge</div>
     <h2 class="reveal rd1">Main Objective of the Project </em></h2>
     <div class="prose reveal rd2">
-      <p>The main objective was to help a coffee shop in Madrid to predict the weekly sales in order to reduce food waste and optimize the buying process. To predict the sales serveral aspects were taking into consideration such as weather forecast, number of tourist expected in a close by museum and lag of last 14 days. The model output two forecast one for total sales and one for total units sold by product category. </p>
-      <p>In order to increase the sales and differenciate from competition, an analysis of online reviews of the coffee shop and nearby competitors was done in order to have an overview of what customer loved most about competitions and what are the strenghts and issues of the coffee shop analyzed</p>
+      <p>The main objective was to help a coffee shop in Madrid to predict the weekly sales in order to reduce food waste and optimize the buying process. To predict the sales serveral aspects were taking into consideration such as weather forecast, number of tourist expected in a close by museum and lag of last 14 days. The model output two forecasts one for total sales and one for total units sold by product category. </p>
+      <p>In order to increase the sales and differenciate from competitions, an analysis of online reviews of the coffee shop and nearby competitors was done in order to have an overview of what customer loved most about competitions and what are the strenghts and issues of the coffee shop analyzed</p>
       <p>Through Streamlit an interface was developed so that owner of the coffee shop could easily access the analysis of reviews and do by himself the prediction only by uploading invoices of the last two weeks</p>
     </div>
 
@@ -212,7 +212,7 @@ footer{border-top:1px solid #e0e0e0;padding:2rem 4rem;display:flex;justify-conte
     <hr class="content-hr">
 
     <div class="section-label reveal">The Approach</div>
-    <h2 class="reveal rd1">Sales Forecasting Model</em></h2>
+    <h2 class="reveal rd1">Sales Forecasting Model & Text Mining</em></h2>
     <ul class="steps reveal rd2">
       <li class="step">
         <span class="step-num">01</span>
@@ -225,8 +225,8 @@ footer{border-top:1px solid #e0e0e0;padding:2rem 4rem;display:flex;justify-conte
         <span class="step-num">02</span>
         <span class="step-text">
           <strong>Training and Model Choice - Why Prophet?</strong>
-          <p> To choose the best model, first were tried the mos common model used for Time Series analysis such as ARIMA/SARIMA that were dismissed for the difficulties to add exogenous variables while the ML classic model liek Linear Regression and XGBoost were used as baseline. Among all the others models tried, like Naive or LSTM, the one that best suited the problem was Prophet.<p>
-          <p> Prophet, a model developed by META, was choose for several caharcteristics such as the fact that is very good to detect weekly and annual seasonality and trends. There is also the possibility to add a list of days that have a bigger impact on the sales, perfect for our case where we could add several holidays that over the years had huge impact oon the sales. To the model can also be add easily  some exogenous variables that can have an additive or multuplicative effect.
+          <p> To choose the best model, first were tried the mos common models used for Time Series analysis such as ARIMA/SARIMA that were dismissed for the difficulties to add exogenous variables while the ML classic model like Linear Regression and XGBoost were used as baseline. Among all the others models tried, like Naive or LSTM, the one that best suited the problem was Prophet.<p>
+          <p> Prophet, a model developed by META, was choose for several caharcteristics such as the fact that is very good to detect weekly and annual seasonality and trends. There is also the possibility to add a list of days that have a bigger impact on the sales, perfect for our case where we could add several holidays that over the years had huge impact on the sales. To the model can also be add easily some exogenous variables that can have an additive or multuplicative effect.
         </span>
       </li>
       <li class="step">
@@ -248,7 +248,7 @@ footer{border-top:1px solid #e0e0e0;padding:2rem 4rem;display:flex;justify-conte
         <span class="step-num">05</span>
         <span class="step-text">
           <strong>Interface Creation w/ Streamlit</strong>
-          Both the prediction model and the review analysis are displayed in a Streamlit Interface. fully deployed with Python code, to help the owner easily access those information.
+          Both the prediction model and the review analysis are displayed in a Streamlit Interface,  fully deployed with Python code, to help the owner easily access those information.
         </span>
       </li>
     </ul>
@@ -258,14 +258,14 @@ footer{border-top:1px solid #e0e0e0;padding:2rem 4rem;display:flex;justify-conte
     <div class="section-label reveal">Results</div>
     <h2 class="reveal rd1">Demo & <em>Link.</em></h2>
     <div class="prose reveal rd2">
-      <p>Here a quick demo of how the app works while at this link you can visit the webpage of the application.</p>
+      <p>Here a quick demo of how the app works but you can also visit the <a href="https://pythia-bestcafeinmadrid.streamlit.app" target="_blank">live application here</a>.</p>
       <p>To access the page "Reviews" the password to use is PATIO</p>
     </div>
   <div class="img-wrap reveal">
   <video width="100%" autoplay muted loop playsinline>
     <source src="video_class1.mp4" type="video/mp4">
   </video>
-  <div class="img-caption">Work order flow — from technician input to billing category</div>
+  <div class="img-caption">Demo on how to use the app to run forecasts and to access the reviews analysis</div>
 </div>
   </div>
 
