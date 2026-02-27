@@ -146,7 +146,7 @@ footer{border-top:1px solid #e0e0e0;padding:2rem 4rem;display:flex;justify-conte
   <div class="hero-inner">
     <a href="projects.html" class="back-link reveal">All Projects</a>
     <div class="hero-eyebrow reveal">Case Study · 002 · TCR Group · 2025</div>
-    <h1 class="hero-title reveal rd1">Forecasting of Rental Revenue by Equipment <br>to <em>with XGBoost</em></h1>
+    <h1 class="hero-title reveal rd1">Revenue Forecasting by Equipment <br>to <em>with XGBoost</em></h1>
     <div class="hero-meta-row reveal rd2">
       <div class="meta-cell">
         <div class="meta-label">Company</div>
@@ -186,7 +186,7 @@ footer{border-top:1px solid #e0e0e0;padding:2rem 4rem;display:flex;justify-conte
       <div class="band-label">R²</div>
     </div>
     <div class="band-metric reveal rd3">
-      <div class="band-val">10 years</div>
+      <div class="band-val">10Y</div>
       <div class="band-label">of data used</div>
     </div>
   </div>
@@ -199,9 +199,9 @@ footer{border-top:1px solid #e0e0e0;padding:2rem 4rem;display:flex;justify-conte
     <h2 class="reveal rd1">What needed fixing </em></h2>
     <div class="prose reveal rd2">
       <p>TCR Group rents Ground Support Equipment (GSE) to airlines and airports worldwide. To choose at what price the the equipment should be rent, the commercial team used an excel where the final price was done by a series of average of the past years and some other additional conditions inside the formulas. </p>
-      <p>The process is extremely slow because each commercial associate needed to find similar equipments, manually add all the information required and then check the final suggested price</p>
-      <p>Also, the final price often was wromg because based on a simply average of the price of the previous years for a similar type of EQ without taking into consideration non linear relationship in the change of rental prices and also without the possibility to generalize on new type of EQs or geography to quick check possible revenues </p>
-      </p> The model aim to predict the expected annual revenue of an equipment based on several information such as geographic location, Gross Book Value, type of customer, model type and past usage. </p>
+      <p>The process was extremely slow because each commercial associate needed to find similar equipments, manually add all the information required and then check the final suggested price</p>
+      <p>Also, the final price often was wrong because based on a simply average of the price of the previous years for a similar type of EQ without taking into consideration non linear relationships in the change of rental prices and also without the possibility to generalize on new type of EQs or geography to quick check possible revenues. </p>
+      </p> The model aim to predict the expected annual revenue of an equipment based on several information such as geographic location, Gross Book Value, type of customer, model type and past usage capturing all type of relationships between data. </p>
     </div>
 
 
@@ -214,36 +214,35 @@ footer{border-top:1px solid #e0e0e0;padding:2rem 4rem;display:flex;justify-conte
         <span class="step-num">01</span>
         <span class="step-text">
           <strong>EDA</strong>
-          First an EDA was done to detect inconsistencies in the data such as: normalization of the distribution and detection of outliers to remove the EQ with a rental revenue with more than 3 standard deviations from the mean; ajuste the str variables to avoid duplicates due to mispelling errors
+          First an EDA was done to detect inconsistencies in the data such as: normalization of the distribution and detection of outliers to remove the EQ with a rental revenue higher than 3 standard deviations from the mean; adjust of the str variables to avoid duplicates due to mispelling errors
         </span>
       </li>
       <li class="step">
         <span class="step-num">02</span>
         <span class="step-text">
           <strong>Feature Engineering & Encoding</strong>
-          <p> Feature Engineering to keep only the variables with an high correlation with the Y (Monthly Revenue) in order to avoid too much noise during the predition. After this, some variables, that were using similar information, were used together such as the Airport and Owning Entity or the EQ Model and the type of fuel used.<p>
-          <p> Since the text feature were too many to just use the categorical support parameter of the mode, the 3 text variables were put together in one column (because they were a mix of customer + model + airport) and with OneHotEncoder library were transformed to only numerical data .<p> 
+          <p> Feature Engineering by filtering variables based on their correlation with Revenue, keeping only those with a strong correlation to the Y. After this, some variables, that were using similar information, were grouped together such as the Airport and Owning Entity or the EQ Model and the type of fuel used.<p>
+          <p> Since the text feature were too many to just use the categorical support parameter of the models, the 3 text variables were put together in one column (a mix of customer + model + airport) and with OneHotEncoder library were transformed to numerical data .<p> 
         </span>
       </li>
       <li class="step">
         <span class="step-num">03</span>
         <span class="step-text">
           <strong>Model Selection with Pycaret</strong>
-          With the usage of Pycaret adn the compare_models() function, multiple algorithms were trained and the result was a ranked leaderboardto identify the best performer quickly (XGBoost).
+          With the usage of Pycaret adn the compare_models() function, multiple basic algorithms were trained and the result was a ranked leaderboard to identify the best performer quickly (XGBoost).
       </li>
       <li class="step">
         <span class="step-num">04</span>
         <span class="step-text">
           <strong>Hyperparameter Tuning</strong>
-          <p>Then the model chosen has been tuned through the usage of a Randomize Search CV. Here with param_grid were defined the hyperparameters to test but instead of trying all combinations (GridSearch), RandomizedSearchCV picks 50 random combinations from these options to finds the best one <p>
+          <p>Then the model chosen has been fine-tuned through the usage of a Randomize Search CV. Here with param_grid were defined the hyperparameters to test but instead of trying all combinations (GridSearch), RandomizedSearchCV was used to pick 50 random combinations from these options and find the best one <p>
         </span>
       </li>
       <li class="step">
         <span class="step-num">05</span>
         <span class="step-text">
           <strong>Interface Creation w/ Streamlit</strong>
-          Creation of an interface to allow the commercial team to easily have prediction by just adding the information. A pipeline run after the click on run predictions and the fill in of all the info that use the same encoder and preprocessing of data done during the training
-        </span>
+          Creation of an interface to allow the commercial team to easily have prediction by just adding the information. A pipeline run after the click on "Predict Revneues" from the apply of the same transformations used in the training to the display of the predicted revenue.
       </li>
     </ul>
 
@@ -256,7 +255,7 @@ footer{border-top:1px solid #e0e0e0;padding:2rem 4rem;display:flex;justify-conte
     </div>
    <div class="img-wrap reveal">
       <img src="photo_appforecast.jpg" alt="Screenshot App">
-      <div class="img-caption">Work order flow — from technician input to billing category</div>
+      <div class="img-caption">Screenshot of the app used to run predictions</div>
     </div>
   </div>
 
@@ -270,9 +269,9 @@ footer{border-top:1px solid #e0e0e0;padding:2rem 4rem;display:flex;justify-conte
   <div class="next-inner">
     <a href="project-forecasting.html" style="text-decoration:none;">
       <div class="next-label">Next Project</div>
-      <div class="next-title">ML Revenue Forecasting Model</div>
+      <div class="next-title">Power Bi Dashboards</div>
     </a>
-    <a href="project-forecasting.html" class="next-arrow">→</a>
+    <a href="dashboards.html" class="next-arrow">→</a>
   </div>
 </div>
 
