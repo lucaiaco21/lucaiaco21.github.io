@@ -35,7 +35,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;justify-content
 .back-link::before{content:'←';}
 .back-link:hover{color:var(--ink);}
 .hero-eyebrow{font-family:var(--mono);font-size:0.62rem;letter-spacing:0.22em;text-transform:uppercase;color:#777;margin-bottom:1.5rem;}
-.hero-title{font-family:var(--serif);font-size:clamp(2.8rem,7vw,6rem);font-weight:800;line-height:0.88;letter-spacing:-0.04em;color:var(--ink);margin-bottom:2.5rem;max-width:800px;}
+.hero-title{font-family:var(--serif);font-size:clamp(2rem,4.5vw,4rem);font-weight:800;line-height:0.88;letter-spacing:-0.04em;color:var(--ink);margin-bottom:2.5rem;max-width:800px;}
 .hero-title em{font-style:normal;-webkit-text-stroke:2px var(--ink);color:transparent;}
 
 .hero-meta-row{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid #e0e0e0;border-bottom:1px solid #e0e0e0;}
@@ -43,9 +43,12 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;justify-content
 .meta-cell:last-child{border-right:none;}
 .meta-label{font-family:var(--mono);font-size:0.55rem;letter-spacing:0.18em;text-transform:uppercase;color:#aaa;margin-bottom:0.35rem;}
 .meta-value{font-family:var(--serif);font-size:0.95rem;font-weight:600;color:var(--ink);}
-.proj-tags{display:flex;flex-wrap:wrap;gap:0.4rem;padding:1.2rem 0;border-bottom:1px solid #e0e0e0;}
-.proj-tag{font-family:var(--mono);font-size:0.58rem;letter-spacing:0.06em;border:1px solid #ddd;color:#555;padding:0.18rem 0.65rem;transition:all 0.2s;}
+
+
+.proj-tags{display:flex;flex-wrap:wrap;gap:0.6rem;padding:1.4rem 0;border-bottom:1px solid #e0e0e0;}
+.proj-tag{font-family:var(--mono);font-size:1.3rem;letter-spacing:0.06em;border:1px solid #ddd;color:#555;padding:0.45rem 1.1rem;border-radius:999px;transition:all 0.2s;}
 .proj-tag:hover{border-color:var(--ink);color:var(--ink);}
+
 
 /* METRICS STRIP */
 .metrics-strip{background:var(--ink);padding:4rem;}
@@ -146,7 +149,7 @@ footer{border-top:1px solid #e0e0e0;padding:2rem 4rem;display:flex;justify-conte
   <div class="hero-inner">
     <a href="projects.html" class="back-link reveal">All Projects</a>
     <div class="hero-eyebrow reveal">Case Study · 002 · TCR Group · 2025</div>
-    <h1 class="hero-title reveal rd1">Revenue Forecasting by Equipment <br>to <em>with XGBoost</em></h1>
+    <h1 class="hero-title reveal rd1">Revenue Forecasting by Equipment <em>with XGBoost</em></h1>
     <div class="hero-meta-row reveal rd2">
       <div class="meta-cell">
         <div class="meta-label">Company</div>
