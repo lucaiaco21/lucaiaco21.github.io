@@ -193,7 +193,7 @@ footer { border-top:1px solid var(--ink-faint); padding:2rem 4rem; max-width:108
 .footer-name { font-family:var(--serif); font-size:1rem; font-style:italic; color:var(--ink-soft); }
 .footer-mono { font-family:var(--mono); font-size:0.6rem; letter-spacing:0.1em; text-transform:uppercase; color:var(--ink-faint); }
 
-.reveal { opacity:0; transform:translateY(22px); transition:opacity 0.7s ease, transform 0.7s ease; }
+.reveal { opacity:0; transform:translateY(22px); transition:opacity 0.4s ease, transform 0.4s ease; }
 .reveal.visible { opacity:1; transform:translateY(0); }
 .rd1{transition-delay:0.1s} .rd2{transition-delay:0.2s} .rd3{transition-delay:0.28s} .rd4{transition-delay:0.36s}
 
@@ -400,8 +400,8 @@ document.addEventListener('mousemove', e => {
 });
 
 (function anim() {
-  rx += (mx - rx) * 0.13;
-  ry += (my - ry) * 0.13;
+ rx += (mx - rx) * 0.28;
+ ry += (my - ry) * 0.28;
   ring.style.left = rx + 'px';
   ring.style.top = ry + 'px';
   requestAnimationFrame(anim);
@@ -415,7 +415,7 @@ document.querySelectorAll('#hero a, #hero button').forEach(el => {
 /* ── PLEXUS ── */
 const canvas = document.getElementById('plexus'), ctx = canvas.getContext('2d');
 let W, H, dots=[], pmx=-999, pmy=-999;
-const N=70, DIST=140, COL='139,69,19';
+const N=45, DIST=140, COL='139,69,19';
 function resize(){ W=canvas.width=window.innerWidth; H=canvas.height=window.innerHeight; }
 function init(){ dots=[]; for(let i=0;i<N;i++) dots.push({x:Math.random()*W,y:Math.random()*H,vx:(Math.random()-.5)*.5,vy:(Math.random()-.5)*.5,r:Math.random()*2+1.5}); }
 function draw(){
@@ -443,7 +443,7 @@ resize(); init(); draw();
 /* ── REVEAL ── */
 const obs = new IntersectionObserver(entries=>{
   entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('visible'); obs.unobserve(e.target); } });
-},{threshold:0.1});
+},{threshold:0, rootMargin: '0px 0px -40px 0px'});
 document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
 
 /* ── FILTER ── */
