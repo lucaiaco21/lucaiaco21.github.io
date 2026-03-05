@@ -185,8 +185,8 @@ footer{border-top:1px solid #e0e0e0;padding:2rem 4rem;display:flex;justify-conte
 <div class="proj-hero">
   <div class="hero-inner">
     <a href="projects.html" class="back-link reveal">All Projects</a>
-    <div class="hero-eyebrow reveal">Case Study · 001 — Personal · 2025–2026</div>
-    <h1 class="hero-title reveal rd1">ETF Price<br><em>Memory.</em></h1>
+    <div class="hero-eyebrow reveal">Case Study · 007 — Personal · 2025</div>
+    <h1 class="hero-title reveal rd1">ETF Price Forecasting<br><em>with LSTM Neural Network</em></h1>
     <div class="hero-meta-row reveal rd2">
       <div class="meta-cell">
         <div class="meta-label">Context</div>
@@ -194,11 +194,11 @@ footer{border-top:1px solid #e0e0e0;padding:2rem 4rem;display:flex;justify-conte
       </div>
       <div class="meta-cell" style="padding-left:2rem;">
         <div class="meta-label">Year</div>
-        <div class="meta-value">2025–2026</div>
+        <div class="meta-value">2025</div>
       </div>
       <div class="meta-cell" style="padding-left:2rem;">
-        <div class="meta-label">Role</div>
-        <div class="meta-value">End-to-End</div>
+        <div class="meta-label">Objective</div>
+        <div class="meta-value">Monitor my investments</div>
       </div>
       <div class="meta-cell" style="padding-left:2rem;">
         <div class="meta-label">Type</div>
@@ -211,7 +211,6 @@ footer{border-top:1px solid #e0e0e0;padding:2rem 4rem;display:flex;justify-conte
       <span class="proj-tag">Keras</span>
       <span class="proj-tag">LSTM</span>
       <span class="proj-tag">Keras Tuner</span>
-      <span class="proj-tag">pandas</span>
       <span class="proj-tag">scikit-learn</span>
       <span class="proj-tag">statsmodels</span>
     </div>
@@ -246,8 +245,8 @@ footer{border-top:1px solid #e0e0e0;padding:2rem 4rem;display:flex;justify-conte
     <div class="section-label reveal">The Problem</div>
     <h2 class="reveal rd1">Why ETFs are <em>hard</em> to predict.</h2>
     <div class="prose reveal rd2">
-      <p>ETF prices are driven by a combination of macro trends, sector momentum, and the idiosyncratic behavior of individual funds. Standard statistical models fail to capture non-linear dependencies across time. The goal here was to build a sequence model that could learn temporal patterns in price movements — across multiple ETFs simultaneously — using both numerical features and categorical embeddings.</p>
-      <p>The target variable is the next-day log return (<code>Close_log_diff</code>), which stabilizes variance across ETFs with very different price scales and makes the model inherently aware of relative movement rather than absolute levels.</p>
+      <p>ETF prices, like all stock prices, are very hard to predict, since models often fail to capture non-linear dependencies across time. The goal here was to build a sequence model that could learn temporal patterns in price movements. The main difficulty was to first create a model that didn't require specialized training for each of the 80+ ETFs I wanted to analyze, while also being able to use both numerical and categorical features as predictors.</p>
+      <p>The target variable is the log difference of the closing price — specifically, the difference between the log of today's close and yesterday's close (Close_log_diff), shifted by one day so the model predicts tomorrow's log return. This choice is motivated by two reasons: first, log-transforming the prices allows a single model to generalize across all 80+ ETFs regardless of their price magnitude; second, predicting the log difference is significantly easier than predicting the raw price, and even when imprecise, it still provides a reliable signal for whether the price will rise or fall the next day.</p>
     </div>
 
     <hr class="content-hr">
