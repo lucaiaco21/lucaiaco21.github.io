@@ -36,7 +36,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;justify-content
 .meta-label{font-family:var(--mono);font-size:0.55rem;letter-spacing:0.18em;text-transform:uppercase;color:#aaa;margin-bottom:0.35rem;}
 .meta-value{font-family:var(--serif);font-size:0.95rem;font-weight:600;color:var(--ink);}
 .proj-tags{display:flex;flex-wrap:wrap;gap:0.6rem;padding:1.4rem 0;border-bottom:1px solid #e0e0e0;}
-.proj-tag{font-family:var(--mono);font-size:1.3rem;letter-spacing:0.06em;border:1px solid #ddd;color:#555;padding:0.45rem 1.1rem;border-radius:999px;transition:all 0.2s;}
+.proj-tag{font-family:var(--mono);font-size:0.75rem;letter-spacing:0.06em;border:1px solid #ddd;color:#555;padding:0.3rem 0.75rem;border-radius:999px;transition:all 0.2s;}
 .proj-tag:hover{border-color:var(--ink);color:var(--ink);}
 
 
@@ -190,11 +190,6 @@ footer{border-top:1px solid #e0e0e0;padding:2rem 4rem;display:flex;justify-conte
       <div class="band-val">20<span>K</span></div>
       <div class="band-label">Hours Saved / Year</div>
     </div>
-    <div class="band-metric reveal rd3">
-      <div class="band-val">2</div>
-      <div class="band-label">Showcases</div>
-    </div>
-  </div>
 </div>
 
 <!-- BODY -->
@@ -245,7 +240,7 @@ footer{border-top:1px solid #e0e0e0;padding:2rem 4rem;display:flex;justify-conte
         <span class="sql-label">Example Query 01 — Market Share by Category</span>
         <span class="sql-tag">Training Sample</span>
       </div>
-      <pre><code><span class="cm">-- Business question: "What is MARS market share by category in the last period?"</span>
+      <pre><code><span class="cm">-- Business question: "What is Company market share by category in the last period?"</span>
 
 <span class="kw">SELECT</span>
     f.global_subcategory,
@@ -257,8 +252,8 @@ footer{border-top:1px solid #e0e0e0;padding:2rem 4rem;display:flex;justify-conte
 <span class="kw">FROM</span> fact_flat_table_local_dashboard f
 <span class="kw">JOIN</span> total_category_summary t
     <span class="kw">ON</span> f.global_subcategory = t.global_subcategory
-    <span class="kw">AND</span> f.mars_period = t.mars_period
-<span class="kw">WHERE</span> f.mars_period = (<span class="kw">SELECT</span> <span class="fn">MAX</span>(mars_period) <span class="kw">FROM</span> fact_flat_table_local_dashboard)
+    <span class="kw">AND</span> f.period = t.period
+<span class="kw">WHERE</span> f.period = (<span class="kw">SELECT</span> <span class="fn">MAX</span>(period) <span class="kw">FROM</span> fact_flat_table_local_dashboard)
 <span class="kw">GROUP BY</span> f.global_subcategory
 <span class="kw">ORDER BY</span> market_share_pct <span class="kw">DESC</span>;</code></pre>
     </div>
@@ -281,7 +276,7 @@ footer{border-top:1px solid #e0e0e0;padding:2rem 4rem;display:flex;justify-conte
         <span class="fn">NULLIF</span>(<span class="fn">SUM</span>(promo_value) + <span class="fn">SUM</span>(non_promo_value), <span class="num">0</span>), <span class="num">1</span>
     ) <span class="kw">AS</span> promo_mix_pct
 <span class="kw">FROM</span> fact_flat_table_local_dashboard
-<span class="kw">WHERE</span> mars_period = (<span class="kw">SELECT</span> <span class="fn">MAX</span>(mars_period) <span class="kw">FROM</span> fact_flat_table_local_dashboard)
+<span class="kw">WHERE</span> period = (<span class="kw">SELECT</span> <span class="fn">MAX</span>(period) <span class="kw">FROM</span> fact_flat_table_local_dashboard)
 <span class="kw">GROUP BY</span> global_subcategory
 <span class="kw">ORDER BY</span> promo_mix_pct <span class="kw">DESC</span>;</code></pre>
     </div>
@@ -305,6 +300,11 @@ footer{border-top:1px solid #e0e0e0;padding:2rem 4rem;display:flex;justify-conte
   </div>
 </div>
 
+ <div class="proj-sidebar">
+    <a href="index.html#projects" class="sidebar-link outline reveal rd1">← All Projects</a>
+  </div>
+</div>
+  
 <!-- NEXT -->
 <div class="next-band">
   <div class="next-inner">
