@@ -8,38 +8,56 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:wght@300;400;500&family=Instrument+Sans:wght@300;400;500;600&family=Rajdhani:wght@700&display=swap" rel="stylesheet">
 <style>
-:root{--ink:#1c1c1c;--paper:#ffffff;--paper-warm:#f5f3ef;--serif:'Syne',sans-serif;--mono:'DM Mono',monospace;--sans:'Instrument Sans',sans-serif;}
+:root{
+  --ink:#1c1c1c;
+  --paper:#ffffff;
+  --paper-warm:#f5f3ef;
+  --serif:'Syne',sans-serif;
+  --mono:'DM Mono',monospace;
+  --sans:'Instrument Sans',sans-serif;
+}
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
 html{scroll-behavior:smooth;}
-body{background:var(--paper);color:var(--ink);font-family:var(--sans);font-weight:300;overflow-x:hidden;}
+body{background:var(--paper);color:var(--ink);font-family:var(--sans);font-weight:300;overflow-x:hidden;cursor:none;}
+#cursor{width:8px;height:8px;background:var(--ink);border-radius:50%;position:fixed;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);}
+#cursor-ring{width:28px;height:28px;border:1px solid var(--ink);border-radius:50%;position:fixed;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:all 0.16s ease;opacity:0.4;}
 
-nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;justify-content:center;align-items:center;gap:3rem;padding:1.4rem 4rem;background:rgba(255,255,255,0.96);border-bottom:1px solid #e0e0e0;}
+nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;justify-content:center;align-items:center;gap:3rem;padding:1.4rem 4rem;background:rgba(255,255,255,0.96);backdrop-filter:blur(16px);border-bottom:1px solid #e0e0e0;}
 .nav-logo{font-family:var(--serif);font-size:1rem;font-weight:700;color:var(--ink);text-decoration:none;}
 .nav-links{display:flex;gap:3rem;list-style:none;}
 .nav-links a{font-family:var(--serif);font-size:0.95rem;font-weight:600;color:#555;text-decoration:none;transition:color 0.2s;padding-bottom:2px;border-bottom:1px solid transparent;}
 .nav-links a:hover,.nav-links a.active{color:var(--ink);border-bottom-color:var(--ink);}
 
-.proj-hero{padding:9rem 0 0;}
+/* HERO — identical to thesis page */
+.proj-hero{padding:9rem 0 0;overflow:hidden;}
 .hero-inner{max-width:1080px;margin:0 auto;padding:4rem 4rem 0;}
 .back-link{font-family:var(--mono);font-size:0.62rem;letter-spacing:0.12em;text-transform:uppercase;color:#aaa;text-decoration:none;display:inline-flex;align-items:center;gap:0.5rem;margin-bottom:2rem;transition:color 0.2s;}
 .back-link::before{content:'←';}
 .back-link:hover{color:var(--ink);}
 .hero-eyebrow{font-family:var(--mono);font-size:0.62rem;letter-spacing:0.22em;text-transform:uppercase;color:#777;margin-bottom:1.5rem;}
 .hero-title{font-family:var(--serif);font-size:clamp(2rem,4.5vw,4rem);font-weight:800;line-height:0.88;letter-spacing:-0.04em;color:var(--ink);margin-bottom:2.5rem;max-width:800px;}
-.hero-title em{font-style:normal;-webkit-text-stroke:2px var(--ink);color:transparent;font-family: 'Rajdhani', sans-serif;
-  font-weight: 700;
-  letter-spacing: 0.06em;}
+.hero-title em{
+  font-style:normal;
+  -webkit-text-stroke:1.5px var(--ink);
+  color:transparent;
+  font-family:'Rajdhani',sans-serif;
+  font-weight:700;
+  letter-spacing:0.06em;
+}
 
+/* META ROW — identical to thesis: border-right on cells, no border-left */
 .hero-meta-row{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid #e0e0e0;border-bottom:1px solid #e0e0e0;}
-.meta-cell{padding:1.2rem 0;}
-.meta-cell+.meta-cell{padding-left:2rem;border-left:1px solid #e0e0e0;}
+.meta-cell{padding:1.2rem 0;border-right:1px solid #e0e0e0;}
+.meta-cell:last-child{border-right:none;}
 .meta-label{font-family:var(--mono);font-size:0.55rem;letter-spacing:0.18em;text-transform:uppercase;color:#aaa;margin-bottom:0.35rem;}
 .meta-value{font-family:var(--serif);font-size:0.95rem;font-weight:600;color:var(--ink);}
+
+/* TAGS — identical to thesis */
 .proj-tags{display:flex;flex-wrap:wrap;gap:0.6rem;padding:1.4rem 0;border-bottom:1px solid #e0e0e0;}
 .proj-tag{font-family:var(--mono);font-size:0.75rem;letter-spacing:0.06em;border:1px solid #ddd;color:#555;padding:0.3rem 0.75rem;border-radius:999px;transition:all 0.2s;}
 .proj-tag:hover{border-color:var(--ink);color:var(--ink);}
 
-
+/* METRICS STRIP — identical to thesis: padding:4rem, 4-col grid */
 .metrics-strip{background:var(--ink);padding:4rem;}
 .metrics-inner{max-width:1080px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);}
 .band-metric{padding:0 3rem;border-right:1px solid rgba(255,255,255,0.12);}
@@ -49,35 +67,32 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;justify-content
 .band-val span{color:rgba(255,255,255,0.55);}
 .band-label{font-family:var(--mono);font-size:0.58rem;letter-spacing:0.14em;text-transform:uppercase;color:rgba(255,255,255,0.55);}
 
-.proj-body{max-width:1080px;margin:0 auto;padding:0 4rem;}
+/* BODY */
+.proj-body{display:grid;grid-template-columns:1fr;gap:0;max-width:1080px;margin:0 auto;padding:0 4rem;}
 .proj-content{padding:5rem 0;}
+.proj-sidebar{padding:5rem 0 5rem 2rem;}
 
 .section-label{font-family:var(--mono);font-size:0.58rem;letter-spacing:0.22em;text-transform:uppercase;color:#aaa;margin-bottom:0.75rem;}
 h2{font-family:var(--serif);font-size:clamp(1.8rem,3vw,2.6rem);font-weight:700;line-height:1.05;color:var(--ink);letter-spacing:-0.03em;margin-bottom:1.5rem;}
-h2 em {
-  font-style: normal;
-  -webkit-text-stroke: 1px var(--ink);
-  color: transparent;
-  font-family: 'Rajdhani', sans-serif;
-  font-weight: 700;
-  letter-spacing: 0.06em;
+h2 em{
+  font-style:normal;
+  -webkit-text-stroke:1px var(--ink);
+  color:transparent;
+  font-family:'Rajdhani',sans-serif;
+  font-weight:700;
+  letter-spacing:0.06em;
 }
 
 .prose{font-size:0.95rem;color:#333;line-height:1.9;margin-bottom:2.5rem;}
 .prose p{margin-bottom:1rem;}
 .content-hr{border:none;border-top:1px solid #e0e0e0;margin:3rem 0;}
 
-/* TWO SHOWCASE SECTIONS */
+/* SHOWCASE — identical structure */
 .showcase{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:#e0e0e0;border:1px solid #e0e0e0;margin:2.5rem 0;}
 .showcase-item{background:var(--paper);padding:2rem;}
 .showcase-label{font-family:var(--mono);font-size:0.52rem;letter-spacing:0.18em;text-transform:uppercase;color:#aaa;margin-bottom:0.6rem;}
 .showcase-title{font-family:var(--serif);font-size:1.1rem;font-weight:700;color:var(--ink);margin-bottom:0.75rem;}
 .showcase-desc{font-size:0.85rem;color:#555;line-height:1.75;}
-
-/* ROLE BADGES */
-.role-tags{display:flex;flex-wrap:wrap;gap:0.4rem;margin:2rem 0;}
-.role-tag{font-family:var(--mono);font-size:0.58rem;letter-spacing:0.06em;padding:0.3rem 0.8rem;background:var(--ink);color:#fff;}
-.role-tag.outline{background:transparent;border:1px solid #ddd;color:#555;}
 
 /* STEPS */
 .steps{list-style:none;display:flex;flex-direction:column;margin-bottom:2.5rem;}
@@ -100,17 +115,20 @@ code{font-family:var(--mono);font-size:0.78rem;line-height:1.8;color:#e0e0e0;}
 .str{color:#98c379;}
 .num{color:#e5c07b;}
 
-/* IMG */
-.img-wrap{margin:2.5rem 0;}
-.img-wrap img{width:100%;display:block;border:1px solid #e0e0e0;}
-.img-caption{font-family:var(--mono);font-size:0.58rem;letter-spacing:0.1em;text-transform:uppercase;color:#aaa;margin-top:0.75rem;}
-
-/* SIDEBAR STAT */
+/* SIDEBAR STAT BOX */
+.stat-box{border:1px solid #e0e0e0;padding:1.5rem;margin-bottom:2.5rem;}
 .sidebar-stat{display:flex;justify-content:space-between;align-items:baseline;padding:0.6rem 0;border-bottom:1px solid #f0ede8;}
 .sidebar-stat:last-child{border-bottom:none;}
 .stat-name{font-family:var(--mono);font-size:0.6rem;letter-spacing:0.06em;color:#555;text-transform:uppercase;}
 .stat-val{font-family:var(--serif);font-size:1.1rem;font-weight:700;color:var(--ink);}
 
+/* SIDEBAR LINKS */
+.sidebar-link{display:block;font-family:var(--mono);font-size:0.65rem;letter-spacing:0.1em;text-transform:uppercase;color:#fff;text-decoration:none;padding:0.85rem 1rem;background:var(--ink);text-align:center;transition:opacity 0.2s;margin-bottom:0.6rem;}
+.sidebar-link:hover{opacity:0.7;}
+.sidebar-link.outline{background:transparent;color:#555;border:1px solid #ddd;}
+.sidebar-link.outline:hover{border-color:var(--ink);color:var(--ink);opacity:1;}
+
+/* NEXT */
 .next-band{background:var(--paper-warm);padding:4rem;}
 .next-inner{max-width:1080px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;}
 .next-label{font-family:var(--mono);font-size:0.6rem;letter-spacing:0.18em;text-transform:uppercase;color:#aaa;margin-bottom:0.5rem;}
@@ -129,13 +147,15 @@ footer{border-top:1px solid #e0e0e0;padding:2rem 4rem;display:flex;justify-conte
 .rd1{transition-delay:0.08s}.rd2{transition-delay:0.16s}.rd3{transition-delay:0.24s}
 
 @media(max-width:860px){
-  nav{gap:1.5rem;padding:1.2rem 2rem;}.nav-links{gap:1.5rem;}
+  nav{gap:1.5rem;padding:1.2rem 2rem;flex-wrap:wrap;}.nav-links{gap:1.5rem;}
   .hero-inner{padding:3rem 2rem 0;}
   .hero-meta-row{grid-template-columns:repeat(2,1fr);}
   .metrics-strip{padding:2.5rem 2rem;}
   .metrics-inner{grid-template-columns:repeat(2,1fr);gap:2rem;}
   .band-metric{padding:0;border-right:none;}
-  .proj-body{padding:0 2rem;}
+  .proj-body{grid-template-columns:1fr;padding:0 2rem;}
+  .proj-content{padding:3rem 0;border-right:none;border-bottom:1px solid #e0e0e0;}
+  .proj-sidebar{padding:3rem 0;}
   .showcase{grid-template-columns:1fr;}
   .next-band{padding:2.5rem 2rem;}
   .next-inner{flex-direction:column;align-items:flex-start;gap:1rem;}
@@ -144,6 +164,8 @@ footer{border-top:1px solid #e0e0e0;padding:2rem 4rem;display:flex;justify-conte
 </style>
 </head>
 <body>
+<div id="cursor"></div>
+<div id="cursor-ring"></div>
 
 <nav>
   <a href="index.html" class="nav-logo">Luca Iacomino</a>
@@ -157,13 +179,25 @@ footer{border-top:1px solid #e0e0e0;padding:2rem 4rem;display:flex;justify-conte
 <div class="proj-hero">
   <div class="hero-inner">
     <a href="index.html#projects" class="back-link reveal">All Projects</a>
-    <div class="hero-eyebrow reveal">Case Study · Accenture · FMCG Big Player · 2024 </div>
-    <h1 class="hero-title reveal rd1">Questions transformed<br><em>into SQL queries.</em>
+    <div class="hero-eyebrow reveal">Case Study · Accenture · FMCG Big Player · 2024</div>
+    <h1 class="hero-title reveal rd1">Questions transformed<br>into <em>SQL queries.</em></h1>
     <div class="hero-meta-row reveal rd2">
-      <div class="meta-cell"><div class="meta-label">Company</div><div class="meta-value">Accenture</div></div>
-      <div class="meta-cell"><div class="meta-label">Client</div><div class="meta-value">FMCG Company</div></div>
-      <div class="meta-cell"><div class="meta-label">My Role</div><div class="meta-value">Functional · SQL</div></div>
-      <div class="meta-cell"><div class="meta-label">Type</div><div class="meta-value">GenAI · SQL · Project Management</div></div>
+      <div class="meta-cell">
+        <div class="meta-label">Company</div>
+        <div class="meta-value">Accenture</div>
+      </div>
+      <div class="meta-cell" style="padding-left:2rem;">
+        <div class="meta-label">Client</div>
+        <div class="meta-value">FMCG Company</div>
+      </div>
+      <div class="meta-cell" style="padding-left:2rem;">
+        <div class="meta-label">My Role</div>
+        <div class="meta-value">Functional · SQL</div>
+      </div>
+      <div class="meta-cell" style="padding-left:2rem;">
+        <div class="meta-label">Type</div>
+        <div class="meta-value">GenAI · SQL · Project Mgmt</div>
+      </div>
     </div>
     <div class="proj-tags reveal rd3">
       <span class="proj-tag">GenAI</span>
@@ -190,32 +224,30 @@ footer{border-top:1px solid #e0e0e0;padding:2rem 4rem;display:flex;justify-conte
       <div class="band-val">20<span>K</span></div>
       <div class="band-label">Hours Saved / Year</div>
     </div>
+  </div>
 </div>
 
 <!-- BODY -->
 <div class="proj-body">
   <div class="proj-content">
 
-    <!-- WHAT WAS THE PROJECT -->
     <div class="section-label reveal">The Project</div>
     <h2 class="reveal rd1">What is <em>Athena.</em></h2>
     <div class="prose reveal rd2">
-      <p>Athena is a GenAI-powered conversational reporting tool built at Accenture for one of the world's largest FMCG companies. It allows business users and executives to query 16M+ rows of Nielsen syndicated sales data using plain English, getting back tables and visualizations instantly WITH no SQL knowledge required.</p>
+      <p>Athena is a GenAI-powered conversational reporting tool built at Accenture for one of the world's largest FMCG companies. It allows business users and executives to query 16M+ rows of Nielsen syndicated sales data using plain English, getting back tables and visualizations instantly with no SQL knowledge required.</p>
     </div>
 
-    <!-- MY ROLE -->
     <div class="section-label reveal">My Role</div>
     <h2 class="reveal rd1">Where I <em>contributed.</em></h2>
     <div class="prose reveal rd2">
       <p>I was part of the functional team at the intersection of business and technology: understanding what the business actually needed, translating that into requirements the technical team could build, and making sure the solution made sense to the people who would use it.</p>
     </div>
 
-    <!-- TWO SHOWCASES -->
     <div class="showcase reveal">
       <div class="showcase-item">
         <div class="showcase-label">Showcase 01</div>
         <div class="showcase-title">Project & Stakeholder Management</div>
-        <div class="showcase-desc">gathering requirements, managing deadlines, aligning the team, and presenting the solution to client executives and decision-makers.</div>
+        <div class="showcase-desc">Gathering requirements, managing deadlines, aligning the team, and presenting the solution to client executives and decision-makers.</div>
       </div>
       <div class="showcase-item" style="border-left:1px solid #e0e0e0;">
         <div class="showcase-label">Showcase 02</div>
@@ -224,17 +256,15 @@ footer{border-top:1px solid #e0e0e0;padding:2rem 4rem;display:flex;justify-conte
       </div>
     </div>
 
-    <div class="content-hr"></div>
+    <hr class="content-hr">
 
-    <!-- Example of SQL Queries Written -->
     <div class="section-label reveal">Showcase 02</div>
     <h2 class="reveal rd1">Writing SQL that teaches<br>a <em>model to think.</em></h2>
     <div class="prose reveal rd2">
-      <p>For a GenAI tool to generate accurate SQL from plain English, it needed examples — high-quality query-answer pairs that demonstrate the business logic and naming conventions</p>
-      <p>The task required understanding both the  data model (how sell-out performance data is structured across SKUs, markets, and periods) and the business questions that the client users actually asked — then translating it in SQL langauge</p>
+      <p>For a GenAI tool to generate accurate SQL from plain English, it needed examples — high-quality query-answer pairs that demonstrate the business logic and naming conventions.</p>
+      <p>The task required understanding both the data model (how sell-out performance data is structured across SKUs, markets, and periods) and the business questions that the client users actually asked — then translating it into SQL language.</p>
     </div>
 
-    <!-- SQL EXAMPLE 1 -->
     <div class="sql-wrap reveal">
       <div class="sql-header">
         <span class="sql-label">Example Query 01 — Market Share by Category</span>
@@ -258,8 +288,6 @@ footer{border-top:1px solid #e0e0e0;padding:2rem 4rem;display:flex;justify-conte
 <span class="kw">ORDER BY</span> market_share_pct <span class="kw">DESC</span>;</code></pre>
     </div>
 
-
-    <!-- SQL EXAMPLE 3 -->
     <div class="sql-wrap reveal rd2">
       <div class="sql-header">
         <span class="sql-label">Example Query 02 — Promo vs Non-Promo Distribution</span>
@@ -281,30 +309,28 @@ footer{border-top:1px solid #e0e0e0;padding:2rem 4rem;display:flex;justify-conte
 <span class="kw">ORDER BY</span> promo_mix_pct <span class="kw">DESC</span>;</code></pre>
     </div>
 
-    <div class="content-hr"></div>
+    <hr class="content-hr">
 
-    <!-- RESULTS -->
     <div class="section-label reveal">Results</div>
-    <h2 class="reveal rd1">What it delivered.</h2>
+    <h2 class="reveal rd1">What it <em>delivered.</em></h2>
     <div class="prose reveal rd2">
-      <p>Athena reached 95%+ output accuracy in production — consistently generating correct SQL and readable outputs from  English questions. The managers at the client company could now get answers in seconds that previously took analysts hours to produce manually.</p>
+      <p>Athena reached 95%+ output accuracy in production — consistently generating correct SQL and readable outputs from English questions. Managers at the client company could now get answers in seconds that previously took analysts hours to produce manually.</p>
       <p>The estimated impact is 20,000 hours saved per year across the reporting function — freeing analysts from repetitive query work and letting them focus on interpretation and decision-making instead.</p>
     </div>
 
-    <div style="border:1px solid #e0e0e0;padding:1.5rem;margin-bottom:2.5rem;" class="reveal">
+    <div class="stat-box reveal">
       <div class="sidebar-stat"><span class="stat-name">Output accuracy</span><span class="stat-val">95%+</span></div>
       <div class="sidebar-stat"><span class="stat-name">Records in database</span><span class="stat-val">16M+</span></div>
       <div class="sidebar-stat"><span class="stat-name">Hours saved / year</span><span class="stat-val">~20,000</span></div>
     </div>
 
   </div>
-</div>
 
- <div class="proj-sidebar">
+  <div class="proj-sidebar">
     <a href="index.html#projects" class="sidebar-link outline reveal rd1">← All Projects</a>
   </div>
 </div>
-  
+
 <!-- NEXT -->
 <div class="next-band">
   <div class="next-inner">
@@ -312,7 +338,7 @@ footer{border-top:1px solid #e0e0e0;padding:2rem 4rem;display:flex;justify-conte
       <div class="next-label">Next Project</div>
       <div class="next-title">How War Shapes Migration</div>
     </a>
-    <a href="migration.html" class="next-arrow">→</a>
+    <a href="project-migration.html" class="next-arrow">→</a>
   </div>
 </div>
 
@@ -322,6 +348,14 @@ footer{border-top:1px solid #e0e0e0;padding:2rem 4rem;display:flex;justify-conte
 </footer>
 
 <script>
+const cur=document.getElementById('cursor'),ring=document.getElementById('cursor-ring');
+let rx=0,ry=0,mx=0,my=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cur.style.left=mx+'px';cur.style.top=my+'px';});
+(function anim(){rx+=(mx-rx)*0.13;ry+=(my-ry)*0.13;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(anim);})();
+document.querySelectorAll('a,button').forEach(el=>{
+  el.addEventListener('mouseenter',()=>{ring.style.transform='translate(-50%,-50%) scale(1.8)';ring.style.opacity='0.2';});
+  el.addEventListener('mouseleave',()=>{ring.style.transform='translate(-50%,-50%) scale(1)';ring.style.opacity='0.4';});
+});
 const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target);}});},{threshold:0.1});
 document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
 </script>
