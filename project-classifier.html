@@ -226,7 +226,16 @@ footer{border-top:1px solid #e0e0e0;padding:2rem 4rem;display:flex;justify-conte
     </div>
 
     <hr class="content-hr">
+    <div class="section-label reveal">The Solution</div>
+    <h2 class="reveal rd1">How I Optimized the process?</em></h2>
+    <div class="prose reveal rd2">
+      <p>I built a two-layer NLP pipeline that reads text work orders written by technicians and automatically decides: is this chargeable? And if yes, which billing category does it belong to? The outputs are the relative categories and a confidence interval with no manual review needed for high-confidence predictions.</p>
+  </div>
+  
+    
+    <hr class="content-hr">
 
+    
     <div class="section-label reveal">The Approach</div>
     <h2 class="reveal rd1">How I built it.</em></h2>
     <ul class="steps reveal rd2">
@@ -248,14 +257,14 @@ footer{border-top:1px solid #e0e0e0;padding:2rem 4rem;display:flex;justify-conte
         <span class="step-num">03</span>
         <span class="step-text">
           <strong>Layer 2 — Fine-tuned BERT for Multi-class Classification</strong>
-          A pre-trained bert-base-uncased model from Hugging Face Transformers was fine-tuned on domain-specific work order data to classify chargeable text into 23 billing categories. The classification head was replaced with a custom dense layer trained end-to-end with a carefully calibrated learning rate, preserving contextual embeddings while adapting the output layer.
+          A pre-trained bert-base-uncased model from Hugging Face was fine-tuned on previous years work orders to classify chargeable text into 23 billing categories. The classification head was replaced with a custom dense layer trained end-to-end with a carefully calibrated learning rate, preserving contextual embeddings while adapting the output layer, no other hyperparameter tuning was done.
         </span>
       </li>
       <li class="step">
         <span class="step-num">04</span>
         <span class="step-text">
           <strong>Keyword Boosting & Confidence Scoring</strong>
-          Each step of the model gives back a confidence score, saying how much the model is confident that the text is chargeable/is of a certain category. Those scores are then  boosted when business-defined keywords are detected — using fuzzy matching to catch misspellings common in technician-written text. Any prediction below 80% confidence is flagged for human review, ensuring quality control without blocking the pipeline.
+          Each step of the model gives back a confidence score, saying how much the model is confident that the text is chargeable/is of a certain category. Those scores are then boosted when business-defined keywords are detected — using fuzzy matching to catch misspellings common in technician-written text. Any prediction below 80% confidence is flagged for human review, ensuring quality control without blocking the pipeline.
         </span>
       </li>
     </ul>
@@ -265,7 +274,7 @@ footer{border-top:1px solid #e0e0e0;padding:2rem 4rem;display:flex;justify-conte
     <div class="section-label reveal">Results</div>
     <h2 class="reveal rd1">Impact on the business</em></h2>
     <div class="prose reveal rd2">
-      <p>The model was deployed to classify historical 2025 work orders that had never been reviewed — recovering revenue from orders incorrectly labeled as non-chargeable. The local team now uses it monthly to process ~3,000 new work orders, significantly reducing manual effort.</p>
+      <p>The model was first used to spot any wrong classification of WO for 2025 and helped the company recover revenue from orders incorrectly labeled as non-chargeable. The local team now uses it monthly to process ~3,000 new work orders, significantly reducing manual effort.</p>
       <p>Layer 1 reached 91% accuracy in production — consistent with validation results. Layer 2 achieved a 75% F1 Score across 23 categories, a strong result given the highly imbalanced training data where some categories had very few labeled examples. 60% of all texts were classified with confidence above 80%, requiring no human intervention.</p>
     </div>
 
