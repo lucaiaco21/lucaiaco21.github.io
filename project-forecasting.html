@@ -66,6 +66,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;justify-content
 .band-val{font-family:var(--serif);font-size:clamp(3.5rem,7vw,6rem);font-weight:800;color:#fff;line-height:1;margin-bottom:0.5rem;letter-spacing:-0.03em;}
 .band-val span{color:rgba(255,255,255,0.55);}
 .band-label{font-family:var(--mono);font-size:0.58rem;letter-spacing:0.14em;text-transform:uppercase;color:rgba(255,255,255,0.55);}
+.band-metric:nth-child(2) .band-val{font-size:clamp(4rem,8vw,7rem);}
 
 /* BODY — full width left + narrow sidebar right */
 .proj-body{display:grid;grid-template-columns:1fr;gap:0;max-width:1080px;margin:0 auto;padding:0 4rem;}
@@ -198,7 +199,7 @@ footer{border-top:1px solid #e0e0e0;padding:2rem 4rem;display:flex;justify-conte
       <div class="band-label">RMSE</div>
     </div>
     <div class="band-metric reveal rd1">
-      <div class="band-val">85%</div>
+      <div class="band-val">85<span>%</span></div>
       <div class="band-label">R²</div>
     </div>
     <div class="band-metric reveal rd3">
