@@ -66,7 +66,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;justify-content
 .band-val{font-family:var(--serif);font-size:clamp(3.5rem,7vw,6rem);font-weight:800;color:#fff;line-height:1;margin-bottom:0.5rem;letter-spacing:-0.03em;}
 .band-val span{color:rgba(255,255,255,0.55);}
 .band-label{font-family:var(--mono);font-size:0.58rem;letter-spacing:0.14em;text-transform:uppercase;color:rgba(255,255,255,0.55);}
-.band-metric:nth-child(2) .band-val{font-size:clamp(4rem,8vw,7rem);}
+.band-metric:nth-child(2) .band-val{font-size:clamp(6rem,12vw,10rem);}
 
 /* BODY — full width left + narrow sidebar right */
 .proj-body{display:grid;grid-template-columns:1fr;gap:0;max-width:1080px;margin:0 auto;padding:0 4rem;}
@@ -215,10 +215,10 @@ footer{border-top:1px solid #e0e0e0;padding:2rem 4rem;display:flex;justify-conte
     <div class="section-label reveal">The Challenge</div>
     <h2 class="reveal rd1">What needed fixing </em></h2>
     <div class="prose reveal rd2">
-      <p>TCR Group rents Ground Support Equipment (GSE) to airlines and airports worldwide. To choose at what price the the equipment should be rent, the commercial team used an excel where the final price was done by a series of average of the past years and some other additional conditions inside the formulas. </p>
-      <p>The process was extremely slow because each commercial associate needed to find similar equipments, manually add all the information required and then check the final suggested price</p>
+      <p>TCR Group rents Ground Support Equipment (GSE) to airlines and airports worldwide. To choose at what price the equipment should be rent, the commercial team used an excel where the final price was done by a series of average of the past years and some other additional conditions inside the formulas. </p>
+      <p>The process was extremely slow because each commercial associate needed to find similar equipments, manually add all the informations required and then check the final suggested price.</p>
       <p>Also, the final price often was wrong because based on a simply average of the price of the previous years for a similar type of EQ without taking into consideration non linear relationships in the change of rental prices and also without the possibility to generalize on new type of EQs or geography to quick check possible revenues. </p>
-      </p> The model aim to predict the expected annual revenue of an equipment based on several information such as geographic location, Gross Book Value, type of customer, model type and past usage capturing all type of relationships between data. </p>
+      </p> The solution I proposed aimed to predict the expected annual revenue of an equipment based on several information such as geographic location, Gross Book Value, type of customer, model type and past usage capturing all type of relationships between data. </p>
     </div>
 
 
@@ -231,7 +231,7 @@ footer{border-top:1px solid #e0e0e0;padding:2rem 4rem;display:flex;justify-conte
         <span class="step-num">01</span>
         <span class="step-text">
           <strong>EDA</strong>
-          First an EDA was done to detect inconsistencies in the data such as: normalization of the distribution and detection of outliers to remove the EQ with a rental revenue higher than 3 standard deviations from the mean; adjust of the str variables to avoid duplicates due to mispelling errors
+          First an EDA was done to detect inconsistencies in the data such as: normalization of the distribution, detection of outliers to remove the EQ with a rental revenue higher than 3 standard deviations from the mean and adjust of the str variables to avoid duplicates due to mispelling errors.
         </span>
       </li>
       <li class="step">
@@ -246,20 +246,20 @@ footer{border-top:1px solid #e0e0e0;padding:2rem 4rem;display:flex;justify-conte
         <span class="step-num">03</span>
         <span class="step-text">
           <strong>Model Selection with Pycaret</strong>
-          With the usage of Pycaret adn the compare_models() function, multiple basic algorithms were trained and the result was a ranked leaderboard to identify the best performer quickly (XGBoost).
+          With the usage of Pycaret and the compare_models() function, multiple basic algorithms were trained and the result was a ranked leaderboard to identify the best performer quickly (XGBoost).
       </li>
       <li class="step">
         <span class="step-num">04</span>
         <span class="step-text">
           <strong>Hyperparameter Tuning</strong>
-          <p>Then the model chosen has been fine-tuned through the usage of a Randomize Search CV. Here with param_grid were defined the hyperparameters to test but instead of trying all combinations (GridSearch), RandomizedSearchCV was used to pick 50 random combinations from these options and find the best one <p>
+          <p>Then the model chosen has been fine-tuned through the usage of a Randomize Search CV. Here with param_grid were defined the hyperparameters to test but instead of trying all combinations (GridSearch), RandomizedSearchCV was used to pick 50 random combinations from these options and find the best one. <p>
         </span>
       </li>
       <li class="step">
         <span class="step-num">05</span>
         <span class="step-text">
           <strong>Interface Creation w/ Streamlit</strong>
-          Creation of an interface to allow the commercial team to easily have prediction by just adding the information. A pipeline run after the click on "Predict Revneues" from the apply of the same transformations used in the training to the display of the predicted revenue.
+          Creation of an interface to allow the commercial team to easily have prediction by just adding the information. A pipeline run after the click on "Predict Revneues" from the application of the same transformations used in the training to the display of the predicted revenue.
       </li>
     </ul>
 
