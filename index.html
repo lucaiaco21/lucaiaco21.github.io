@@ -56,7 +56,6 @@ nav {
   align-items: center; justify-content: center;
   text-align: center; overflow: hidden;
 }
-#plexus { position: absolute; inset: 0; width:100%; height:100%; z-index: -1; pointer-events: none; }
 .hero-content { position: relative; z-index:1; display:flex; flex-direction:column; align-items:center; gap:1.5rem; padding: 8rem 2rem 4rem; }
 
 .hero-name {
@@ -224,7 +223,6 @@ footer { border-top:1px solid var(--ink-faint); padding:2rem 4rem; max-width:108
 
 <!-- ── HERO ── -->
 <section id="hero">
-  <canvas id="plexus"></canvas>
   <div class="hero-content">
     <div class="hero-name">Luca<br><em>Iacomino</em></div>
     <div class="hero-sub">Data Science <span>·</span> Business Analytics</div>
@@ -412,33 +410,7 @@ document.querySelectorAll('#hero a, #hero button').forEach(el => {
   el.addEventListener('mouseleave', () => { ring.style.transform='translate(-50%,-50%) scale(1)'; ring.style.opacity='0.5'; });
 });
 
-/* ── PLEXUS ── */
-const canvas = document.getElementById('plexus'), ctx = canvas.getContext('2d');
-let W, H, dots=[], pmx=-999, pmy=-999;
-const N=45, DIST=140, COL='139,69,19';
-function resize(){ W=canvas.width=window.innerWidth; H=canvas.height=window.innerHeight; }
-function init(){ dots=[]; for(let i=0;i<N;i++) dots.push({x:Math.random()*W,y:Math.random()*H,vx:(Math.random()-.5)*.5,vy:(Math.random()-.5)*.5,r:Math.random()*2+1.5}); }
-function draw(){
-  ctx.clearRect(0,0,W,H);
-  dots.forEach(d=>{d.x+=d.vx;d.y+=d.vy;if(d.x<0||d.x>W)d.vx*=-1;if(d.y<0||d.y>H)d.vy*=-1;});
-  for(let i=0;i<dots.length;i++){
-    for(let j=i+1;j<dots.length;j++){
-      const dx=dots[i].x-dots[j].x,dy=dots[i].y-dots[j].y,dist=Math.sqrt(dx*dx+dy*dy);
-      if(dist<DIST){ctx.beginPath();ctx.strokeStyle=`rgba(${COL},${(1-dist/DIST)*0.4})`;ctx.lineWidth=.6;ctx.moveTo(dots[i].x,dots[i].y);ctx.lineTo(dots[j].x,dots[j].y);ctx.stroke();}
-    }
-    const mx2=dots[i].x-pmx,my2=dots[i].y-pmy,md=Math.sqrt(mx2*mx2+my2*my2);
-    if(md<DIST*1.6){
-      ctx.beginPath();ctx.strokeStyle=`rgba(${COL},${(1-md/(DIST*1.6))*0.6})`;ctx.lineWidth=.9;ctx.moveTo(dots[i].x,dots[i].y);ctx.lineTo(pmx,pmy);ctx.stroke();
-      dots[i].vx+=-mx2/md*.07;dots[i].vy+=-my2/md*.07;
-      const sp=Math.sqrt(dots[i].vx**2+dots[i].vy**2);if(sp>2){dots[i].vx/=sp/2;dots[i].vy/=sp/2;}
-    }
-    ctx.beginPath();ctx.arc(dots[i].x,dots[i].y,dots[i].r,0,Math.PI*2);ctx.fillStyle=`rgba(${COL},0.35)`;ctx.fill();
-  }
-  requestAnimationFrame(draw);
-}
-document.addEventListener('mousemove', e=>{ pmx=e.clientX; pmy=e.clientY; });
-window.addEventListener('resize', ()=>{ resize(); init(); });
-resize(); init(); draw();
+
 
 /* ── REVEAL ── */
 const obs = new IntersectionObserver(entries=>{
