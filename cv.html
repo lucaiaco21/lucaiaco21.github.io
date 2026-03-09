@@ -78,6 +78,13 @@ h1 em{font-style:italic;}
 .cv-points li::before{content:'—';position:absolute;left:0;color:#aaa;font-size:0.75rem;top:0.05rem;}
 .cv-gpa{display:inline-block;background:var(--paper-warm);border:1px solid #ccc;color:var(--ink-soft);font-family:var(--mono);font-size:0.55rem;letter-spacing:0.08em;padding:0.12rem 0.45rem;margin-top:0.3rem;}
 
+ .cv-desc {
+  font-size: 0.72rem;
+  font-style: italic;
+  color: var(--ink-faint);
+  line-height: 1.5;
+  margin-bottom: 0.3rem;
+} 
 footer{border-top:1px solid #eee;padding:1.2rem 4rem;max-width:1080px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;}
 .footer-name{font-family:var(--serif);font-size:0.95rem;font-style:italic;color:var(--ink-soft);}
 .footer-mono{font-family:var(--mono);font-size:0.58rem;letter-spacing:0.1em;text-transform:uppercase;color:#aaa;}
@@ -177,7 +184,7 @@ footer{border-top:1px solid #eee;padding:1.2rem 4rem;max-width:1080px;margin:0 a
         <div class="cv-org">TCR Group</div>
         <div class="cv-loc">Madrid, Spain</div>
         <ul class="cv-points">
-          <li>TCR Group is the world's largest lessor of airport Ground Support Equipment (GSE), operating at 230+ airports across 20+ countries, serving airlines, ground handlers, and airports through full-service rental, maintenance, and fleet management. </li>
+        <p class="cv-desc">World's largest lessor of airport Ground Support Equipment (GSE), operating at 230+ airports across 20+ countries, serving airlines, ground handlers, and airports through full-service rental, maintenance, and fleet management.</p>
           <li>Built and led TCR Group's first AI solutions from scratch: Revenue Forecasting Model with RMSE= €12K to replace manual Excel based estimations and a text classifier with 91% accuracy that generated revenues for €200K within the first 30 days</li>
           <li>Created dynamic PowerBI dashboard monitoring KPIs across multiple entities and reporting layers</li>
           <li>Automated monthly performance reporting, reducing reporting time by 40%</li>
@@ -206,8 +213,7 @@ footer{border-top:1px solid #eee;padding:1.2rem 4rem;max-width:1080px;margin:0 a
         <div class="cv-org">BusinessCoot</div>
         <div class="cv-loc">Paris, France · Rio de Janeiro, Brazil</div>
         <ul class="cv-points">
-          <li> Businesscoot simplifies access to industry information with precise and quantified reports on niche segments. Using technology and a standardized writing method, Businesscoot cut prices and deals with niche subjects neglected by the traditional players. </li>
-          <li>Grew Italian market sales by 60% over 2 years</li>
+          <p class="cv-desc">Businesscoot simplifies access to industry information with precise and quantified reports on niche segments, cutting prices on topics neglected by traditional market research players.</p>          <li>Grew Italian market sales by 60% over 2 years</li>
           <li>Managed teams of 4 analysts, increasing the number of reports covering the italian market by 40%</li>
           <li>Managed relationship with customers through the assessment of needs, evaluation of  satisfaction and tailored of study base on needs of clients.</li>
         </ul>
@@ -253,7 +259,9 @@ footer{border-top:1px solid #eee;padding:1.2rem 4rem;max-width:1080px;margin:0 a
         <div class="cv-org">ESSEC Business School</div>
         <div class="cv-loc">Paris, France</div>
         <div class="cv-gpa">19/20</div>
+        <ul class="cv-points" style="margin-top:0.4rem">
           <li>Main Course : Private Equity & Entr. Finance, VBA Programming, Advanced Excel, Operations & Tech. Management </li>
+        </ul>
       </div>
 
       <div class="cv-item">
@@ -264,7 +272,9 @@ footer{border-top:1px solid #eee;padding:1.2rem 4rem;max-width:1080px;margin:0 a
         <div class="cv-org">LUISS Guido Carli University</div>
         <div class="cv-loc">Rome, Italy</div>
         <div class="cv-gpa">28/30</div>
+        <ul class="cv-points" style="margin-top:0.4rem">
           <li>Thesis: Internazionalization of SME as post-covid recovery strategy</li>
+        </ul>
       </div>
     </div>
   </div>
